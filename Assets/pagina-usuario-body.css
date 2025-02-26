@@ -21,4 +21,62 @@
 
 .pass-1{
     display: flex;
+    margin-top: 30px;
 }
+
+.pass-1 img{
+    width: 200px;
+    height: 200px;
+    border-radius: 30px;
+    border: 2px solid #488BE8;
+    box-shadow: 0 0 5px #212121;
+    margin-left: 65vh;
+}
+
+.pass-1 p{
+    font-size: 20px;
+    width: 400px;
+    margin-left: 10px;
+}
+
+.pass-2{
+    display: flex;
+    margin-top: 30px;
+}
+
+.pass-2 img{
+    width: 200px;
+    height: 200px;
+    border-radius: 30px;
+    border: 2px solid #488BE8;
+    box-shadow: 0 0 5px #212121;
+    margin-left: 75vh;
+}
+
+.pass-2 p{
+    font-size: 20px;
+    width: 400px;
+    margin-left: 10px;
+}
+
+.pass-3{
+    display: flex;
+    margin-top: 30px;
+    width: 204.8vh;
+}
+
+.pass-3 img{
+    width: 200px;
+    height: 200px;
+    border-radius: 30px;
+    border: 2px solid #488BE8;
+    box-shadow: 0 0 5px #212121;
+    margin-left: 85vh;
+}
+
+.pass-3 p{
+    font-size: 20px;
+    width: 400px;
+    margin-left: 10px;
+}
+
