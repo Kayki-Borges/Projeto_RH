@@ -1,0 +1,24 @@
+/*Passo a Passo*/
+
+#passo{
+    position: absolute;
+    top: 68vh;
+    z-index: 2;
+}
+
+.passo p:nth-child(1){
+    font-size: 40px;
+    height: 60px;
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #488BE8;
+    border-top: 2px solid #317ce4;
+    border-bottom: 2px solid #317ce4;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color: #e4e4ee;
+}
+
+.pass-1{
+    display: flex;
+}
