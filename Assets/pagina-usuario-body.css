@@ -11,12 +11,8 @@
     height: 60px;
     text-align: center;
     margin-bottom: 20px;
-    background-color: #488BE8;
-    border-top: 2px solid #317ce4;
-    border-bottom: 2px solid #317ce4;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    color: #e4e4ee;
+    color: #212121;
+    margin-top: 20px;
 }
 
 .pass-1{
