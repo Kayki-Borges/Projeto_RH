@@ -14,12 +14,13 @@
 }
 
 /*Botão modo escuro*/
-/* From Uiverse.io by Galahhad */ 
-/* switch settings 👇 */
-
 .ui-switch {
+  position: fixed;
+  top: 92%;
+  left: 91%;
+  z-index: 999;
   /* switch */
-  --switch-bg: rgb(135, 150, 165);
+  --switch-bg: linear-gradient(147deg, #e4e4e4 0%, #488BE8 74%);
   --switch-width: 48px;
   --switch-height: 20px;
   /* circle */
@@ -49,7 +50,7 @@
   left: 0;
   width: var(--circle-diameter);
   height: var(--circle-diameter);
-  position: absolute;
+  position: relative;
   background: var(--circle-bg);
   border-radius: inherit;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjAiIHdpZHRoPSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KICAgIDxwYXRoIGZpbGw9IiNmZmYiCiAgICAgICAgZD0iTTkuMzA1IDEuNjY3VjMuNzVoMS4zODlWMS42NjdoLTEuMzl6bS00LjcwNyAxLjk1bC0uOTgyLjk4Mkw1LjA5IDYuMDcybC45ODItLjk4Mi0xLjQ3My0xLjQ3M3ptMTAuODAyIDBMMTMuOTI3IDUuMDlsLjk4Mi45ODIgMS40NzMtMS40NzMtLjk4Mi0uOTgyek0xMCA1LjEzOWE0Ljg3MiA0Ljg3MiAwIDAwLTQuODYyIDQuODZBNC44NzIgNC44NzIgMCAwMDEwIDE0Ljg2MiA0Ljg3MiA0Ljg3MiAwIDAwMTQuODYgMTAgNC44NzIgNC44NzIgMCAwMDEwIDUuMTM5em0wIDEuMzg5QTMuNDYyIDMuNDYyIDAgMDExMy40NzEgMTBhMy40NjIgMy40NjIgMCAwMS0zLjQ3MyAzLjQ3MkEzLjQ2MiAzLjQ2MiAwIDAxNi41MjcgMTAgMy40NjIgMy40NjIgMCAwMTEwIDYuNTI4ek0xLjY2NSA5LjMwNXYxLjM5aDIuMDgzdi0xLjM5SDEuNjY2em0xNC41ODMgMHYxLjM5aDIuMDg0di0xLjM5aC0yLjA4NHpNNS4wOSAxMy45MjhMMy42MTYgMTUuNGwuOTgyLjk4MiAxLjQ3My0xLjQ3My0uOTgyLS45ODJ6bTkuODIgMGwtLjk4Mi45ODIgMS40NzMgMS40NzMuOTgyLS45ODItMS40NzMtMS40NzN6TTkuMzA1IDE2LjI1djIuMDgzaDEuMzg5VjE2LjI1aC0xLjM5eiIgLz4KPC9zdmc+");
@@ -73,7 +74,7 @@
 
 .slider .circle::before {
   content: "";
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0.75);
@@ -98,6 +99,28 @@
   opacity: 1;
   width: 0;
   height: 0;
+}
+
+body.dark{
+  background-color: #212121;
+  color: #e4e4e4;
+}
+
+body.dark .menu{
+  background-color: #212121;
+}
+
+body.dark .menu .menu-items li a{
+  color: #e4e4e4;
+}
+
+body.dark .menu .menu-items li a:hover{
+  color: #488BE8;
+}
+
+body.dark .menu-2.active{
+  background-color: #212121;
+  color: #e4e4e4;
 }
 
 /*Botão ajuda*/
@@ -201,7 +224,7 @@ header .menu{
     border: 2px solid lightgray;
     border-radius: 15px;
     top: 25px;
-    z-index: 99;
+    z-index: 9999;
 }
 
 .menu .menu-items li a{
@@ -315,6 +338,7 @@ header .menu{
     border-radius: 12px;
     filter: blur(3px);
   }
+
   .input {
     background-color: #e4e4e4;
     border: none;
@@ -325,6 +349,14 @@ header .menu{
     color: #212121;
     padding-inline: 59px;
     font-size: 15px;
+  }
+
+  body.dark .input{
+    background-color: #1c191c;
+  }
+
+  body.dark .input::placeholder{
+    color: #e4e4e4;
   }
 
   .input::placeholder {
@@ -339,6 +371,10 @@ header .menu{
     display: none;
   }
   
+  body.dark #input-mask{
+    background: linear-gradient(90deg, transparent, #1c191c);
+  }
+
   #input-mask {
     pointer-events: none;
     width: 150px;
