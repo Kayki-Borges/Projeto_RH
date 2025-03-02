@@ -355,9 +355,7 @@ header .menu{
     background-color: #1c191c;
   }
 
-  body.dark .input::placeholder{
-    color: #e4e4e4;
-  }
+  zzzz
 
   .input::placeholder {
     color: #1c191c;
