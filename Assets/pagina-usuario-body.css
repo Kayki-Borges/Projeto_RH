@@ -1,7 +1,6 @@
 /*Áreas de trabalho*/
 
 #area{
-background-color: red;
 position: absolute;
 top: 70%;
 left: 50%;
@@ -40,15 +39,58 @@ body.dark .tit{
 }
 
 .areas-1 p{
-    font-size: 30px;
-    margin-top: 20vh;
+    font-size: 40px;
+    margin-top: 27vh;
+    color: #488BE8;
+    
 }
 
 .areas-1:hover{
     transform: scale(1.2);
     transition: 0.5s all ease-in-out;
-    border: 2px solid #488BE8;
+    border: 4px solid #488BE8;
     color: #488BE8;
+    background-image: url(IMG/Saúde-Ef.jpg);
+}
+
+.areas-2{
+    background-image: url(IMG/educação.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.areas-2 p{
+    font-size: 40px;
+    margin-top: 27vh;
+    color: #488BE8;
+}
+
+.areas-2:hover{
+    transform: scale(1.2);
+    transition: 0.5s all ease-in-out;
+    border: 4px solid #488BE8;
+    color: #488BE8;
+    background-image: url(IMG/Educação-Ef.png);
+}
+
+.areas-3{
+    background-image: url(IMG/tecnologia.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.areas-3 p{
+    font-size: 40px;
+    margin-top: 27vh;
+    color: #488BE8;
+}
+
+.areas-3:hover{
+    transform: scale(1.2);
+    transition: 0.5s all ease-in-out;
+    border: 4px solid #488BE8;
+    color: #488BE8;
+    background-image: url(IMG/Tecnologia-Ef.jpg);
 }
 
 .areas-2,
@@ -64,9 +106,8 @@ body.dark .tit{
 /*Passo a Passo*/
 #passo{
     position: absolute;
-    top: 68vh;
+    top: 135vh;
     z-index: 2;
-    display: none;
 }
 
 body.dark .passo p:nth-child(1){
