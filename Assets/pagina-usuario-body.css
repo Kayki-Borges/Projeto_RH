@@ -183,3 +183,107 @@ body.dark .passo p:nth-child(1){
     width: 400px;
     margin-left: 10px;
 }
+
+/*Rodapé*/
+body.dark footer .Candidatos a{
+    color: #e4e4e4;
+}
+
+body.dark footer .Candidatos a:hover{
+    color: #488BE8;
+}
+
+body.dark footer .Empresa a{
+    color: #e4e4e4;
+}
+
+body.dark footer .Empresa a:hover{
+    color: #488BE8;
+}
+
+footer{
+    position: absolute;
+    top: 250vh;
+    height: 400px;
+    width: 100%;
+    border-top: 4px solid #488BE8;
+}
+
+footer .Candidatos p:nth-child(1){
+    position: absolute;
+    top: 50px;
+    font-size: 25px;
+    left: 40px;
+}
+
+footer .Candidatos a:nth-child(2){
+    position: absolute;
+    top: 90px;
+    left: 50px;
+    color: black;
+    text-decoration: none;
+    transition: 0.2s ease-in;
+}
+
+footer .Candidatos a:nth-child(3){
+    position: absolute;
+    top: 120px;
+    left: 50px;
+    color: black;
+    text-decoration: none;
+    transition: 0.2s ease-in;
+}
+
+footer .Candidatos a:nth-child(4){
+    position: absolute;
+    top: 150px;
+    left: 50px;
+    color: black;
+    text-decoration: none;
+    transition: 0.2s ease-in;
+}
+
+footer .Empresa p:nth-child(1){
+    position: absolute;
+    top: 50px;
+    font-size: 25px;
+    left: 300px;
+}
+
+footer .Empresa a:nth-child(2){
+    position: absolute;
+    top: 90px;
+    left: 310px;
+    color: black;
+    text-decoration: none;
+    transition: 0.2s ease-in;
+}
+
+footer .Empresa a:hover{
+    color: #488BE8;
+    transform: scale(1.2);
+}
+
+footer .Candidatos a:hover{
+    color: #488BE8;
+    transform: scale(1.2);
+}
+
+footer .inf p:nth-child(1){
+    position: absolute;
+    top: 45vh;
+    left: 10px;
+}
+
+footer .inf p:nth-child(2){
+    position: absolute;
+    top: 45vh;
+    left: 50vh;
+}
+
+footer .inf a{
+    position: absolute;
+    top: 45vh;
+    left: 100vh;
+    color: #488BE8;
+}
