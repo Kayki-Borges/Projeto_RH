@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuário</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/Projeto_RH/css/style.css">
 </head>
 <body>
     <h1>Cadastro de Usuário</h1>
-    <form id="formCadastro" action="processa_cadastro.php" method="POST" aria-labelledby="formCadastro">
+    <form id="formCadastro" action="/Projeto_RH/cadastro/processa_cadastro.php" method="POST" aria-labelledby="formCadastro">
         <!-- Etapa 1: Dados Pessoais -->
         <div id="etapa1" class="etapa">
             <h2>Etapa 1: Dados Pessoais</h2>
@@ -97,9 +97,9 @@
     </form>
 
     <!-- Código JavaScript para as máscaras -->
-    <script src="js/mascaras.js"></script>
+    <script src="/Projeto_RH/js/mascaras.js"></script>
     <!-- Código JavaScript para alternar visibilidade da senha -->
-    <script src="js/senha.js"></script>
+    <script src="/Projeto_RH/js/senha.js"></script>
     <!-- Código JavaScript para navegação entre etapas -->
     <script>
     let etapaAtual = 1;

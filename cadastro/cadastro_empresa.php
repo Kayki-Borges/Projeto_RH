@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Empresa</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/Projeto_RH/css/style.css">
 </head>
 <body>
     <h1>Cadastro de Empresa</h1>
-    <form id="formCadastroEmpresa" action="processa_cadastro_empresa.php" method="POST">
+    <form id="formCadastroEmpresa" action="/Projeto_RH/cadastro/processa_cadastro_empresa.php" method="POST">
         
         <!-- Etapa 1: Dados da Empresa -->
         <div id="etapa1" class="etapa">
@@ -95,7 +95,7 @@ mudarEtapa();
     </script>
 
     <!-- Máscaras para CNPJ e Telefone -->
-    <script src="js/empresa_mascara.js"></script>
+    <script src="/Projeto_RH/js/mascaras.js"></script>
 
 </body>
 </html>

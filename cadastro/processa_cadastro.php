@@ -1,7 +1,12 @@
 <?php
-require_once 'conexao.php';
+session_start(); // Inicia a sessão
+
+require_once('../conexao.php');
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtendo os dados do formulário
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $cpf = $_POST['cpf'];
@@ -28,9 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$nome, $email, $cpf, $endereco, $telefone, $formacao_academica, $experiencia_profissional, $senha_hash, $area_interesse]);
-        
-        // Redireciona para a página de sucesso
-        header("Location: login.php");
+
+        // Definir a variável de sessão para indicar sucesso no cadastro
+        $_SESSION['cadastro_sucesso'] = true;
+
+        // Redireciona para a página de confirmação
+        echo "Tentando redirecionar para confirmacao_cadastro.php...";
+        header("Location: confirmacao_cadastro.php");
+
+        exit();
     } catch (PDOException $e) {
         echo "Erro ao cadastrar: " . $e->getMessage();
     }

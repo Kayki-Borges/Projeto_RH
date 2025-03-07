@@ -1,4 +1,4 @@
-fetch("google-callback.php", {
+fetch("/Projeto_RH/login/google-callback.php", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: "token=" + response.credential

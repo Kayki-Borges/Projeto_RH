@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "conexao.php"; // Inclua sua conexão com o banco
+require_once "/Projeto_RH/cadasto/conexao.php"; // Inclua sua conexão com o banco
 
 // Função para decodificar o token JWT
 function decodeGoogleToken($token) {
