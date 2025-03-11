@@ -20,12 +20,12 @@
   left: 91%;
   z-index: 999;
   /* switch */
-  --switch-bg: linear-gradient(147deg, #e4e4e4 0%, #488BE8 74%);
+  --switch-bg: linear-gradient(147deg, #e4e4e4 0%, #9D61EA 74%);
   --switch-width: 48px;
   --switch-height: 20px;
   /* circle */
   --circle-diameter: 32px;
-  --circle-bg: #488BE8;
+  --circle-bg: #9D61EA;
   --circle-inset: calc((var(--circle-diameter) - var(--switch-height)) / 2);
 }
 
@@ -115,7 +115,7 @@ body.dark .menu .menu-items li a{
 }
 
 body.dark .menu .menu-items li a:hover{
-  color: #488BE8;
+  color: #9D61EA;
 }
 
 body.dark .menu-2.active{
@@ -130,7 +130,7 @@ body.dark .menu-2.active{
   border-radius: 50%;
   border: none;
   background-color: #ffe53b;
-  background-image: linear-gradient(147deg, #e4e4e4 0%, #488BE8 74%);
+  background-image: linear-gradient(147deg, #e4e4e4 0%, #9D61EA 74%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -177,7 +177,7 @@ body.dark .menu-2.active{
   top: -20px;
   opacity: 0;
   background-color: #ffe53b;
-  background-image: linear-gradient(147deg, #e4e4e4 0%, #488BE8 74%);
+  background-image: linear-gradient(147deg, #e4e4e4 0%, #9D61EA 74%);
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
@@ -194,7 +194,7 @@ body.dark .menu-2.active{
   content: "";
   width: 10px;
   height: 10px;
-  background-color: #488BE8;
+  background-color: #9D61EA;
   background-size: 1000%;
   background-position: center;
   transform: rotate(45deg);
@@ -231,17 +231,16 @@ header .menu{
     list-style: none;
     color: #212121;
     text-decoration: none;
+    transition: 0.5s all ease-in-out;
 }
 
 .menu li:hover{
     transform: scale(1.2);
-    transition: 0.5s all ease-in-out;
 }
 
 .menu li a:hover{
     transform: scale(1.2);
-    transition: 0.5s all ease-in-out;
-    color: #488BE8;
+    color: #9D61EA;
 }
 
 .menu .menu-items li a::after{
@@ -253,7 +252,7 @@ header .menu{
     bottom: -2px;
     left: 0;
     transform-origin: bottom right;
-    background-color: #488BE8;
+    background-color: #9D61EA;
     transition: 0.2s ease-out;
 } 
 
@@ -277,7 +276,7 @@ header .menu{
 }
 
 .menu .conta.active-2 a{
-    color: #488BE8;
+    color: #9D61EA;
 }
 
 .menu .conta.active-2::after{
@@ -289,7 +288,7 @@ header .menu{
     bottom: -2px;
     left: 0;
     transform-origin: bottom right;
-    background-color: #488BE8;
+    background-color: #9D61EA;
     transition: 0.2s ease-out;
 }
 
@@ -315,7 +314,7 @@ header .menu{
 }
 
 .menu .menu-2.active a:hover{
-    color: #488BE8;
+    color: #9D61EA;
 }
 
 .menu .toggle{
@@ -430,10 +429,10 @@ header .menu{
     background-position: 0 0;
     background-image: conic-gradient(
       #1c191c,
-      #488BE8 5%,
+      #9D61EA 5%,
       #1c191c 14%,
       #1c191c 50%,
-      #488BE8 60%,
+      #9D61EA 60%,
       #1c191c 64%
     );
     animation: rotate 4s 0.1s linear infinite;
@@ -524,60 +523,3 @@ header .menu{
     transition-duration: .3s;
     transform-origin: left center;
   }
-  
-/*Banner*/
-
-#banner{
-    height: 70vh;
-    width: 100%;
-    position: absolute;
-    z-index: 1;
-    background-image: url(IMG/Banner-1.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.banner{
-  position: absolute;
-  top: 25vh;
-  font-size: 40px;
-  color: #212121;
-}
-
-.banner p:nth-child(1){
-  margin-left: 155px;
-}
-
-.banner p:nth-child(2){
-  margin-left: 165px;
-}
-
-.banner p:nth-child(2) span{
-  color: #488BE8;
-  text-transform: uppercase;
-}
-
-.banner button{
-  height: 80px;
-  width: 300px;
-  margin-top: 5vh;
-  cursor: pointer;
-  border-radius: 10px;
-  border: 2px solid #488BE8;
-  margin-left: 30vh;
-  background-color: transparent;
-  font-size: 20px;
-  backdrop-filter: blur(25px);
-}
-
-.banner button a{
-  text-decoration: none;
-  color: #212121;
-}
-
-.banner button:hover{
-  background-color: #488BE8   ;
-  transform: scale(1.1);
-  transition: 0.5s ease-in-out;
-  box-shadow: 0 0 80px #488BE8;
-}
