@@ -187,7 +187,7 @@
                 document.getElementById('error-message').textContent = 'Senha incorreta. Tente novamente.';
             } else if (data === 'usuario_nao_encontrado') {
                 document.getElementById('error-message').textContent = 'Usuário não encontrado. Por favor, complete seu cadastro.';
-                window.location.href = "cadastro.php"; // Redireciona para a página de cadastro
+                window.location.href = "escolha_perfil.php"; // Redireciona para a página de cadastro
             }
         })
         .catch(error => {
