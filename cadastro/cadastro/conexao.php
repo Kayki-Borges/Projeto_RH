@@ -10,4 +10,7 @@ try {
 } catch (PDOException $e) {
     echo "Erro: " . $e->getMessage();
 }
+//if ($pdo ->conn_error){
+    //echo "conexao realizada com sucesso";
+//}
 ?>

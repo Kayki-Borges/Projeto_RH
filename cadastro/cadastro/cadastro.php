@@ -184,25 +184,3 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
 
 </body>
 </html>
-<style>
-    .modal {
-  display: none; /* Mantém oculto inicialmente */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%; /* Define um tamanho flexível */
-  max-width: 400px; /* Limita o tamanho máximo */
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  z-index: 1000; /* Garante que está acima de outros elementos */
-}
-
-.modal-content {
-  margin: 0;
-}
-
-</style>
