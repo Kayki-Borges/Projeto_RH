@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/public/styles/style.css">
+</head>
+<body>
+    <h2>Login</h2>
+    <!-- Botão de login com Google -->
+    <button id="google-login">Login com Google</button>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+
+    <script>
+        window.onload = () => {
+            google.accounts.id.initialize({
+                client_id: "543793793556-rlo97asgftgul1624uo3phbbi4rh4eqr.apps.googleusercontent.com",
+                callback: handleCredentialResponse
+            });
+
+            google.accounts.id.renderButton(
+                document.getElementById("google-login"),
+                { theme: "outline", size: "large" }
+            );
+        };
+
+        function handleCredentialResponse(response) {
+            const userCredential = jwt_decode(response.credential);
+            const email = userCredential.email;
+
+            // Redirecionar para a verificação ou completar o cadastro
+            fetch(`/verificar-usuario.php`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.existe) {
+                        window.location.href = data.tipo === 'candidato' ? '/pagina-candidato.html' : 'pagina-empresa.html';
+                    } else {
+                        window.location.href = '/pagina-cadastro.html';
+                    }
+                })
+                .catch(error => console.error(error));
+        }
+    </script>
+</body>
+</html>
