@@ -237,6 +237,12 @@ header.roll a{
   align-items: center;
 }
 
+.logo p{
+  font-size: 40px; 
+  color: #488BE8; 
+  text-transform: uppercase;
+}
+
 .items{
   display: flex;
   align-items: center;
@@ -308,12 +314,13 @@ header.roll a{
   display: none;
 }
 
-@media screen and (max-width:730px) {
+@media screen and (max-width:768px) {
   header{
     width: 100%;
     background-color: #46454a;
     color: #e4e4e4;
   }
+
   .menu{
     padding: 1.5rem 4rem;
   }

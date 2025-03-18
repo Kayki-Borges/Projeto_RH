@@ -48,7 +48,7 @@
     font-weight: 400px;
   }
   
-  @media screen and (max-width: 730px){
+  @media screen and (max-width: 768px){
     .banner{
       background-repeat: no-repeat;
       background-position-x: -600px;
@@ -71,8 +71,125 @@
     }
   }
 
+/*Caixas*/
+.feature-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 300px;
+}
+
+.box {
+  background-color: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.123);
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #488be88e;
+  transition: .3s all ease-in-out;
+}
+
+.box:hover{
+  transform: scale(1.1);
+  border: 3px solid #488be88e;
+  cursor: default;
+}
+
+.box i {
+  font-size: 50px;
+  color: #488BE8;
+  cursor: default;
+}
+
+.box h4 {
+  font-size: 18px;
+  margin-top: 15px;
+  color: #333;
+  cursor: default;
+}
+
+.box p {
+  font-size: 14px;
+  color: #666;
+  cursor: default;
+}
+
+@media screen and (max-width:768px) {
+  .feature-box{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/*Passo a passo*/
+.steps{
+height: 400px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 40px;
+margin-bottom: 20px;
+}
+
+.step {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-left: 120px;
+margin-top: 20px;
+text-align: center;
+}
+
+.step .circle {
+width: 200px;
+height: 200px;
+border-radius: 50%;
+background-color: #488BE8; 
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 40px;
+box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+margin-bottom: 15px;
+}
+
+.step .circle:hover {
+background-color: #488BE8;
+}
+
+.step h3 {
+font-size: 22px;
+color: #333;
+margin: 10px 0;
+}
+
+.step p {
+font-size: 16px;
+color: #666;
+max-width: 280px;
+margin: 0 auto;
+}
+
+.efeito-circle{
+  visibility: hidden;
+}
+
+.efeito-circle-2{
+  visibility: hidden;
+}
+
+/*Banenr 2*/
 .banner-2{
-    height: 720px;
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: space-around;

@@ -23,3 +23,19 @@ revelar.reveal('.efeito-text-topo-2', {
     delay: 100
     
 })
+
+revelar.reveal('.efeito-circle', {
+
+    duration: 2000,
+    distance: '90px',
+    delay: 100
+    
+})
+
+revelar.reveal('.efeito-circle-2', {
+
+    duration: 2000,
+    distance: '90px',
+    delay: 200
+    
+})
