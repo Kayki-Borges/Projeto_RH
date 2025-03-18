@@ -235,3 +235,31 @@ margin: 0 auto;
     display: none;
   }
 }
+
+/*Rodapé*/
+footer{
+  background-color: red;
+  height: 250px;
+}
+
+.infor{
+  display: flex;
+  justify-content: end;
+  position: absolute;
+  
+}
+
+@media screen and (max-width:768px) {
+  footer{
+    position: absolute;
+    top: 245vh;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width:400px) {
+  footer{
+    position: absolute;
+    top: 170vh;
+  }
+}

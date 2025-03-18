@@ -217,9 +217,6 @@ header{
   z-index: 9999;
 }
 
-header .items ul li a{
-  color: white;
-}
 header.roll{
   background-color: #46454a;
   padding: 1rem 6rem;
@@ -277,7 +274,7 @@ header.roll a{
 
 .link:hover{
   background-color: #488BE8;
-  padding: 5px;
+  padding: 10px;
   border-radius: 5px;
   color: #e4e4e4;
 }
@@ -319,7 +316,6 @@ header.roll a{
 @media screen and (max-width:768px) {
   header{
     width: 100%;
-    color: #e4e4e4;
   }
 
   .menu{
@@ -336,6 +332,11 @@ header.roll a{
 
   .resp-but{
     display: block;
+  }
+
+  .resp{
+    background-color: #46454a;
+    border-radius: 10px;
   }
 
   .resp ul{
