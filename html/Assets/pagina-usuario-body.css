@@ -229,3 +229,9 @@ margin: 0 auto;
     gap: 30px;
   }
 }
+
+@media screen and (max-width:400px) {
+  .steps{
+    display: none;
+  }
+}

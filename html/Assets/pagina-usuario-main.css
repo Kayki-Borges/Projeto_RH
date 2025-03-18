@@ -217,7 +217,9 @@ header{
   z-index: 9999;
 }
 
-
+header .items ul li a{
+  color: white;
+}
 header.roll{
   background-color: #46454a;
   padding: 1rem 6rem;
@@ -347,6 +349,13 @@ header.roll a{
     display: block;
     padding-top: 1.2rem;
   }
+
+  .resp .nav-item a{
+    display: block;
+    padding-top: 1.2rem;
+    color: white;
+  }
+
 
   .resp .cad-log{
     display: block;
