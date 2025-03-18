@@ -20,6 +20,6 @@ revelar.reveal('.efeito-text-topo-2', {
 
     duration: 2000,
     distance: '90px',
-    delay: 500
+    delay: 100
     
 })
