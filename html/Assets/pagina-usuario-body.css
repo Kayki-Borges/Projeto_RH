@@ -238,15 +238,51 @@ margin: 0 auto;
 
 /*Rodapé*/
 footer{
-  background-color: red;
-  height: 250px;
+  height: 400px;
+  border-top: 2px solid #488BE8;
 }
 
 .infor{
   display: flex;
   justify-content: end;
   position: absolute;
-  
+  margin-left: 10px;
+  margin-top: 23vh;
+  gap: 30px;
+}
+
+.infor a{
+  color: #488BE8;
+  transition: .3s all ease-in-out;
+}
+
+.infor a:hover{
+  transform: scale(1.1);
+}
+
+.text-rod{
+  display: flex;
+  gap: 30px;
+}
+
+.text-rod .inf{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-top: 10vh;
+}
+
+.inf:nth-child(1){
+  margin-left: 30px;
+}
+
+.inf a{
+  color: #488BE8;
+  transition: 0.3s all ease-in-out;
+}
+
+.inf a:hover{
+  transform: scale(1.1);
 }
 
 @media screen and (max-width:768px) {
@@ -263,3 +299,4 @@ footer{
     top: 170vh;
   }
 }
+
