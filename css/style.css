@@ -15,8 +15,8 @@ body {
 
 h1 {
     text-align: center;
-    color: #5e3c5e;
-    margin-bottom: 20px;
+    color: #9D61EA;
+    margin-bottom: 20px ;
 }
 
 /* Container do formulário */
@@ -103,10 +103,25 @@ input, select, button, textarea {
 
 
 
+    .modal {
+  display: none; /* Mantém oculto inicialmente */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; /* Define um tamanho flexível */
+  max-width: 400px; /* Limita o tamanho máximo */
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 1000; /* Garante que está acima de outros elementos */
+}
 
-
-
-
+.modal-content {
+  margin: 0;
+}
 
 
 
@@ -135,8 +150,8 @@ input, select, button, textarea {
 }
 
 .step-indicator.active {
-    border-color: #4caf50;
-    color: #4caf50;
+    border-color: #9D61EA;
+    color: #9D61EA;
     background-color: #eaf7e6;
     animation: waveAnimation 1.5s infinite;
 }
@@ -145,15 +160,15 @@ input, select, button, textarea {
 @keyframes waveAnimation {
     0% {
         transform: scale(1);
-        box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        box-shadow: 0 0 5px #9D61EA;
     }
     50% {
-        transform: scale(1.2);
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+        transform: scale(1.1);
+        box-shadow: 0 0 15px #9D61EA;
     }
     100% {
         transform: scale(1);
-        box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        box-shadow: 0 0 5px #9D61EA;
     }
 }
 
@@ -178,7 +193,7 @@ input, select, textarea {
 }
 
 input:focus, select:focus, textarea:focus {
-    border-color: #4caf50;
+    border-color: #9D61EA;
     outline: none;
 }
 
