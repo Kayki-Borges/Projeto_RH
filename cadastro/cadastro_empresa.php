@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Empresa</title>
-    <link rel="stylesheet" href="/Projeto_RH/css/style.css">
+    <link rel="stylesheet" href="/Projeto_RH/css/cadastro.css">
 </head>
 <body>
     <h1>Cadastro de Empresa</h1>
