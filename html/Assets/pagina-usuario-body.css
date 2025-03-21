@@ -291,6 +291,14 @@ footer{
     top: 245vh;
     width: 100%;
   }
+
+  .inf h1{
+    font-size: 25px;
+  }
+
+  .inf a{
+    margin: 10px;
+  }
 }
 
 @media screen and (max-width:400px) {
