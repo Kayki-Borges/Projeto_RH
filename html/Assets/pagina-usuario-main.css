@@ -218,7 +218,7 @@ header{
 }
 
 header.roll{
-  background-color: #46454a;
+  background-color: #787881;
   padding: 1rem 6rem;
 }
 
@@ -236,10 +236,21 @@ header.roll a{
   align-items: center;
 }
 
-.logo p{
-  font-size: 40px; 
-  color: #488BE8; 
-  text-transform: uppercase;
+.logo img{
+  width: 100px;
+  height: 70px;
+  margin-top: 0;
+}
+
+@media screen and (max-width: 400px){
+  .logo img{
+    position: absolute;
+    left: 50px;
+  }
+
+  .resp-but{
+    margin-left:140px;
+  }
 }
 
 .items{
@@ -285,6 +296,7 @@ header.roll a{
   padding: 10px 15px;
   border-radius: 5px;
   transition: 0.3s all ease-in-out;
+  margin-top: 10px;
 }
 
 .cad-log button:nth-child(2){
@@ -303,6 +315,18 @@ header.roll a{
   font-weight: 500;
   font-size: 1.1rem;
 
+}
+
+.perf img{
+  height: 80px;
+  width: 80px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.perf img:hover{
+  transform: scale(1.1);
 }
 
 .resp-but{
@@ -330,13 +354,27 @@ header.roll a{
     display: none;
   }
 
+  .perf{
+    display: none;
+  }
+
   .resp-but{
     display: block;
   }
 
   .resp{
-    background-color: #46454a;
+    background-color: #787881;
     border-radius: 10px;
+  }
+
+  .resp .perf{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .resp .perf img{
+    margin-bottom: 20px;
   }
 
   .resp ul{
@@ -379,6 +417,7 @@ header.roll a{
     display: block;
   }
 }
+
 
 /*Botão menu*/
 #checkbox {
