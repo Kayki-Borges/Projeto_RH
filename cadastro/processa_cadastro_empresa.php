@@ -39,7 +39,7 @@ $stmt->execute([$nome_empresa, $email_empresa, $cnpj_empresa, $endereco_empresa,
         $_SESSION['cadastro_sucesso'] = true;
 
         // Redireciona para a página de confirmação
-        header("Location: confirmacao_cadastro.php");
+        header("Location:/Projeto_RH/login/login.php");
         exit();
     } catch (PDOException $e) {
         echo "Erro ao cadastrar: " . $e->getMessage();

@@ -1,3 +1,18 @@
+<?php
+session_start();
+require_once "conexao.php";
+
+// Verifica se o usuário está logado
+if (!isset($_SESSION['usuario'])) {
+    header("Location: pagina-empresa.html");
+    exit;
+}
+
+// Dados da empresa logada
+$empresa_nome = $_SESSION['usuario']['nome_empresa'];
+$empresa_local = $_SESSION['usuario']['endereco_empresa'];
+$empresa_id = $_SESSION['usuario']['id'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,16 +24,15 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Cadastro de Vagas</h1>
-        
-        <!-- Formulário de cadastro de vagas -->
+
         <form action="cadastrar_vaga.php" method="POST" class="my-4">
             <div class="mb-3">
                 <label for="nome_empresa" class="form-label">Nome da Empresa</label>
-                <input type="text" class="form-control" id="nome_empresa" name="nome_empresa" value="<?php echo $_SESSION['nome_empresa']; ?>" readonly>
+                <input type="text" class="form-control" id="nome_empresa" name="nome_empresa" value="<?php echo $empresa_nome; ?>" readonly>
             </div>
             <div class="mb-3">
                 <label for="local_empresa" class="form-label">Local da Empresa</label>
-                <input type="text" class="form-control" id="local_empresa" name="local_empresa" value="<?php echo $_SESSION['local_empresa']; ?>" readonly>
+                <input type="text" class="form-control" id="local_empresa" name="local_empresa" value="<?php echo $empresa_local; ?>" readonly>
             </div>
             <div class="mb-3">
                 <label for="descricao" class="form-label">Descrição da Vaga</label>
@@ -40,13 +54,10 @@
 
         <h2 class="mt-5">Vagas Cadastradas</h2>
 
-        <!-- Listagem de vagas cadastradas -->
         <table class="table table-striped mt-3">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Empresa</th>
-                    <th>Local</th>
                     <th>Descrição</th>
                     <th>Requisitos</th>
                     <th>Data de Postagem</th>
@@ -54,41 +65,29 @@
             </thead>
             <tbody>
                 <?php
-                // Conexão com o banco de dados
-                $conn = new mysqli('localhost', 'root', '', 'projeto_rh');
+                $sql = "SELECT * FROM vagas WHERE empresa_id = :empresa_id ORDER BY data_postagem DESC";
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':empresa_id', $empresa_id, PDO::PARAM_INT);
+                $stmt->execute();
 
-                if ($conn->connect_error) {
-                    die("Erro na conexão: " . $conn->connect_error);
-                }
+                $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                // Query para buscar as vagas cadastradas
-                $sql = "SELECT vagas.id, empresas.nome_empresa, empresas.endereco_empresa AS local_empresa, vagas.descricao, vagas.requisitos, vagas.data_postagem 
-                        FROM vagas 
-                        INNER JOIN empresas ON vagas.empresa_id = empresas.id 
-                        ORDER BY vagas.data_postagem DESC";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
+                if ($vagas) {
+                    foreach ($vagas as $vaga) {
                         echo "<tr>
-                                <td>{$row['id']}</td>
-                                <td>{$row['nome_empresa']}</td>
-                                <td>{$row['local_empresa']}</td>
-                                <td>{$row['descricao']}</td>
-                                <td>{$row['requisitos']}</td>
-                                <td>{$row['data_postagem']}</td>
+                                <td>{$vaga['id']}</td>
+                                <td>{$vaga['descricao']}</td>
+                                <td>{$vaga['requisitos']}</td>
+                                <td>{$vaga['data_postagem']}</td>
                               </tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='6' class='text-center'>Nenhuma vaga cadastrada.</td></tr>";
+                    echo "<tr><td colspan='4' class='text-center'>Nenhuma vaga cadastrada.</td></tr>";
                 }
-
-                $conn->close();
                 ?>
             </tbody>
         </table>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

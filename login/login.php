@@ -1,11 +1,37 @@
 <?php
+session_start();
+require_once("../conexao.php");
 
-// Adicionando os cabeçalhos CORS
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+// Verificando se os dados de login foram enviados via POST
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Obtendo os dados de login
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
 
-// O restante do código...
+    // Verificar se o usuário existe no banco de dados
+    $sql = "SELECT * FROM empresas WHERE email_empresa = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$email]);
+
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Verificar se o usuário foi encontrado e a senha está correta
+    if ($usuario && password_verify($senha, $usuario['senha_empresa'])) {
+        // Armazenar os dados do usuário na sessão
+        $_SESSION['usuario'] = $usuario;
+
+        // Redirecionar com base no tipo de usuário
+        if ($usuario['tipo_usuario'] === 'empresa') {
+            header("Location: cadastrar_vaga.php"); // Redireciona para a página de cadastro de vagas
+            exit();
+        } else {
+            echo "Usuário não autorizado!";
+            exit;
+        }
+    } else {
+        echo "Credenciais inválidas!";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -95,11 +121,13 @@ header('Access-Control-Allow-Headers: Content-Type');
         <h1>Login</h1>
         <div id="login-container">
             <h2>Entre na sua conta</h2>
-            <form id="loginForm">
+            <form id="loginForm" method="POST" action="login.php">
                 <input type="email" name="email" id="email" placeholder="Email" required>
                 <input type="password" name="senha" id="senha" placeholder="Senha" required>
                 <button type="submit">Entrar</button>
             </form>
+            
+            <!-- Google Login -->
             <div id="g_id_onload"
                 data-client_id="543793793556-rlo97asgftgul1624uo3phbbi4rh4eqr.apps.googleusercontent.com"
                 data-callback="handleCredentialResponse">
@@ -112,27 +140,38 @@ header('Access-Control-Allow-Headers: Content-Type');
         <p>Login realizado com sucesso!</p>
         <button onclick="fecharModal()">Fechar</button>
     </div>
-    
+
     <script>
- fetch('google-callback.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: 'token=' + encodeURIComponent(token)
-})
-.then(response => response.text())  // Use .text() para depurar a resposta
-.then(data => {
-    console.log(data); // Verifique o conteúdo da resposta
-    try {
-        let jsonData = JSON.parse(data);  // Tente converter a resposta em JSON
-        // Agora você pode manipular jsonData
-    } catch (e) {
-        console.error('Erro ao processar JSON:', e);
-    }
-})
-.catch(error => console.error('Erro:', error));
+        // Exibe o modal de sucesso após login
+        function exibirModal() {
+            document.getElementById("successModal").style.display = "block";
+        }
 
+        function fecharModal() {
+            document.getElementById("successModal").style.display = "none";
+        }
 
-</script>
+        // Callback para o login do Google
+        function handleCredentialResponse(response) {
+            const token = response.credential;
 
+            fetch('google-callback.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'token=' + encodeURIComponent(token)
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                try {
+                    let jsonData = JSON.parse(data); // Tenta converter a resposta em JSON
+                    // Aqui você pode manipular jsonData, por exemplo, armazenando dados de login
+                } catch (e) {
+                    console.error('Erro ao processar JSON:', e);
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        }
+    </script>
 </body>
 </html>

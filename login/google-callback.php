@@ -7,7 +7,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
-require_once "cadastro/conexao.php";  // Inclua o arquivo de conexão com o banco
+require_once("../conexao.php");// Inclua o arquivo de conexão com o banco
 
 // Função para decodificar o token do Google
 function decodeGoogleToken($token) {

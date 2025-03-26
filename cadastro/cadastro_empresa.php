@@ -93,9 +93,9 @@ function mudarEtapa(acao) {
 // Inicializar corretamente na etapa 1
 mudarEtapa();
     </script>
+ <script src="js/senha.js"></script>
+<script src="js/mascaras.js"></script>
 
-    <!-- Máscaras para CNPJ e Telefone -->
-    <script src="/Projeto_RH/js/mascaras.js"></script>
 
 </body>
 </html>
