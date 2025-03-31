@@ -153,25 +153,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Callback para o login do Google
         function handleCredentialResponse(response) {
-            const token = response.credential;
+    const token = response.credential;
 
-            fetch('google-callback.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'token=' + encodeURIComponent(token)
-            })
-            .then(response => response.text())
-            .then(data => {
-                console.log(data);
-                try {
-                    let jsonData = JSON.parse(data); // Tenta converter a resposta em JSON
-                    // Aqui você pode manipular jsonData, por exemplo, armazenando dados de login
-                } catch (e) {
-                    console.error('Erro ao processar JSON:', e);
-                }
-            })
-            .catch(error => console.error('Erro:', error));
+    fetch('google-callback.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'token=' + encodeURIComponent(token)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if (data.status === "success" && data.redirect) {
+            window.location.href = data.redirect;
+        } else {
+            alert("Erro no login: " + (data.message || "Tente novamente."));
         }
+    })
+    .catch(error => console.error('Erro:', error));
+}
+
     </script>
 </body>
 </html>

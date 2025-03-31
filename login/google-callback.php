@@ -55,8 +55,13 @@ $_SESSION["usuario"] = $usuario;
 
 // Redireciona para o dashboard do tipo de usuário
 if ($usuario['tipo_usuario'] === 'empresa') {
-    echo json_encode(["status" => "success", "redirect" => "/login/dashboard_empresa.php"]);
+    echo json_encode(["status" => "success", "redirect" => "/Assets/dashboard_empresa.php"]);
 } else {
-    echo json_encode(["status" => "success", "redirect" => "/login/dashboard_usuario.php"]);
+    
+    echo json_encode(["status" => "success", "redirect" => "/Assets/completar-cadastro.html"]);
 }
+ob_clean(); // Limpa qualquer saída anterior
+echo json_encode(["status" => "success", "redirect" => "/Assets/completar-cadastro.html"]);
+exit;
+
 ?>
