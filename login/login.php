@@ -22,16 +22,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Redirecionar com base no tipo de usuário
         if ($usuario['tipo_usuario'] === 'empresa') {
-            header("Location: cadastrar_vaga.php"); // Redireciona para a página de cadastro de vagas
+            header("Location: ../html/pagina-empresa log.html"); // Redireciona para a página de cadastro de vagas
             exit();
-        } else {
+        } 
+        if ($usuario['tipo_usuario'] === 'empresa' ) {
+            header("Location: ../html/pagina-usuario log.html"); // Redireciona para a página de cadastro de vagas
+            exit();
+        }
+        else {
             echo "Usuário não autorizado!";
             exit;
         }
     } else {
         echo "Credenciais inválidas!";
     }
+    
 }
+
 ?>
 
 <!DOCTYPE html>
