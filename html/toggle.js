@@ -1,3 +1,4 @@
+//Função do menu Mobile
 function mostrar() {
     let menuMobile = document.querySelector('.resp');
     if (menuMobile.classList.contains('abrir')) {
@@ -6,3 +7,11 @@ function mostrar() {
         menuMobile.classList.add('abrir');
     }
 }
+
+//Função do Perfil
+const but = document.querySelector('perfFoto');
+const menu = document.querySelector('cont-list')
+
+but.addEventListener('click', ()=>{
+    menu.classList.toggle('apar');
+})
