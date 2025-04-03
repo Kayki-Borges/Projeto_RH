@@ -10,11 +10,61 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuário</title>
     <link rel="stylesheet" href="/Projeto_RH/css/cadastro.css">
+    <style>
+        /* Ajustes no contêiner dos círculos */
+        .step-indicator-container {
+            display: flex;
+            justify-content: flex-end;  /* Alinha os círculos à direita */
+            margin-top: 20px;
+            padding-right: 20px;  /* Distância da borda direita */
+        }
+
+        .step-indicator {
+            width: 80px;  /* Aumenta o tamanho dos círculos */
+            height: 80px;  /* Aumenta o tamanho dos círculos */
+            background-color: #ccc;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;  /* Aumenta o tamanho da fonte */
+            font-weight: bold;
+            color: white;
+            transition: background-color 0.3s;
+            margin: 0 10px;  /* Espaço entre os círculos */
+        }
+
+        .step-indicator.active {
+            background-color: #4caf50;
+        }
+
+        /* Estilos gerais do modal */
+        .modal {
+            display: none; /* Mantém oculto inicialmente */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%; /* Define um tamanho flexível */
+            max-width: 400px; /* Limita o tamanho máximo */
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 1000; /* Garante que está acima de outros elementos */
+        }
+
+        .modal-content {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <form id="formCadastro" action="/Projeto_RH/cadastro/processa_cadastro.php" method="POST" aria-labelledby="formCadastro">
-    <h1>Cadastro de Usuário</h1>
-    <!-- Etapa 1: Dados Pessoais -->
+        <h1>Cadastro de Usuário</h1>
+        
+        <!-- Etapa 1: Dados Pessoais -->
         <div id="etapa1" class="etapa">
             <h2>Etapa 1: Dados Pessoais</h2>
             <label for="nome">Nome:</label>
@@ -38,11 +88,9 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             <div id="telefoneHelp" class="error">Informe seu telefone de contato.</div>
         </div>
 
-        <!-- Contêiner para os indicadores -->
+        <!-- Contêiner para o indicador (somente um círculo) -->
         <div class="step-indicator-container">
-            <div class="step-indicator" id="step1-indicator">1</div>
-            <div class="step-indicator" id="step2-indicator">2</div>
-            <div class="step-indicator" id="step3-indicator">3</div>
+            <div class="step-indicator" id="step-indicator">1</div>
         </div>
 
         <!-- Etapa 2: Formação Acadêmica e Experiência -->
@@ -99,110 +147,80 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
         </div>
     </form>
     
-   <!-- Modal -->
-<div id="myModal" class="modal" style="display: none;">
-    <div class="modal-content">
-        <h2>Cadastro Concluído!</h2>
-        <p>Seu cadastro foi realizado com sucesso. Você pode agora fazer login.</p>
-        <button id="btnLogin">Ir para Login</button>
+    <!-- Modal -->
+    <div id="myModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Cadastro Concluído!</h2>
+            <p>Seu cadastro foi realizado com sucesso. Você pode agora fazer login.</p>
+            <button id="btnLogin">Ir para Login</button>
+        </div>
     </div>
-</div>
 
-    <!-- Código JavaScript para as máscaras -->
-    <script src="/Projeto_RH/js/mascaras.js"></script>
-    <!-- Código JavaScript para alternar visibilidade da senha -->
-    <script src="/Projeto_RH/js/senha.js"></script>
     <!-- Código JavaScript para navegação entre etapas -->
     <script>
-    let etapaAtual = 1;
+        let etapaAtual = 1;
 
-    function mudarEtapa(acao) {
-        const totalEtapas = 3;
-        const etapa1 = document.getElementById("etapa1");
-        const etapa2 = document.getElementById("etapa2");
-        const etapa3 = document.getElementById("etapa3");
-        const proximoBtn = document.getElementById("proximo");
-        const anteriorBtn = document.getElementById("anterior");
-        const finalizarBtn = document.getElementById("finalizar");
+        function mudarEtapa(acao) {
+            const totalEtapas = 3;
+            const etapa1 = document.getElementById("etapa1");
+            const etapa2 = document.getElementById("etapa2");
+            const etapa3 = document.getElementById("etapa3");
+            const proximoBtn = document.getElementById("proximo");
+            const anteriorBtn = document.getElementById("anterior");
+            const finalizarBtn = document.getElementById("finalizar");
+            const stepIndicator = document.getElementById("step-indicator");
 
-        // Esconder todas as etapas
-        etapa1.style.display = "none";
-        etapa2.style.display = "none";
-        etapa3.style.display = "none";
+            // Esconder todas as etapas
+            etapa1.style.display = "none";
+            etapa2.style.display = "none";
+            etapa3.style.display = "none";
 
-        // Remover a classe 'active' dos indicadores de passo
-        document.querySelectorAll('.step-indicator').forEach(indicator => {
-            indicator.classList.remove('active');
-        });
+            // Remover a classe 'active' do indicador de passo
+            stepIndicator.classList.remove('active');
 
-        // Mover entre as etapas
-        if (acao === "proximo" && etapaAtual < totalEtapas) {
-            etapaAtual++;
-        } else if (acao === "anterior" && etapaAtual > 1) {
-            etapaAtual--;
+            // Mover entre as etapas
+            if (acao === "proximo" && etapaAtual < totalEtapas) {
+                etapaAtual++;
+            } else if (acao === "anterior" && etapaAtual > 1) {
+                etapaAtual--;
+            }
+
+            // Exibir a etapa atual e marcar o indicador de passo como ativo
+            if (etapaAtual === 1) {
+                etapa1.style.display = "block";
+                stepIndicator.classList.add('active');
+                proximoBtn.style.display = "inline-block";
+                anteriorBtn.style.display = "none";
+                finalizarBtn.style.display = "none";
+            } else if (etapaAtual === 2) {
+                etapa2.style.display = "block";
+                stepIndicator.classList.add('active');
+                proximoBtn.style.display = "inline-block";
+                anteriorBtn.style.display = "inline-block";
+                finalizarBtn.style.display = "none";
+            } else if (etapaAtual === 3) {
+                etapa3.style.display = "block";
+                stepIndicator.classList.add('active');
+                proximoBtn.style.display = "none";
+                anteriorBtn.style.display = "inline-block";
+                finalizarBtn.style.display = "inline-block";
+            }
         }
 
-        // Exibir a etapa atual e marcar o indicador de passo como ativo
-        if (etapaAtual === 1) {
-            etapa1.style.display = "block";
-            document.getElementById("step1-indicator").classList.add('active');
-            proximoBtn.style.display = "inline-block";
-            anteriorBtn.style.display = "none";
-            finalizarBtn.style.display = "none";
-        } else if (etapaAtual === 2) {
-            etapa2.style.display = "block";
-            document.getElementById("step2-indicator").classList.add('active');
-            proximoBtn.style.display = "inline-block";
-            anteriorBtn.style.display = "inline-block";
-            finalizarBtn.style.display = "none";
-        } else if (etapaAtual === 3) {
-            etapa3.style.display = "block";
-            document.getElementById("step3-indicator").classList.add('active');
-            proximoBtn.style.display = "none";
-            anteriorBtn.style.display = "inline-block";
-            finalizarBtn.style.display = "inline-block";
-        }
-    }
+        // Exibir o modal caso o cadastro tenha sido realizado com sucesso
+        window.onload = function() {
+            mudarEtapa();
 
-   // Exibir o modal caso o cadastro tenha sido realizado com sucesso
-   window.onload = function() {
-    mudarEtapa();
+            // Exibir o modal caso o cadastro tenha sido realizado com sucesso
+            <?php if (isset($cadastro_sucesso) && $cadastro_sucesso): ?>
+                document.getElementById('myModal').style.display = 'flex';  // Modal deve ter 'flex' para centralizar
+            <?php endif; ?>
 
-    // Exibir o modal caso o cadastro tenha sido realizado com sucesso
-    <?php if (isset($cadastro_sucesso) && $cadastro_sucesso): ?>
-        document.getElementById('myModal').style.display = 'flex';  // Modal deve ter 'flex' para centralizar
-    <?php endif; ?>
-
-    // Redirecionar para o login ao clicar no botão do modal
-    document.getElementById('btnLogin').onclick = function() {
-    window.location.href = "/Projeto_RH/login/login.php"; // Caminho correto para o login.php
-};
-};
-
-
+            // Redirecionar para o login ao clicar no botão do modal
+            document.getElementById('btnLogin').onclick = function() {
+                window.location.href = "/Projeto_RH/login/login.php"; // Caminho correto para o login.php
+            };
+        };
     </script>
-
 </body>
 </html>
-<style>
-    .modal {
-  display: none; /* Mantém oculto inicialmente */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%; /* Define um tamanho flexível */
-  max-width: 400px; /* Limita o tamanho máximo */
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  z-index: 1000; /* Garante que está acima de outros elementos */
-}
-
-.modal-content {
-  margin: 0;
-}
-
-</style>
