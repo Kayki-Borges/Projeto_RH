@@ -157,6 +157,50 @@ header.roll a{
   transform: scale(1.1);
 }
 
+
+.perf .cont-list{
+  display: none;
+}
+
+.perf .cont-list.most{
+  display: block;
+  background-color: #787881;
+  list-style: none;
+  position: absolute;
+  left: 165vh;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.perf .cont-list.most a{
+  color: #e4e4e4;
+  text-decoration: none;
+}
+
+.perf .cont-list.most li{
+  transition: .2s all ease-in-out;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.perf .cont-list.most li:hover{
+  transform: scale(1.1);
+  background-color: #488BE8;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.perf .cont-list.most .term{
+  text-decoration: underline;
+  transition: .2s all ease-in-out;
+}
+
+.perf .cont-list.most .term:hover{
+  color: #488BE8;
+  transform: scale(1.1);
+}
+
 .resp-but{
   display: none;
 }
