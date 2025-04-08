@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['usuario'])) {
+    echo "Usuário não autenticado!";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,8 +15,8 @@
     <script src="revelar.js" defer></script>
     <script src="toggle.js"></script>
     <script src="scroll-menu.js"></script>
-    <link rel="stylesheet" href="Assets/pagina-usuario-body.css">
-    <link rel="stylesheet" href="Assets/pagina-usuario-main.css">
+    <link rel="stylesheet" href="Assets/pagina-empresa-body.css">
+    <link rel="stylesheet" href="Assets/pagina-empresa-main.css">
     <link rel="icon" href="Assets/IMG/Link_Next_Logo_sem_fundo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,8 +32,9 @@
         <div class="items">
           <ul>
           <li class="nav-item"><a href="#banner" class="link">inicio</a></li>
-          <li class="nav-item"><a href="#" class="link">Buscar Vagas</a></li>
-          <li class="nav-item"><a href="#" class="link">Sou Empresa</a></li>
+          <li class="nav-item"><a href="#" class="link">Buscar Candidatos</a></li>
+          <li class="nav-item"><a href="../login/cadastrar_vaga.php" class="link">Cadastrar Vagas</a></li>
+          <li class="nav-item"><a href="#" class="link">Sou Candidato</a></li>
           </ul>
         </div>
 
@@ -32,7 +42,6 @@
           <img src="Assets/IMG/Foto model.jpg" alt="Foto de perfil" class="foto" onclick="apar()">
           <ul class="cont-list">
             <li><a href="#">Editar Perfil</a></li>
-            <li><a href="#">Curriculo</a></li>
             <li><a href="#">Candidaturas</a></li>
             <li><a href="#">Ajuda</a></li>
             <li><a href="#">Sair</a></li>
@@ -54,10 +63,12 @@
         <ul>
           <li class="nav-item"><a href="#" class="link">inicio</a></li>
           <li class="nav-item"><a href="#" class="link">Buscar Vagas</a></li>
+          <li class="nav-item"><a href="../login/cadastrar_vaga.php" class="link">Cadastrar Vagas</a></li>
           <li class="nav-item"><a href="#" class="link">Sou Empresa</a></li>
         </ul>
         <div class="perf">
-          <img src="Assets/IMG/Foto model.jpg" alt="Foto de perfil">
+          <img src="Assets/IMG/Foto model.jpg" alt="Foto de perfil" id="perfFoto">
+          
         </div>
       </div>
 
@@ -67,9 +78,10 @@
 
     <div class="banner" style="height: 600px;">
       <div class="efeito-text-topo">
-      <h1>Impulsionando talentos,</h1>
-      <h2>por meio de <span>Oportunidades</span>!</h2>
-      <button><a href="#">Cargos mais procurados</a></button>
+      <h1>Seja bem vindo(a)!</h1>
+      <h2>Aqui você buscará <span>candidatos</span></h2>
+      <h2>necessários para sua empresa!</h2>
+      <button><a href="#">Buscar Candidatos</a></button>
       </div>
     </div>
   </section>
@@ -77,7 +89,7 @@
   <section class="feature-box">
     <div class="box">
         <i class="material-icons">group</i>
-        <h4>Vagas para Empresas</h4>
+        <h4>Anuncio de Vagas</h4>
         <p>Anuncie suas vagas e encontre candidatos qualificados rapidamente.</p>
     </div>
     <div class="box">
@@ -87,8 +99,8 @@
     </div>
     <div class="box">
         <i class="material-icons">search</i>
-        <h4>Busca de Empregos</h4>
-        <p>Encontre a vaga ideal de acordo com suas habilidades e interesses.</p>
+        <h4>Busca de Candidatos</h4>
+        <p>Encontre o candidato ideal de acordo com suas habilidades e interesses.</p>
     </div>
 </section>
 

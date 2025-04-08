@@ -1,3 +1,33 @@
+<?php
+session_start();
+require_once('conexao.php');
+
+if (!isset($_SESSION['usuario'])) {
+    echo "Usuário não autenticado!";
+    exit;
+}
+$candidato_id = $_SESSION['usuario']['id']; // ou ['id_candidato'] se o nome da coluna for assim
+
+
+
+try {
+    // Busca os dados do candidato logado
+    $stmt = $pdo->prepare("SELECT * FROM candidatos WHERE id = ?");
+    $stmt->execute([$candidato_id]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Se não encontrar, mostra mensagem de erro
+    if (!$row) {
+        echo "Candidato não encontrado no banco de dados.";
+        exit();
+    }
+} catch (PDOException $e) {
+    echo "Erro ao buscar candidato: " . $e->getMessage();
+    exit();
+}
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -18,44 +48,45 @@
             <div class="avatar">IL</div>
             <p><a href="#">Saiba porque não exibimos a foto de perfil</a></p>
         </div>
-        <form action="salvar.php" method="POST">
-            <label>Nome *</label>
-            <input type="text" name="nome" value="<?php echo $row['nome_candidato']; ?>" required>
-            
-            <label>Sobrenome *</label>
-            <input type="text" name="sobrenome" value="<?php echo $row['sobrenome_candidato']; ?>" required>
-            
-            <label>Data de nascimento *</label>
-            <input type="text" id="data_nascimento" name="data_nascimento" value="<?php echo $row['data_nascimento']; ?>" required>
-            
-            <label>E-mail *</label>
-            <input type="email" name="email" value="<?php echo $row['email_candidato']; ?>" required>
-            
-            <label>Telefone celular *</label>
-            <input type="text" id="telefone" name="telefone" value="<?php echo $row['telefone_candidato']; ?>" required>
-            
-            <label>Telefone fixo</label>
-            <input type="text" id="telefone_fixo" name="telefone_fixo" placeholder="(   ) _____-____">
-            
-            <label>País de origem *</label>
-            <select name="pais">
-                <option selected>Brasil</option>
-            </select>
-            
-            <label>CPF *</label>
-            <input type="text" id="cpf" name="cpf" value="<?php echo $row['cpf_candidato']; ?>" required>
-            
-            <button type="button">Trocar senha</button>
-            
-            <label>Idioma</label>
-            <div class="languages">
-                <button type="button" class="selected">Português</button>
-                <button type="button">English</button>
-                <button type="button">Español</button>
-            </div>
-            
-            <button type="submit">Salvar</button>
-        </form>
+        <form action="salvar.php" method="POST" enctype="multipart/form-data">
+    <label>Nome *</label>
+    <input type="text" name="nome" value="<?php echo $row['nome_candidato']; ?>" required>
+
+    <label>E-mail *</label>
+    <input type="email" name="email" value="<?php echo $row['email_candidato']; ?>" required>
+
+    <label>Telefone celular *</label>
+    <input type="text" id="telefone" name="telefone" value="<?php echo $row['telefone_candidato']; ?>" required>
+
+    <label>País de origem *</label>
+    <select name="pais">
+        <option selected>Brasil</option>
+    </select>
+
+    <label>CPF *</label>
+    <input type="text" id="cpf" name="cpf" value="<?php echo $row['cpf_candidato']; ?>" required>
+
+    <button type="button">Trocar senha</button>
+
+    <!-- Upload de Foto do Currículo -->
+    <label>Foto do currículo</label>
+
+    <?php if (!empty($row['foto_candidato'])): ?>
+        <img src="uploads/<?php echo $row['foto_candidato']; ?>" alt="Foto do Candidato" style="width: 120px; border-radius: 8px; margin-bottom: 10px;">
+    <?php endif; ?>
+
+    <input type="file" name="foto_candidato" accept="image/*">
+
+    <label>Idioma</label>
+    <div class="languages">
+        <button type="button" class="selected">Português</button>
+        <button type="button">English</button>
+        <button type="button">Español</button>
+    </div>
+
+    <button type="submit">Salvar</button>
+</form>
+
     </div>
     
     <script>

@@ -2,44 +2,53 @@
 session_start();
 require_once("../conexao.php");
 
-// Verificando se os dados de login foram enviados via POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Obtendo os dados de login
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    // Verificar se o usuário existe no banco de dados
-    $sql = "SELECT * FROM empresas WHERE email_empresa = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$email]);
+    // Primeiro, tenta encontrar o usuário como empresa
+    $sql_empresa = "SELECT * FROM empresas WHERE email_empresa = ?";
+    $stmt_empresa = $pdo->prepare($sql_empresa);
+    $stmt_empresa->execute([$email]);
+    $empresa = $stmt_empresa->fetch(PDO::FETCH_ASSOC);
 
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Verificar se o usuário foi encontrado e a senha está correta
-    if ($usuario && password_verify($senha, $usuario['senha_empresa'])) {
-        // Armazenar os dados do usuário na sessão
-        $_SESSION['usuario'] = $usuario;
-
-        // Redirecionar com base no tipo de usuário
-        if ($usuario['tipo_usuario'] === 'empresa') {
-            header("Location: ../html/pagina-empresa log.html"); // Redireciona para a página de cadastro de vagas
-            exit();
-        } 
-        if ($usuario['tipo_usuario'] === 'empresa' ) {
-            header("Location: ../html/pagina-usuario log.html"); // Redireciona para a página de cadastro de vagas
-            exit();
-        }
-        else {
-            echo "Usuário não autorizado!";
+    if ($empresa) {
+        if (password_verify($senha, $empresa['senha_empresa'])) {
+            $_SESSION['usuario'] = $empresa;
+            $_SESSION['tipo'] = 'empresa';
+            header("Location: ../html/pagina-empresa log.php");
+            exit;
+        } else {
+            echo "Senha incorreta para empresa!";
             exit;
         }
-    } else {
-        echo "Credenciais inválidas!";
     }
-    
-}
 
+    // Se não for empresa, tenta como candidato
+    $sql_candidato = "SELECT * FROM candidatos WHERE email_candidato = ?";
+    $stmt_candidato = $pdo->prepare($sql_candidato);
+    $stmt_candidato->execute([$email]);
+    $candidato = $stmt_candidato->fetch(PDO::FETCH_ASSOC);
+
+    if ($candidato) {
+        if (password_verify($senha, $candidato['senha_candidato'])) {
+            $_SESSION['usuario'] = $candidato;
+            $_SESSION['tipo'] = 'candidato';
+            
+            header("Location: ../html/pagina-usuario log.php");
+            exit;
+        } else {
+            echo "Senha incorreta para candidato!";
+            exit;
+        }
+    }
+
+    // Se não encontrar em nenhuma das tabelas
+    echo "Usuário não encontrado!";
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
