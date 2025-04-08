@@ -9,9 +9,17 @@ function mostrar() {
 }
 
 //Função do Perfil
-const but = document.querySelector('perfFoto');
-const menu = document.querySelector('cont-list')
+const but = document.querySelector('.foto');
+const menu = document.querySelector('.cont-list')
 
-but.addEventListener('click', ()=>{
-    menu.classList.toggle('apar');
-})
+function apar() {
+    let but = document.querySelector('.foto');
+    let menu = document.querySelector('.cont-list')
+    if (but.classList.contains('apar')) {
+        but.classList.remove('apar')
+        menu.classList.add('most')
+    } else {
+        menu.classList.remove('most')
+        but.classList.add('apar')
+    }
+}
