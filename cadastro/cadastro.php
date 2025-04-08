@@ -9,146 +9,240 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuário</title>
-    <link rel="stylesheet" href="/Projeto_RH/css/cadastro.css">
+
     <style>
-        /* Ajustes no contêiner dos círculos */
-        .step-indicator-container {
-            display: flex;
-            justify-content: flex-end;  /* Alinha os círculos à direita */
-            margin-top: 20px;
-            padding-right: 20px;  /* Distância da borda direita */
+       * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .step-indicator {
-            width: 80px;  /* Aumenta o tamanho dos círculos */
-            height: 80px;  /* Aumenta o tamanho dos círculos */
-            background-color: #ccc;
-            border-radius: 50%;
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #9D61EA;
+            margin-bottom: 20px;
+        }
+
+        .container-principal {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .lado-esquerdo {
+            flex: 1;
+            max-width: 400px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 30px;  /* Aumenta o tamanho da fonte */
-            font-weight: bold;
+        }
+
+        .lado-esquerdo img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+           
+            flex: 1;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #5e3c5e;
+            outline: none;
+            box-shadow: 0 0 8px rgba(94, 60, 94, 0.3);
+        }
+
+        button {
+            background-color: #5e3c5e;
             color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
             transition: background-color 0.3s;
-            margin: 0 10px;  /* Espaço entre os círculos */
         }
 
-        .step-indicator.active {
-            background-color: #4caf50;
+        button:hover {
+            background-color: #4a2a4a;
         }
 
-        /* Estilos gerais do modal */
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+        }
+
+        .step {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .step.active {
+            display: flex;
+        }
+
+        #finalizar {
+            background-color: #2196f3;
+            color: white;
+        }
+
         .modal {
-            display: none; /* Mantém oculto inicialmente */
+            display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90%; /* Define um tamanho flexível */
-            max-width: 400px; /* Limita o tamanho máximo */
+            width: 90%;
+            max-width: 400px;
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
-            z-index: 1000; /* Garante que está acima de outros elementos */
+            z-index: 1000;
         }
 
         .modal-content {
             margin: 0;
         }
+
+        @media (max-width: 768px) {
+            .container-principal {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .lado-esquerdo,
+            form {
+                max-width: 90%;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <form id="formCadastro" action="/Projeto_RH/cadastro/processa_cadastro.php" method="POST" aria-labelledby="formCadastro">
-        <h1>Cadastro de Usuário</h1>
-        
-        <!-- Etapa 1: Dados Pessoais -->
-        <div id="etapa1" class="etapa">
-            <h2>Etapa 1: Dados Pessoais</h2>
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" required aria-describedby="nomeHelp">
-            <div id="nomeHelp" class="error">Por favor, insira seu nome completo.</div>
-
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required aria-describedby="emailHelp">
-            <div id="emailHelp" class="error">Insira um email válido.</div>
-
-            <label for="cpf">CPF:</label>
-            <input type="text" name="cpf" id="cpf" required aria-describedby="cpfHelp" maxlength="14">
-            <div id="cpfHelp" class="error">Insira seu CPF corretamente.</div>
-
-            <label for="endereco">Endereço:</label>
-            <textarea name="endereco" id="endereco" required aria-describedby="enderecoHelp"></textarea>
-            <div id="enderecoHelp" class="error">O endereço é obrigatório.</div>
-
-            <label for="telefone">Telefone:</label>
-            <input type="text" name="telefone" id="telefone" required aria-describedby="telefoneHelp" maxlength="15">
-            <div id="telefoneHelp" class="error">Informe seu telefone de contato.</div>
+    <div class="container-principal">
+        <div class="lado-esquerdo">
+            <img src="../cadastro/nada.png" alt="Imagem ilustrativa">
         </div>
 
-        <!-- Contêiner para o indicador (somente um círculo) -->
-        <div class="step-indicator-container">
-            <div class="step-indicator" id="step-indicator">1</div>
-        </div>
+        <form id="formCadastro" action="/Projeto_RH/cadastro/processa_cadastro.php" method="POST" aria-labelledby="formCadastro">
+            <h1>Cadastro de Usuário</h1>
 
-        <!-- Etapa 2: Formação Acadêmica e Experiência -->
-        <div id="etapa2" class="etapa" style="display: none;">
-            <h2>Etapa 2: Formação Acadêmica e Experiência</h2>
-            <label for="formacao_academica">Formação Acadêmica:</label>
-            <select name="formacao_academica" id="formacao_academica" required aria-describedby="formacaoHelp">
-                <option value="Ensino Médio">Ensino Médio</option>
-                <option value="Graduação">Graduação</option>
-                <option value="Pós-Graduação">Pós-Graduação</option>
-                <option value="Mestrado">Mestrado</option>
-                <option value="Doutorado">Doutorado</option>
-            </select>
-            <div id="formacaoHelp" class="error">Escolha sua formação acadêmica.</div>
+            <!-- Etapa 1 -->
+            <div id="etapa1" class="etapa">
+                <h2>Etapa 1: Dados Pessoais</h2>
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" required>
+                <div id="nomeHelp" class="error">Por favor, insira seu nome completo.</div>
 
-            <label for="experiencia_profissional">Experiência Profissional:</label>
-            <textarea name="experiencia_profissional" id="experiencia_profissional" aria-describedby="experienciaHelp"></textarea>
-            <div id="experienciaHelp" class="error">Descreva sua experiência, se houver.</div>
-        </div>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
+                <div id="emailHelp" class="error">Insira um email válido.</div>
 
-        <!-- Etapa 3: Senha e Confirmação -->
-        <div id="etapa3" class="etapa" style="display: none;">
-            <h2>Etapa 3: Senha e Confirmação</h2>
-            <div class="password-container">
+                <label for="cpf">CPF:</label>
+                <input type="text" name="cpf" id="cpf" required maxlength="14">
+                <div id="cpfHelp" class="error">Insira seu CPF corretamente.</div>
+
+                <label for="endereco">Endereço:</label>
+                <textarea name="endereco" id="endereco" required></textarea>
+                <div id="enderecoHelp" class="error">O endereço é obrigatório.</div>
+
+                <label for="telefone">Telefone:</label>
+                <input type="text" name="telefone" id="telefone" required maxlength="15">
+                <div id="telefoneHelp" class="error">Informe seu telefone de contato.</div>
+            </div>
+
+            <div id="etapa2" class="etapa" style="display: none;">
+                <h2>Etapa 2: Formação e Experiência</h2>
+                <label for="formacao_academica">Formação Acadêmica:</label>
+                <select name="formacao_academica" id="formacao_academica" required>
+                    <option value="Ensino Médio">Ensino Médio</option>
+                    <option value="Graduação">Graduação</option>
+                    <option value="Pós-Graduação">Pós-Graduação</option>
+                    <option value="Mestrado">Mestrado</option>
+                    <option value="Doutorado">Doutorado</option>
+                </select>
+
+                <label for="experiencia_profissional">Experiência Profissional:</label>
+                <textarea name="experiencia_profissional" id="experiencia_profissional"></textarea>
+            </div>
+
+            <div id="etapa3" class="etapa" style="display: none;">
+                <h2>Etapa 3: Senha e Área</h2>
                 <label for="senha">Senha:</label>
-                <input type="password" name="senha" id="senha" required aria-describedby="senhaHelp">
-                <span id="toggleSenha">👁️</span>
-            </div>
-            
-            <div id="senhaHelp" class="error">A senha deve ter pelo menos 8 caracteres.</div>
+                <input type="password" name="senha" id="senha" required>
+                <div id="senhaHelp" class="error">A senha deve ter pelo menos 8 caracteres.</div>
 
-            <div class="password-container">
                 <label for="confirmar_senha">Confirmar Senha:</label>
-                <input type="password" name="confirmar_senha" id="confirmar_senha" required aria-describedby="confirmarSenhaHelp">
-                <span id="toggleConfirmarSenha">👁️</span>
+                <input type="password" name="confirmar_senha" id="confirmar_senha" required>
+
+                <label for="area_interesse">Área de Interesse:</label>
+                <select name="area_interesse" id="area_interesse" required>
+                    <option value="Tecnologia">Tecnologia</option>
+                    <option value="Saúde">Saúde</option>
+                    <option value="Administração">Administração</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Educação">Educação</option>
+                </select>
             </div>
 
-            <label for="area_interesse">Área de atuação:</label>
-            <select name="area_interesse" id="area_interesse" required aria-describedby="areaHelp">
-                <option value="Tecnologia">Tecnologia</option>
-                <option value="Saúde">Saúde</option>
-                <option value="Administração">Administração</option>
-                <option value="Marketing">Marketing</option>
-                <option value="Educação">Educação</option>
-            </select>
-            <div id="areaHelp" class="error">Escolha sua área de interesse.</div>
-        </div>
+            <!-- Navegação -->
+            <div id="navegacao">
+                <button type="button" id="anterior" onclick="mudarEtapa('anterior')">Anterior</button>
+                <button type="button" id="proximo" onclick="mudarEtapa('proximo')">Próximo</button>
+                <button type="submit" id="finalizar" style="display: none;">Cadastrar</button>
+            </div>
+        </form>
+    </div>
 
-        <!-- Navegação -->
-        <div id="navegacao">
-            <button type="button" id="anterior" onclick="mudarEtapa('anterior')">Anterior</button>
-            <button type="button" id="proximo" onclick="mudarEtapa('proximo')">Próximo</button>
-            <button type="submit" id="finalizar" style="display: none;">Cadastrar</button>
-        </div>
-    </form>
-    
     <!-- Modal -->
-    <div id="myModal" class="modal" style="display: none;">
+    <div id="myModal" class="modal">
         <div class="modal-content">
             <h2>Cadastro Concluído!</h2>
             <p>Seu cadastro foi realizado com sucesso. Você pode agora fazer login.</p>
@@ -156,71 +250,53 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
         </div>
     </div>
 
-    <!-- Código JavaScript para navegação entre etapas -->
+    <!-- JavaScript -->
     <script>
         let etapaAtual = 1;
 
         function mudarEtapa(acao) {
             const totalEtapas = 3;
-            const etapa1 = document.getElementById("etapa1");
-            const etapa2 = document.getElementById("etapa2");
-            const etapa3 = document.getElementById("etapa3");
-            const proximoBtn = document.getElementById("proximo");
-            const anteriorBtn = document.getElementById("anterior");
-            const finalizarBtn = document.getElementById("finalizar");
-            const stepIndicator = document.getElementById("step-indicator");
+            const etapas = [etapa1, etapa2, etapa3];
+            etapas.forEach(e => e.style.display = "none");
 
-            // Esconder todas as etapas
-            etapa1.style.display = "none";
-            etapa2.style.display = "none";
-            etapa3.style.display = "none";
+            if (acao === "proximo" && etapaAtual < totalEtapas) etapaAtual++;
+            if (acao === "anterior" && etapaAtual > 1) etapaAtual--;
 
-            // Remover a classe 'active' do indicador de passo
-            stepIndicator.classList.remove('active');
-
-            // Mover entre as etapas
-            if (acao === "proximo" && etapaAtual < totalEtapas) {
-                etapaAtual++;
-            } else if (acao === "anterior" && etapaAtual > 1) {
-                etapaAtual--;
-            }
-
-            // Exibir a etapa atual e marcar o indicador de passo como ativo
-            if (etapaAtual === 1) {
-                etapa1.style.display = "block";
-                stepIndicator.classList.add('active');
-                proximoBtn.style.display = "inline-block";
-                anteriorBtn.style.display = "none";
-                finalizarBtn.style.display = "none";
-            } else if (etapaAtual === 2) {
-                etapa2.style.display = "block";
-                stepIndicator.classList.add('active');
-                proximoBtn.style.display = "inline-block";
-                anteriorBtn.style.display = "inline-block";
-                finalizarBtn.style.display = "none";
-            } else if (etapaAtual === 3) {
-                etapa3.style.display = "block";
-                stepIndicator.classList.add('active');
-                proximoBtn.style.display = "none";
-                anteriorBtn.style.display = "inline-block";
-                finalizarBtn.style.display = "inline-block";
-            }
+            etapas[etapaAtual - 1].style.display = "block";
+            proximo.style.display = etapaAtual < totalEtapas ? "inline-block" : "none";
+            anterior.style.display = etapaAtual > 1 ? "inline-block" : "none";
+            finalizar.style.display = etapaAtual === totalEtapas ? "inline-block" : "none";
         }
 
-        // Exibir o modal caso o cadastro tenha sido realizado com sucesso
-        window.onload = function() {
+        window.onload = function () {
             mudarEtapa();
 
-            // Exibir o modal caso o cadastro tenha sido realizado com sucesso
-            <?php if (isset($cadastro_sucesso) && $cadastro_sucesso): ?>
-                document.getElementById('myModal').style.display = 'flex';  // Modal deve ter 'flex' para centralizar
+            <?php if ($cadastro_sucesso): ?>
+                document.getElementById('myModal').style.display = 'flex';
             <?php endif; ?>
 
-            // Redirecionar para o login ao clicar no botão do modal
-            document.getElementById('btnLogin').onclick = function() {
-                window.location.href = "/Projeto_RH/login/login.php"; // Caminho correto para o login.php
+            document.getElementById('btnLogin').onclick = function () {
+                window.location.href = "/Projeto_RH/login/login.php";
             };
         };
+
+        // Máscara CPF
+        document.getElementById('cpf').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            e.target.value = value;
+        });
+
+        // Máscara Telefone
+        document.getElementById('telefone').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.length <= 10
+                ? value.replace(/(\d{2})(\d{4})(\d+)/, '($1) $2-$3')
+                : value.replace(/(\d{2})(\d{5})(\d+)/, '($1) $2-$3');
+            e.target.value = value;
+        });
     </script>
 </body>
 </html>

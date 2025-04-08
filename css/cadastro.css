@@ -25,7 +25,7 @@ form {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    width: 80%;
     max-width: 600px;
     margin: 0 auto;
     transform: translateY(-50px);
@@ -104,35 +104,8 @@ input, select, button, textarea {
 
 
 /* Indicadores de Etapas (agora na parte superior) */
-.step-indicator-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
+/* Indicadores de Etapas (à direita e bem maiores) */
 
-.step-indicator {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 3px solid #ccc;
-    font-weight: bold;
-    color: #666;
-    font-size: 18px;
-    background-color: #fff;
-    transition: all 0.3s ease;
-    margin: 0 10px;
-    cursor: pointer;
-}
-
-.step-indicator.active {
-    border-color: #9D61EA;
-    color: #9D61EA;
-    background-color: #eaf7e6;
-    animation: waveAnimation 1.5s infinite;
-}
 
 /* Animação de onda */
 @keyframes waveAnimation {
