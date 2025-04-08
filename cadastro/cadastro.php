@@ -6,20 +6,28 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuário</title>
 
     <style>
-       * {
+        /*Configurações básicas*/
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+        *{
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .poppins-medium {
+            font-family: "Poppins", sans-serif;
+            font-weight: 500;
+            font-style: normal;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
             color: #333;
             line-height: 1.6;
             padding: 20px;
@@ -27,16 +35,15 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
 
         h1 {
             text-align: center;
-            color: #9D61EA;
+            color: #2196f3;
             margin-bottom: 20px;
         }
 
         .container-principal {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             gap: 30px;
-            margin-top: 40px;
             flex-wrap: wrap;
         }
 
@@ -49,25 +56,36 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
         }
 
         .lado-esquerdo img {
-            width: 100%;
-            max-width: 100%;
+            width: 560px;
             border-radius: 10px;
-            object-fit: cover;
+            margin-left: 80px;
+            animation: fadeInImg 1s ease-in-out forwards;
         }
 
         form {
+            border: 0.1px solid #2196f3;
             background-color: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
-           
             flex: 1;
-            max-width: 600px;
+            max-width: 400px;
             animation: fadeInUp 1s ease-in-out forwards;
         }
 
         @keyframes fadeInUp {
             0% {
                 transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInImg {
+            0% {
+                transform: translateY(50px);
                 opacity: 0;
             }
             100% {
@@ -86,25 +104,51 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             transition: all 0.3s;
         }
 
+        input{
+            height: 40px;
+        }
+
         input:focus, textarea:focus, select:focus {
-            border-color: #5e3c5e;
+            border-color: #2196f3;
             outline: none;
-            box-shadow: 0 0 8px rgba(94, 60, 94, 0.3);
+            box-shadow: 0 0 4px #2196f3;
+        }
+
+        #senhaIcon{
+            color: #2196f3;
+            font-size: 25px;
+            position: absolute;
+            top: 20vh;
+            left: 44vh;
+            cursor: pointer;
+        }
+
+        #comfirmIcon{
+            color: #2196f3;
+            font-size: 25px;
+            position: absolute;
+            top: 32vh;
+            left: 44vh;
+            cursor: pointer;
         }
 
         button {
-            background-color: #5e3c5e;
-            color: white;
-            border: none;
+            background-color: transparent;
+            border: 1px solid #2196f3;
+            color: black;
             padding: 12px 20px;
+            margin-top: 30px;
+            margin-bottom:5px;
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: 0.3s all ease-in-out;
         }
 
         button:hover {
-            background-color: #4a2a4a;
+            background-color: #2196f3;
+            transform: scale(1.1);
+            color: #f4f4f9;
         }
 
         .error {
@@ -123,9 +167,14 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             display: flex;
         }
 
+        #navegacao #proximo{
+            margin-left: 20px;
+        }
+
         #finalizar {
             background-color: #2196f3;
             color: white;
+            margin-left: 20px;
         }
 
         .modal {
@@ -167,9 +216,6 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
 </head>
 <body>
     <div class="container-principal">
-        <div class="lado-esquerdo">
-            <img src="../cadastro/nada.png" alt="Imagem ilustrativa">
-        </div>
 
         <form id="formCadastro" action="/Projeto_RH/cadastro/processa_cadastro.php" method="POST" aria-labelledby="formCadastro">
             <h1>Cadastro de Usuário</h1>
@@ -216,10 +262,12 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             <div id="etapa3" class="etapa" style="display: none;">
                 <h2>Etapa 3: Senha e Área</h2>
                 <label for="senha">Senha:</label>
+                <i class="bi bi-eye-slash-fill" id="senhaIcon"></i>
                 <input type="password" name="senha" id="senha" required>
                 <div id="senhaHelp" class="error">A senha deve ter pelo menos 8 caracteres.</div>
 
                 <label for="confirmar_senha">Confirmar Senha:</label>
+                <i class="bi bi-eye-slash-fill" id="comfirmIcon"></i>
                 <input type="password" name="confirmar_senha" id="confirmar_senha" required>
 
                 <label for="area_interesse">Área de Interesse:</label>
@@ -239,6 +287,10 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
                 <button type="submit" id="finalizar" style="display: none;">Cadastrar</button>
             </div>
         </form>
+        
+        <div class="lado-esquerdo">
+            <img src="img.png" alt="Imagem ilustrativa">
+        </div>
     </div>
 
     <!-- Modal -->
