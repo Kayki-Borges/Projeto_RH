@@ -2,29 +2,38 @@
 session_start();
 require '../conexao.php';
 
-$termoBusca = isset($_GET['busca']) ? trim($_GET['busca']) : '';
+$descricao = isset($_GET['descricao']) ? trim($_GET['descricao']) : '';
+$empresa = isset($_GET['empresa']) ? trim($_GET['empresa']) : '';
+$requisitos = isset($_GET['requisitos']) ? trim($_GET['requisitos']) : '';
 
-if (!empty($termoBusca)) {
-  $sql = "SELECT vagas.id, vagas.descricao, vagas.requisitos, vagas.data_postagem, empresas.nome_empresa 
-          FROM vagas 
-          JOIN empresas ON vagas.empresa_id = empresas.id 
-          WHERE vagas.descricao LIKE :busca 
-             OR empresas.nome_empresa LIKE :busca
-             OR vagas.requisitos LIKE :busca
-          ORDER BY vagas.data_postagem DESC";
+$where = [];
+$params = [];
 
-  $stmt = $pdo->prepare($sql);
-  $stmt->execute(['busca' => '%' . $termoBusca . '%']);
-} else {
-  $sql = "SELECT vagas.id, vagas.descricao, vagas.requisitos, vagas.data_postagem, empresas.nome_empresa 
-          FROM vagas 
-          JOIN empresas ON vagas.empresa_id = empresas.id 
-          ORDER BY vagas.data_postagem DESC";
-
-  $stmt = $pdo->prepare($sql);
-  $stmt->execute();
+if (!empty($descricao)) {
+    $where[] = 'vagas.descricao LIKE :descricao';
+    $params['descricao'] = '%' . $descricao . '%';
+}
+if (!empty($empresa)) {
+    $where[] = 'empresas.nome_empresa LIKE :empresa';
+    $params['empresa'] = '%' . $empresa . '%';
+}
+if (!empty($requisitos)) {
+    $where[] = 'vagas.requisitos LIKE :requisitos';
+    $params['requisitos'] = '%' . $requisitos . '%';
 }
 
+$sql = "SELECT vagas.id, vagas.descricao, vagas.requisitos, vagas.data_postagem, empresas.nome_empresa 
+        FROM vagas 
+        JOIN empresas ON vagas.empresa_id = empresas.id";
+
+if (!empty($where)) {
+    $sql .= ' WHERE ' . implode(' AND ', $where);
+}
+
+$sql .= ' ORDER BY vagas.data_postagem DESC';
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -97,6 +106,24 @@ $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
       border: none;
       border-radius: 8px;
       font-weight: bold;
+      cursor: pointer;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 20px 30px;
+      background-color: #fff;
+    }
+
+    .filters select, .filters button {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #004aad;
+      background: white;
+      color: #004aad;
+      font-size: 14px;
       cursor: pointer;
     }
 
@@ -181,11 +208,12 @@ $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <p>Acompanhe o andamento das vagas que você está participando.</p>
   </section>
 
-  <!-- Formulário com campo de busca -->
   <form class="search-section" method="GET">
-    <input type="text" name="busca" placeholder="Buscar por vaga, empresa ou requisito" value="<?= htmlspecialchars($termoBusca) ?>">
-    <button type="submit">Buscar</button>
-  </form>
+  <input type="text" name="descricao" placeholder="Buscar por vaga" value="<?= htmlspecialchars($_GET['descricao'] ?? '') ?>">
+  <input type="text" name="empresa" placeholder="Buscar por empresa" value="<?= htmlspecialchars($_GET['empresa'] ?? '') ?>">
+  <input type="text" name="requisitos" placeholder="Buscar por requisitos" value="<?= htmlspecialchars($_GET['requisitos'] ?? '') ?>">
+  <button type="submit">Buscar</button>
+</form>
 
   <div class="tabs">
     <div>Em andamento</div>
@@ -228,3 +256,70 @@ $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </script>
 </body>
 </html>
+<?php
+session_start();
+require '../conexao.php';
+
+$usuarioId = $_SESSION['usuario_id'];
+
+$descricao = isset($_GET['descricao']) ? trim($_GET['descricao']) : '';
+$empresa = isset($_GET['empresa']) ? trim($_GET['empresa']) : '';
+$requisitos = isset($_GET['requisitos']) ? trim($_GET['requisitos']) : '';
+
+$where = [];
+$params = [];
+
+if (!empty($descricao)) {
+    $where[] = 'v.descricao LIKE :descricao';
+    $params['descricao'] = '%' . $descricao . '%';
+}
+if (!empty($empresa)) {
+    $where[] = 'e.nome_empresa LIKE :empresa';
+    $params['empresa'] = '%' . $empresa . '%';
+}
+if (!empty($requisitos)) {
+    $where[] = 'v.requisitos LIKE :requisitos';
+    $params['requisitos'] = '%' . $requisitos . '%';
+}
+
+// Vagas em andamento e finalizadas (com candidatura)
+$sqlCandidaturas = "SELECT v.id, v.descricao, v.requisitos, v.data_postagem, e.nome_empresa, c.status
+        FROM vagas v
+        JOIN empresas e ON v.empresa_id = e.id
+        JOIN candidaturas c ON v.id = c.vaga_id
+        WHERE c.usuario_id = :usuario_id";
+
+$paramsCandidatura = ['usuario_id' => $usuarioId];
+if (!empty($where)) {
+    $sqlCandidaturas .= ' AND ' . implode(' AND ', $where);
+    $paramsCandidatura = array_merge($paramsCandidatura, $params);
+}
+$sqlCandidaturas .= ' ORDER BY v.data_postagem DESC';
+$stmt = $pdo->prepare($sqlCandidaturas);
+$stmt->execute($paramsCandidatura);
+$vagasCandidatadas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Separar por status
+$vagasEmAndamento = array_filter($vagasCandidatadas, fn($v) => $v['status'] === 'em_andamento');
+$vagasFinalizadas = array_filter($vagasCandidatadas, fn($v) => $v['status'] === 'finalizada');
+
+// Vagas no banco de talentos (sem candidatura)
+$sqlBanco = "SELECT v.id, v.descricao, v.requisitos, v.data_postagem, e.nome_empresa
+        FROM vagas v
+        JOIN empresas e ON v.empresa_id = e.id
+        WHERE NOT EXISTS (
+            SELECT 1 FROM candidaturas c 
+            WHERE c.vaga_id = v.id AND c.usuario_id = :usuario_id
+        )";
+
+if (!empty($where)) {
+    $sqlBanco .= ' AND ' . implode(' AND ', $where);
+}
+$sqlBanco .= ' ORDER BY v.data_postagem DESC';
+$stmtBanco = $pdo->prepare($sqlBanco);
+$stmtBanco->execute(['usuario_id' => $usuarioId] + $params);
+$vagasBancoTalentos = $stmtBanco->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!-- Resto do HTML permanece igual, apenas altere a parte que exibe as vagas conforme a aba selecionada usando JavaScript e condicional PHP -->
+<!-- Por exemplo, para cada aba, renderizar $vagasEmAndamento, $vagasBancoTalentos ou $vagasFinalizadas -->
