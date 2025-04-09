@@ -257,31 +257,7 @@ $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </body>
 </html>
 <?php
-session_start();
-require '../conexao.php';
-
-$usuarioId = $_SESSION['usuario_id'];
-
-$descricao = isset($_GET['descricao']) ? trim($_GET['descricao']) : '';
-$empresa = isset($_GET['empresa']) ? trim($_GET['empresa']) : '';
-$requisitos = isset($_GET['requisitos']) ? trim($_GET['requisitos']) : '';
-
-$where = [];
-$params = [];
-
-if (!empty($descricao)) {
-    $where[] = 'v.descricao LIKE :descricao';
-    $params['descricao'] = '%' . $descricao . '%';
-}
-if (!empty($empresa)) {
-    $where[] = 'e.nome_empresa LIKE :empresa';
-    $params['empresa'] = '%' . $empresa . '%';
-}
-if (!empty($requisitos)) {
-    $where[] = 'v.requisitos LIKE :requisitos';
-    $params['requisitos'] = '%' . $requisitos . '%';
-}
-
+require_once('../conexao.php');
 // Vagas em andamento e finalizadas (com candidatura)
 $sqlCandidaturas = "SELECT v.id, v.descricao, v.requisitos, v.data_postagem, e.nome_empresa, c.status
         FROM vagas v

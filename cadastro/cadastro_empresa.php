@@ -36,7 +36,14 @@
         <div id="etapa2" class="etapa" style="display: none;">
             <h2>Etapa 2: Área de Atuação</h2>
             <label for="area_atuacao">Área de Atuação:</label>
-            <input type="text" name="area_atuacao" id="area_atuacao" required>
+            <select class="form-control" id="descricao" name="descricao" required>
+                    <option value="">Selecione uma descrição</option>
+                    <option value="Recepcionista">Recepcionista</option>
+                    <option value="Analista de TI">Analista de TI</option>
+                    <option value="Desenvolvedor">Desenvolvedor</option>
+                    <option value="Gerente de Projetos">Gerente de Projetos</option>
+                    <option value="Vendedor">Vendedor</option>
+                </select>
         </div>
 
         <!-- Etapa 3: Senha e Confirmação -->
