@@ -38,13 +38,13 @@
             <h2>Etapa 2: Área de Atuação</h2>
             <label for="area_atuacao">Área de Atuação:</label>
             <select class="form-control" id="descricao" name="descricao" required>
-                    <option value="">Selecione uma descrição</option>
-                    <option value="Recepcionista">Recepcionista</option>
-                    <option value="Analista de TI">Analista de TI</option>
-                    <option value="Desenvolvedor">Desenvolvedor</option>
-                    <option value="Gerente de Projetos">Gerente de Projetos</option>
-                    <option value="Vendedor">Vendedor</option>
-                </select>
+                <option value="">Selecione uma descrição</option>
+                <option value="Recepcionista">Recepcionista</option>
+                <option value="Analista de TI">Analista de TI</option>
+                <option value="Desenvolvedor">Desenvolvedor</option>
+                <option value="Gerente de Projetos">Gerente de Projetos</option>
+                <option value="Vendedor">Vendedor</option>
+            </select>
         </div>
 
         <!-- Etapa 3: Senha e Confirmação -->
@@ -76,39 +76,51 @@
     <script>
         let etapaAtual = 1;
 
-function mudarEtapa(acao) {
-    const totalEtapas = 3;
-    const etapas = document.querySelectorAll(".etapa");
-    const proximoBtn = document.getElementById("proximo");
-    const anteriorBtn = document.getElementById("anterior");
-    const finalizarBtn = document.getElementById("finalizar");
+        function mudarEtapa(acao) {
+            const totalEtapas = 3;
+            const etapas = document.querySelectorAll(".etapa");
+            const proximoBtn = document.getElementById("proximo");
+            const anteriorBtn = document.getElementById("anterior");
+            const finalizarBtn = document.getElementById("finalizar");
 
-    // Esconder todas as etapas
-    etapas.forEach(etapa => etapa.style.display = "none");
+            // Esconder todas as etapas
+            etapas.forEach(etapa => etapa.style.display = "none");
 
-    // Lógica de mudança de etapa
-    if (acao === "proximo" && etapaAtual < totalEtapas) {
-        etapaAtual++;
-    } else if (acao === "anterior" && etapaAtual > 1) {
-        etapaAtual--;
-    }
+            // Lógica de mudança de etapa
+            if (acao === "proximo" && etapaAtual < totalEtapas) {
+                etapaAtual++;
+            } else if (acao === "anterior" && etapaAtual > 1) {
+                etapaAtual--;
+            }
 
-    // Exibir etapa atual
-    etapas[etapaAtual - 1].style.display = "block";
+            // Exibir etapa atual
+            etapas[etapaAtual - 1].style.display = "block";
 
-    // Controle de visibilidade dos botões
-    anteriorBtn.style.display = etapaAtual === 1 ? "none" : "inline-block";
-    proximoBtn.style.display = etapaAtual === totalEtapas ? "none" : "inline-block";
-    finalizarBtn.style.display = etapaAtual === totalEtapas ? "inline-block" : "none";
-}
+            // Controle de visibilidade dos botões
+            anteriorBtn.style.display = etapaAtual === 1 ? "none" : "inline-block";
+            proximoBtn.style.display = etapaAtual === totalEtapas ? "none" : "inline-block";
+            finalizarBtn.style.display = etapaAtual === totalEtapas ? "inline-block" : "none";
+        }
 
-// Inicializar corretamente na etapa 1
-mudarEtapa();
+        // Máscara para CNPJ
+        document.getElementById('cnpj_empresa').addEventListener('input', function (e) {
+            let cnpj = e.target.value;
+            cnpj = cnpj.replace(/\D/g, ''); // Remove tudo que não for número
+            cnpj = cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3.$4-$5');
+            e.target.value = cnpj;
+        });
+
+        // Máscara para Telefone
+        document.getElementById('telefone_empresa').addEventListener('input', function (e) {
+            let telefone = e.target.value;
+            telefone = telefone.replace(/\D/g, ''); // Remove tudo que não for número
+            telefone = telefone.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+            e.target.value = telefone;
+        });
+
+        // Inicializar corretamente na etapa 1
+        mudarEtapa();
     </script>
- <script src="js/senha.js"></script>
-<script src="js/mascaras.js"></script>
-
-
 </body>
 </html>
 
