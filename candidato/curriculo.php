@@ -84,8 +84,6 @@ try {
 
     <button type="submit">Salvar</button>
 </form>
-<button type="button"><?php echo "voltar";
-header('location:/projeto_rh/candidato/pagina-usuario log.php') ?></button>
 
     </div>
     
