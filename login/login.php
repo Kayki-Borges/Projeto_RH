@@ -103,14 +103,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         button {
-            background: #28a745;
+            background: linear-gradient(to right, #488BE8,#9D61EA);
             color: white;
             cursor: pointer;
-            transition: background 0.3s;
+            transition:.5s all ease-in-out;
         }
 
         button:hover {
-            background: #218838;
+            background: linear-gradient(to right, #9D61EA, #488BE8);
+            transform: scale(1.1);
         }
 
         .modal {

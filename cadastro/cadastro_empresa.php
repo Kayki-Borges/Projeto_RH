@@ -7,6 +7,7 @@
     <title>Cadastro de Empresa</title>
     <link rel="icon" href="/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
     <link rel="stylesheet" href="/Projeto_RH/css/cadastro.css">
+    <script src="/Projeto_RH/js/senha.js"></script>
 </head>
 <body>
     <div class="container-principal">
@@ -51,14 +52,14 @@
             <h2>Etapa 3: Senha e Confirmação</h2>
             <div class="password-container">
                 <label for="senha_empresa">Senha:</label>
-                <input type="password" name="senha_empresa" id="senha_empresa" required>
-                <i class="bi bi-eye-slash-fill" id="senhaIcon"></i>
+                <input type="password" name="senha_empresa" id="senha" onclick="mostrarSenha()" required>
+                <i class="bi bi-eye-slash-fill" id="senhaIcon" onclick="mostrarSenha()"></i>
             </div>
 
             <div class="password-container">
                 <label for="confirmar_senha_empresa">Confirmar Senha:</label>
-                <input type="password" name="confirmar_senha_empresa" id="confirmar_senha_empresa" required>
-                <i class="bi bi-eye-slash-fill" id="comfirmIcon"></i>
+                <input type="password" name="confirmar_senha_empresa" id="confirmar_senha" required>
+                <i class="bi bi-eye-slash-fill" id="comfirmIcon" onclick="mostrarSenhaDois()"></i>
             </div>
         </div>
 
@@ -69,10 +70,6 @@
             <button type="submit" id="finalizar" style="display: none;">Cadastrar Empresa</button>
         </div>
     </form>
-
-    <div class="lado-esquerdo">
-        <img src="img.png" alt="Imagem ilustrativa">
-    </div>
 
     </div>
     <!-- JavaScript para Navegação e Senhas -->
@@ -160,8 +157,9 @@ mudarEtapa();
         }
 
         .lado-esquerdo img {
-            width: 560px;
-            
+            width: 500px;
+            position: absolute;
+            left: 95vh;
             animation: fadeInImg 1s ease-in-out forwards;
         }
 
@@ -221,8 +219,8 @@ mudarEtapa();
             color: #9D61EA;
             font-size: 25px;
             position: absolute;
-            top: 20vh;
-            left: 44vh;
+            top: 4.5vh;
+            left: 42vh;
             cursor: pointer;
         }
 
@@ -230,8 +228,8 @@ mudarEtapa();
             color: #9D61EA;
             font-size: 25px;
             position: absolute;
-            top: 32vh;
-            left: 44vh;
+            top: 4.5vh;
+            left: 42vh;
             cursor: pointer;
         }
 
