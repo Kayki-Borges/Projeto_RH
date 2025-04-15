@@ -44,7 +44,7 @@ if (!isset($_SESSION['usuario'])) {
             <li><a href="#">Editar Perfil</a></li>
             <li><a href="#">Candidaturas</a></li>
             <li><a href="#">Ajuda</a></li>
-            <li><a href="#">Sair</a></li>
+            <li><a href="/projoto_rh/cadastro/logout.php">Sair</a></li>
             <a href="#" class="term">Termos de uso | Link Next</a>
           </ul>
         </div>
