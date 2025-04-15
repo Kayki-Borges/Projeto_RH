@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08/04/2025 às 18:58
+-- Tempo de geração: 15/04/2025 às 19:45
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -39,18 +39,19 @@ CREATE TABLE `candidatos` (
   `area_atuacao` varchar(100) NOT NULL,
   `senha_candidato` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `tipo_usuario` enum('candidato','empresa') NOT NULL DEFAULT 'candidato'
+  `tipo_usuario` enum('candidato','empresa') NOT NULL DEFAULT 'candidato',
+  `foto_candidato` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `candidatos`
 --
 
-INSERT INTO `candidatos` (`id`, `nome_candidato`, `email_candidato`, `cpf_candidato`, `endereco_candidato`, `telefone_candidato`, `formacao_academica`, `experiencia_profissional`, `area_atuacao`, `senha_candidato`, `created_at`, `tipo_usuario`) VALUES
-(1, 'isaque', 'wwwisaque18@gmail.com', '123.525.226-26', '123asdfadas', '(12) 31231-2312', 'Ensino Médio', 'asdasd', 'Tecnologia', '$2y$10$ABzhXcIYuragvXxrcYtOCOJlBeTiQp0pt77J.auJsAhWH4PWgMNcm', '2025-02-27 23:11:11', 'candidato'),
-(2, 'lucas', 'wwwisaue18@gmail.com', '123.131.231-23', '12345', '(13) 12312-3131', 'Ensino Médio', '12345', 'Tecnologia', '$2y$10$cVToLXiQabpzgrO0Ab0bme2p747fOdyX9rKaqtUU40nH43RlpkIxa', '2025-03-11 16:19:18', 'candidato'),
-(3, 'lucas', 'wwwisa12313122ue18@gmail.com', '123.545.123-13', 'rua agu9ia', '(11) 12313-1235', 'Ensino Médio', '1234', 'Tecnologia', '$2y$10$bI3i36nxQyy9VJDca5yVwuIjNs9VjgJVKV7FUtfPpAAvH0vNTZneO', '2025-03-11 16:24:31', 'candidato'),
-(4, 'carlos', 'wwwisaqu123418@gmail.com', '123.112.323-41', '123131', '(12) 12331-2313', 'Ensino Médio', '1235', 'Educação', '$2y$10$O3jL62d8Ngv.1IHVZBtwXuhHOCtddZmVZ69kgmIWwysjhSGEPd7uC', '2025-03-13 15:33:55', 'candidato');
+INSERT INTO `candidatos` (`id`, `nome_candidato`, `email_candidato`, `cpf_candidato`, `endereco_candidato`, `telefone_candidato`, `formacao_academica`, `experiencia_profissional`, `area_atuacao`, `senha_candidato`, `created_at`, `tipo_usuario`, `foto_candidato`) VALUES
+(1, 'isaque', '1@gmail.com', '123.525.226-26', '123asdfadas', '(12) 31231-2312', 'Ensino Médio', 'asdasd', 'Tecnologia', '$2y$10$ABzhXcIYuragvXxrcYtOCOJlBeTiQp0pt77J.auJsAhWH4PWgMNcm', '2025-02-27 23:11:11', 'candidato', '67fe71c70be4a.png'),
+(2, 'lucas', 'wwwisaue18@gmail.com', '123.131.231-23', '12345', '(13) 12312-3131', 'Ensino Médio', '12345', 'Tecnologia', '$2y$10$cVToLXiQabpzgrO0Ab0bme2p747fOdyX9rKaqtUU40nH43RlpkIxa', '2025-03-11 16:19:18', 'candidato', NULL),
+(3, 'lucas', 'wwwisa12313122ue18@gmail.com', '123.545.123-13', 'rua agu9ia', '(11) 12313-1235', 'Ensino Médio', '1234', 'Tecnologia', '$2y$10$bI3i36nxQyy9VJDca5yVwuIjNs9VjgJVKV7FUtfPpAAvH0vNTZneO', '2025-03-11 16:24:31', 'candidato', NULL),
+(4, 'carlos', 'wwwisaqu123418@gmail.com', '123.112.323-41', '123131', '(12) 12331-2313', 'Ensino Médio', '1235', 'Educação', '$2y$10$O3jL62d8Ngv.1IHVZBtwXuhHOCtddZmVZ69kgmIWwysjhSGEPd7uC', '2025-03-13 15:33:55', 'candidato', NULL);
 
 -- --------------------------------------------------------
 
@@ -62,7 +63,8 @@ CREATE TABLE `candidato_vaga` (
   `id` int(11) NOT NULL,
   `candidato_id` int(11) NOT NULL,
   `vaga_id` int(11) NOT NULL,
-  `data_inscricao` timestamp NOT NULL DEFAULT current_timestamp()
+  `data_inscricao` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('em_andamento','finalizada') DEFAULT 'em_andamento'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -165,7 +167,7 @@ ALTER TABLE `candidatos`
 -- AUTO_INCREMENT de tabela `candidato_vaga`
 --
 ALTER TABLE `candidato_vaga`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `empresas`
