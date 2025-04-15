@@ -2,11 +2,7 @@
 session_start();
 require_once("../conexao.php");
 
-// Verifica se o usuário está logado
-if (!isset($_SESSION['usuario'])) {
-    header("Location: pagina-empresa.html");
-    exit;
-}
+
 
 // Dados da empresa logada
 $empresa_nome = $_SESSION['usuario']['nome_empresa'];
@@ -149,7 +145,7 @@ $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <div class="btn-group">
                 <button type="submit" class="btn btn-primary">Cadastrar Vaga</button>
-                <a href="../html/pagina-empresa log.html" class="btn btn-secondary btn-back">Voltar</a>
+                <a href="/projeto_rh/empresa/pagina-empresa log.php" class="btn btn-secondary btn-back">Voltar</a>
             </div>
         </form>
 
