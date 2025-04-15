@@ -172,6 +172,7 @@ if (isset($_POST['cancelar_candidatura'])) {
 </head>
 <body>
     <!-- Menu e Header -->
+    <header>
 
     <nav class="menu">
 
@@ -179,6 +180,7 @@ if (isset($_POST['cancelar_candidatura'])) {
          
     </nav>
 
+    </header>
     <section class="hero">
         <h1>Minhas candidaturas</h1>
         <p>Acompanhe o andamento das vagas que você está participando.</p>
