@@ -2,48 +2,285 @@
 session_start();
 require '../conexao.php';
 
-$descricao = isset($_GET['descricao']) ? trim($_GET['descricao']) : '';
-$empresa = isset($_GET['empresa']) ? trim($_GET['empresa']) : '';
-$requisitos = isset($_GET['requisitos']) ? trim($_GET['requisitos']) : '';
+// Verifica se o usuário está autenticado
+if (!isset($_SESSION['usuario']['id'])) {
+    echo "Usuário não autenticado!";
+    exit;
+}
+
+$usuarioId = $_SESSION['usuario']['id'];
+$aba = $_GET['aba'] ?? 'banco'; // Aba inicial padrão
+
+// Verifica se o método é POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if (isset($_POST['candidatar'])) {
+        // Candidatar-se à vaga
+        $vagaId = $_POST['vaga_id'];
+
+        // Verifica se já existe essa candidatura
+        $checkStmt = $pdo->prepare("SELECT 1 FROM candidato_vaga WHERE candidato_id = :cid AND vaga_id = :vid");
+        $checkStmt->execute(['cid' => $usuarioId, 'vid' => $vagaId]);
+
+        if (!$checkStmt->fetch()) {
+            $insertStmt = $pdo->prepare("INSERT INTO candidato_vaga (candidato_id, vaga_id, status) VALUES (:cid, :vid, 'em_andamento')");
+            $insertStmt->execute(['cid' => $usuarioId, 'vid' => $vagaId]);
+        }
+
+        // Redireciona para a aba 'andamento'
+        header("Location: minhas_candidaturas.php?aba=andamento");
+        exit;
+    }
+
+    if (isset($_POST['cancelar_candidatura'])) {
+      // Cancelar a candidatura
+      $vagaId = $_POST['vaga_id'];
+  
+      // Verifica se a candidatura existe antes de tentar cancelá-la
+      $deleteStmt = $pdo->prepare("DELETE FROM candidato_vaga WHERE candidato_id = :cid AND vaga_id = :vid");
+      $deleteStmt->execute(['cid' => $usuarioId, 'vid' => $vagaId]);
+  
+      // Redireciona para a aba 'andamento' após a remoção
+      header("Location: minhas_candidaturas.php?aba=andamento");
+      exit;
+  }
+  
+}
+
+// Parâmetros de busca
+$descricao = $_GET['descricao'] ?? '';
+$empresa = $_GET['empresa'] ?? '';
+$requisitos = $_GET['requisitos'] ?? '';
 
 $where = [];
 $params = [];
 
 if (!empty($descricao)) {
-    $where[] = 'vagas.descricao LIKE :descricao';
+    $where[] = 'v.descricao LIKE :descricao';
     $params['descricao'] = '%' . $descricao . '%';
 }
 if (!empty($empresa)) {
-    $where[] = 'empresas.nome_empresa LIKE :empresa';
+    $where[] = 'e.nome_empresa LIKE :empresa';
     $params['empresa'] = '%' . $empresa . '%';
 }
 if (!empty($requisitos)) {
-    $where[] = 'vagas.requisitos LIKE :requisitos';
+    $where[] = 'v.requisitos LIKE :requisitos';
     $params['requisitos'] = '%' . $requisitos . '%';
 }
 
-$sql = "SELECT vagas.id, vagas.descricao, vagas.requisitos, vagas.data_postagem, empresas.nome_empresa 
-        FROM vagas 
-        JOIN empresas ON vagas.empresa_id = empresas.id";
+// VAGAS COM CANDIDATURA
+$sqlCandidaturas = "SELECT v.id, v.descricao, v.requisitos, v.data_postagem, e.nome_empresa, cv.status
+    FROM vagas v
+    JOIN empresas e ON v.empresa_id = e.id
+    JOIN candidato_vaga cv ON v.id = cv.vaga_id
+    WHERE cv.candidato_id = :usuario_id";
+
+$paramsCandidatura = ['usuario_id' => $usuarioId];
 
 if (!empty($where)) {
-    $sql .= ' WHERE ' . implode(' AND ', $where);
+    $sqlCandidaturas .= ' AND ' . implode(' AND ', $where);
+    $paramsCandidatura += $params;
 }
 
-$sql .= ' ORDER BY vagas.data_postagem DESC';
+$sqlCandidaturas .= ' ORDER BY v.data_postagem DESC';
 
-$stmt = $pdo->prepare($sql);
-$stmt->execute($params);
-$vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt = $pdo->prepare($sqlCandidaturas);
+$stmt->execute($paramsCandidatura);
+$vagasCandidatadas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Separar por status
+$vagasEmAndamento = array_filter($vagasCandidatadas, fn($v) => $v['status'] === 'em_andamento');
+$vagasFinalizadas = array_filter($vagasCandidatadas, fn($v) => $v['status'] === 'finalizada');
+
+// VAGAS NO BANCO DE TALENTOS
+$sqlBanco = "SELECT v.id, v.descricao, v.requisitos, v.data_postagem, e.nome_empresa
+    FROM vagas v
+    JOIN empresas e ON v.empresa_id = e.id
+    WHERE NOT EXISTS (
+        SELECT 1 FROM candidato_vaga cv 
+        WHERE cv.vaga_id = v.id AND cv.candidato_id = :usuario_id
+    )";
+
+if (!empty($where)) {
+    $sqlBanco .= ' AND ' . implode(' AND ', $where);
+}
+
+$sqlBanco .= ' ORDER BY v.data_postagem DESC';
+
+$stmtBanco = $pdo->prepare($sqlBanco);
+$stmtBanco->execute(['usuario_id' => $usuarioId] + $params);
+$vagasBancoTalentos = $stmtBanco->fetchAll(PDO::FETCH_ASSOC);
+
+// DEFINE QUAL CONJUNTO USAR
+switch ($aba) {
+    case 'andamento':
+        $vagas = $vagasEmAndamento;
+        break;
+    case 'banco':
+        $vagas = $vagasBancoTalentos;
+        break;
+    case 'finalizadas':
+    default:
+        $vagas = $vagasFinalizadas;
+        break;
+}
+if (isset($_POST['cancelar_candidatura'])) {
+  // Cancelar a candidatura
+  $vagaId = $_POST['vaga_id'];
+
+  // Verifica se a candidatura existe antes de tentar cancelá-la
+  $deleteStmt = $pdo->prepare("DELETE FROM candidato_vaga WHERE candidato_id = :cid AND vaga_id = :vid");
+  $deleteStmt->execute(['cid' => $usuarioId, 'vid' => $vagaId]);
+
+  // Agora, verifique se a candidatura foi removida
+  $checkStmt = $pdo->prepare("SELECT 1 FROM candidato_vaga WHERE candidato_id = :cid AND vaga_id = :vid");
+  $checkStmt->execute(['cid' => $usuarioId, 'vid' => $vagaId]);
+
+  if (!$checkStmt->fetch()) {
+      // Candidatura foi removida com sucesso, então redireciona
+      header("Location: minhas_candidaturas.php?aba=andamento");
+      exit;
+  } else {
+      echo "Erro ao cancelar candidatura.";
+      exit;
+  }
+}
+
 ?>
+
+<!-- O HTML do código permanece o mesmo -->
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minhas Candidaturas</title>
-  <style>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="/projeto_rh/html/revelar.js" defer></script>
+    <script src="/projeto_rh/html/toggle.js"></script>
+    <script src="/projeto_rh/html/scroll-menu.js"></script>
+    <link rel="stylesheet" href="/projeto_rh/html/Assets/pagina-usuario-body.css">
+    <link rel="stylesheet" href="/projeto_rh/html/Assets/pagina-usuario-main.css">
+    <link rel="stylesheet" href="/projeto_rh/css/minhascandidaturas.css">
+    <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Candidaturas</title>
+</head>
+<body>
+    <!-- Menu e Header -->
+    <nav class="menu">
+        <!-- Conteúdo do Menu -->
+    </nav>
+
+    <section class="hero">
+        <h1>Minhas candidaturas</h1>
+        <p>Acompanhe o andamento das vagas que você está participando.</p>
+    </section>
+
+    <!-- Formulário de Busca -->
+    <form class="search-section" method="GET">
+        <input type="text" name="descricao" placeholder="Buscar por vaga" value="<?= htmlspecialchars($_GET['descricao'] ?? '') ?>">
+        <input type="text" name="empresa" placeholder="Buscar por empresa" value="<?= htmlspecialchars($_GET['empresa'] ?? '') ?>">
+        <input type="text" name="requisitos" placeholder="Buscar por requisitos" value="<?= htmlspecialchars($_GET['requisitos'] ?? '') ?>">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <div class="<?= ($_GET['aba'] ?? '') === 'andamento' ? 'active' : '' ?>" onclick="mudarAba('andamento')">Em andamento</div>
+        <div class="<?= ($_GET['aba'] ?? '') === 'banco' || !isset($_GET['aba']) ? 'active' : '' ?>" onclick="mudarAba('banco')">Em banco de talentos</div>
+        <div class="<?= ($_GET['aba'] ?? '') === 'finalizadas' ? 'active' : '' ?>" onclick="mudarAba('finalizadas')">Finalizadas</div>
+    </div>
+
+
+
+
+
+    <?php if (count($vagas) > 0): ?>
+
+<?php foreach ($vagas as $vaga): ?>
+    <div class="vaga">
+        <h2><?= htmlspecialchars($vaga['descricao']) ?></h2>
+        <p><strong>Empresa:</strong> <?= htmlspecialchars($vaga['nome_empresa']) ?></p>
+        <p><strong>Requisitos:</strong> <?= htmlspecialchars($vaga['requisitos']) ?></p>
+        <small>Postada em: <?= date('d/m/Y H:i', strtotime($vaga['data_postagem'])) ?></small>
+
+        <?php if ($aba === 'banco'): ?>
+            <!-- Botão para se candidatar -->
+            <form method="POST" style="margin-top: 10px;">
+                <input type="hidden" name="vaga_id" value="<?= $vaga['id'] ?>">
+                <button type="submit" name="candidatar" style="margin-top: 10px; background-color: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                    Candidatar
+                </button>
+            </form>
+        <?php elseif ($aba === 'andamento'): ?>
+            <!-- Botão para cancelar candidatura -->
+            <form method="POST" style="margin-top: 10px;">
+                <input type="hidden" name="vaga_id" value="<?= $vaga['id'] ?>">
+                <button type="submit" name="cancelar_candidatura" style="margin-top: 10px; background-color: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                    Cancelar Candidatura
+                </button>
+            </form>
+        <?php endif; ?>
+    </div>
+<?php endforeach; ?>
+
+<?php else: ?>
+
+<div class="empty-state">
+    <img src="https://cdn-icons-png.flaticon.com/512/875/875610.png" alt="Documento">
+    <p>Você ainda não possui candidaturas.</p>
+    <button>Buscar Oportunidades</button>
+</div>
+
+<?php endif; ?>
+
+    <script>
+        const tabs = document.querySelectorAll('.tabs div');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        const buscarBtn = document.querySelector('.empty-state button');
+        if (buscarBtn) {
+            buscarBtn.addEventListener('click', () => {
+                window.location.href = 'buscar-oportunidades.html';
+            });
+        }
+        function mudarAba(aba) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('aba', aba);
+
+            const descricao = document.querySelector('input[name="descricao"]').value;
+            const empresa = document.querySelector('input[name="empresa"]').value;
+            const requisitos = document.querySelector('input[name="requisitos"]').value;
+
+            if (descricao) url.searchParams.set('descricao', descricao);
+            else url.searchParams.delete('descricao');
+
+            if (empresa) url.searchParams.set('empresa', empresa);
+            else url.searchParams.delete('empresa');
+
+            if (requisitos) url.searchParams.set('requisitos', requisitos);
+            else url.searchParams.delete('requisitos');
+
+            window.location.href = url.toString();
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+<style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
@@ -108,6 +345,18 @@ $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
       font-weight: bold;
       cursor: pointer;
     }
+    button[name="cancelar_candidatura"] {
+    background-color: #e74c3c; /* Cor de fundo vermelha */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[name="cancelar_candidatura"]:hover {
+    background-color: #c0392b; /* Cor de fundo mais escura quando o botão for hover */
+}
 
     .filters {
       display: flex;
@@ -196,106 +445,4 @@ $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
       color: #777;
     }
   </style>
-</head>
-<body>
-  <header>
-    <div>☰ Menu</div>
-    <div>Ajuda</div>
-  </header>
 
-  <section class="hero">
-    <h1>Minhas candidaturas</h1>
-    <p>Acompanhe o andamento das vagas que você está participando.</p>
-  </section>
-
-  <form class="search-section" method="GET">
-  <input type="text" name="descricao" placeholder="Buscar por vaga" value="<?= htmlspecialchars($_GET['descricao'] ?? '') ?>">
-  <input type="text" name="empresa" placeholder="Buscar por empresa" value="<?= htmlspecialchars($_GET['empresa'] ?? '') ?>">
-  <input type="text" name="requisitos" placeholder="Buscar por requisitos" value="<?= htmlspecialchars($_GET['requisitos'] ?? '') ?>">
-  <button type="submit">Buscar</button>
-</form>
-
-  <div class="tabs">
-    <div>Em andamento</div>
-    <div>Em banco de talentos</div>
-    <div class="active">Finalizadas</div>
-  </div>
-
-  <?php if (count($vagas) > 0): ?>
-    <?php foreach ($vagas as $vaga): ?>
-      <div class="vaga">
-        <h2><?= htmlspecialchars($vaga['descricao']) ?></h2>
-        <p><strong>Empresa:</strong> <?= htmlspecialchars($vaga['nome_empresa']) ?></p>
-        <p><strong>Requisitos:</strong> <?= htmlspecialchars($vaga['requisitos']) ?></p>
-        <small>Postada em: <?= date('d/m/Y H:i', strtotime($vaga['data_postagem'])) ?></small>
-      </div>
-    <?php endforeach; ?>
-  <?php else: ?>
-    <div class="empty-state">
-      <img src="https://cdn-icons-png.flaticon.com/512/875/875610.png" alt="Documento">
-      <p>Você ainda não possui candidaturas.</p>
-      <button>Buscar Oportunidades</button>
-    </div>
-  <?php endif; ?>
-
-  <script>
-    const tabs = document.querySelectorAll('.tabs div');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-      });
-    });
-
-    const buscarBtn = document.querySelector('.empty-state button');
-    if (buscarBtn) {
-      buscarBtn.addEventListener('click', () => {
-        window.location.href = 'buscar-oportunidades.html';
-      });
-    }
-  </script>
-</body>
-</html>
-<?php
-require_once('../conexao.php');
-// Vagas em andamento e finalizadas (com candidatura)
-$sqlCandidaturas = "SELECT v.id, v.descricao, v.requisitos, v.data_postagem, e.nome_empresa, c.status
-        FROM vagas v
-        JOIN empresas e ON v.empresa_id = e.id
-        JOIN candidaturas c ON v.id = c.vaga_id
-        WHERE c.usuario_id = :usuario_id";
-
-$paramsCandidatura = ['usuario_id' => $usuarioId];
-if (!empty($where)) {
-    $sqlCandidaturas .= ' AND ' . implode(' AND ', $where);
-    $paramsCandidatura = array_merge($paramsCandidatura, $params);
-}
-$sqlCandidaturas .= ' ORDER BY v.data_postagem DESC';
-$stmt = $pdo->prepare($sqlCandidaturas);
-$stmt->execute($paramsCandidatura);
-$vagasCandidatadas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Separar por status
-$vagasEmAndamento = array_filter($vagasCandidatadas, fn($v) => $v['status'] === 'em_andamento');
-$vagasFinalizadas = array_filter($vagasCandidatadas, fn($v) => $v['status'] === 'finalizada');
-
-// Vagas no banco de talentos (sem candidatura)
-$sqlBanco = "SELECT v.id, v.descricao, v.requisitos, v.data_postagem, e.nome_empresa
-        FROM vagas v
-        JOIN empresas e ON v.empresa_id = e.id
-        WHERE NOT EXISTS (
-            SELECT 1 FROM candidaturas c 
-            WHERE c.vaga_id = v.id AND c.usuario_id = :usuario_id
-        )";
-
-if (!empty($where)) {
-    $sqlBanco .= ' AND ' . implode(' AND ', $where);
-}
-$sqlBanco .= ' ORDER BY v.data_postagem DESC';
-$stmtBanco = $pdo->prepare($sqlBanco);
-$stmtBanco->execute(['usuario_id' => $usuarioId] + $params);
-$vagasBancoTalentos = $stmtBanco->fetchAll(PDO::FETCH_ASSOC);
-?>
-
-<!-- Resto do HTML permanece igual, apenas altere a parte que exibe as vagas conforme a aba selecionada usando JavaScript e condicional PHP -->
-<!-- Por exemplo, para cada aba, renderizar $vagasEmAndamento, $vagasBancoTalentos ou $vagasFinalizadas -->
