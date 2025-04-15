@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (password_verify($senha, $empresa['senha_empresa'])) {
             $_SESSION['usuario'] = $empresa;
             $_SESSION['tipo'] = 'empresa';
-            header("Location: ../html/pagina-empresa log.php");
+            header("Location: /projeto_rh/empresa/pagina-empresa log.php");
             exit;
         } else {
             echo "Senha incorreta para empresa!";
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['usuario'] = $candidato;
             $_SESSION['tipo'] = 'candidato';
             
-            header("Location: ../html/pagina-usuario log.php");
+            header("Location:  /projeto_rh/candidato/pagina-usuario log.php");
             exit;
         } else {
             echo "Senha incorreta para candidato!";
