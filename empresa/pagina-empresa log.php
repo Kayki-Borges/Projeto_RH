@@ -12,11 +12,11 @@ if (!isset($_SESSION['usuario'])) {
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="revelar.js" defer></script>
-    <script src="toggle.js"></script>
-    <script src="scroll-menu.js"></script>
-    <link rel="stylesheet" href="Assets/pagina-empresa-body.css">
-    <link rel="stylesheet" href="Assets/pagina-empresa-main.css">
+    <script src="/Projeto_RH/html/revelar.js" defer></script>
+    <script src="/Projeto_RH/html/toggle.js"></script>
+    <script src="/Projeto_RH/html/scroll-menu.js"></script>
+    <link rel="stylesheet" href="/Projeto_RH/html/Assets/pagina-empresa-body.css">
+    <link rel="stylesheet" href="/Projeto_RH/html/Assets/pagina-empresa-main.css">
     <link rel="icon" href="Assets/IMG/Link_Next_Logo_sem_fundo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +26,7 @@ if (!isset($_SESSION['usuario'])) {
       <nav class="menu">
 
         <div class="logo">
-          <img src="Assets/IMG/Link_Next_Logo_sem_fundo.png" alt="Logo">
+          <img src="/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png" alt="Logo">
         </div>
 
         <div class="items">
@@ -39,7 +39,7 @@ if (!isset($_SESSION['usuario'])) {
         </div>
 
         <div class="perf">
-          <img src="Assets/IMG/Foto model.jpg" alt="Foto de perfil" class="foto" onclick="apar()">
+          <img src="/Projeto_RH/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil" class="foto" onclick="apar()">
           <ul class="cont-list">
             <li><a href="#">Editar Perfil</a></li>
             <li><a href="#">Candidaturas</a></li>
@@ -67,7 +67,7 @@ if (!isset($_SESSION['usuario'])) {
           <li class="nav-item"><a href="#" class="link">Sou Empresa</a></li>
         </ul>
         <div class="perf">
-          <img src="Assets/IMG/Foto model.jpg" alt="Foto de perfil" id="perfFoto">
+          <img src="/Projeto_RH/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil" id="perfFoto">
           
         </div>
       </div>
