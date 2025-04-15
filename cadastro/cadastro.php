@@ -6,6 +6,7 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script src="/Projeto_RH/js/senha.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -124,11 +125,11 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             cursor: pointer;
         }
 
-        #comfirmIcon{
+        #confirmIcon{
             color: #2196f3;
             font-size: 25px;
             position: absolute;
-            top: 32vh;
+            top: 30.5vh;
             left: 44vh;
             cursor: pointer;
         }
@@ -226,23 +227,18 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
                 <h2>Etapa 1: Dados Pessoais</h2>
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome" required>
-                <div id="nomeHelp" class="error">Por favor, insira seu nome completo.</div>
 
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email" required>
-                <div id="emailHelp" class="error">Insira um email válido.</div>
 
                 <label for="cpf">CPF:</label>
                 <input type="text" name="cpf" id="cpf" required maxlength="14">
-                <div id="cpfHelp" class="error">Insira seu CPF corretamente.</div>
 
                 <label for="endereco">Endereço:</label>
                 <textarea name="endereco" id="endereco" required></textarea>
-                <div id="enderecoHelp" class="error">O endereço é obrigatório.</div>
 
                 <label for="telefone">Telefone:</label>
                 <input type="text" name="telefone" id="telefone" required maxlength="15">
-                <div id="telefoneHelp" class="error">Informe seu telefone de contato.</div>
             </div>
 
             <div id="etapa2" class="etapa" style="display: none;">
@@ -263,12 +259,11 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             <div id="etapa3" class="etapa" style="display: none;">
                 <h2>Etapa 3: Senha e Área</h2>
                 <label for="senha">Senha:</label>
-                <i class="bi bi-eye-slash-fill" id="senhaIcon"></i>
+                <i class="bi bi-eye-slash-fill" id="senhaIcon" onclick="mostrarSenha()"></i>
                 <input type="password" name="senha" id="senha" required>
-                <div id="senhaHelp" class="error">A senha deve ter pelo menos 8 caracteres.</div>
 
                 <label for="confirmar_senha">Confirmar Senha:</label>
-                <i class="bi bi-eye-slash-fill" id="comfirmIcon"></i>
+                <i class="bi bi-eye-slash-fill" id="confirmIcon" onclick="mostrarSenhaDois()"></i>
                 <input type="password" name="confirmar_senha" id="confirmar_senha" required>
 
                 <label for="area_interesse">Área de Interesse:</label>
