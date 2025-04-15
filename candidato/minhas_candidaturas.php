@@ -172,8 +172,11 @@ if (isset($_POST['cancelar_candidatura'])) {
 </head>
 <body>
     <!-- Menu e Header -->
+
     <nav class="menu">
+
         <!-- Conteúdo do Menu -->
+         
     </nav>
 
     <section class="hero">
