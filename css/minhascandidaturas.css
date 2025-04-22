@@ -55,8 +55,7 @@ header {
   display: block;
   background-color: #488BE8;
   padding: 20px;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-radius: 20px;
   position: absolute;
   left: 173vh;
   top: 80px;
