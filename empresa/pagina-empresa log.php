@@ -17,7 +17,7 @@ if (!isset($_SESSION['usuario'])) {
     <script src="/Projeto_RH/html/scroll-menu.js"></script>
     <link rel="stylesheet" href="/Projeto_RH/html/Assets/pagina-empresa-body.css">
     <link rel="stylesheet" href="/Projeto_RH/html/Assets/pagina-empresa-main.css">
-    <link rel="icon" href="Assets/IMG/Link_Next_Logo_sem_fundo.png">
+    <link rel="icon" href="/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Link Next|Conectando Talentos</title>
@@ -34,7 +34,7 @@ if (!isset($_SESSION['usuario'])) {
           <li class="nav-item"><a href="#banner" class="link">inicio</a></li>
           <li class="nav-item"><a href="/projeto_rh/candidato/candidatar.php" class="link">Buscar Candidatos</a></li>
           <li class="nav-item"><a href="../login/cadastrar_vaga.php" class="link">Cadastrar Vagas</a></li>
-          <li class="nav-item"><a href="#" class="link">Sou Candidato</a></li>
+          <li class="nav-item"><a href="/Projeto_RH/html/pagina-usuario.html" class="link">Sou Candidato</a></li>
           </ul>
         </div>
 

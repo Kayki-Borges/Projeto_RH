@@ -105,18 +105,18 @@ $usuarioId = $_SESSION['usuario']['id']; // <-- Adicione isso
 <section class="steps">
   <div class="step">
     <div class="circle efeito-circle">1</div>
-    <h3 class="efeito-circle-2">Cadastre sua vaga</h3>
-    <p class="efeito-circle">Preencha as informações da sua vaga e cadastre gratuitamente na plataforma.</p>
+    <h3 class="efeito-circle-2">Candate-se a uma vaga</h3>
+    <p class="efeito-circle">Procure vagas que empresas requerem para se candidatar em nosso site.</p>
   </div>
   <div class="step">
     <div class="circle efeito-circle">2</div>
-    <h3 class="efeito-circle-2">Receba candidatos</h3>
-    <p class="efeito-circle-2">Receba candidaturas de profissionais qualificados no seu primeiro dia de anúncio.</p>
+    <h3 class="efeito-circle-2">Receba vagas</h3>
+    <p class="efeito-circle-2">Receba vagas de trabalho caso seja aceita por uma empresa que queira contratar-te.</p>
   </div>
   <div class="step">
     <div class="circle efeito-circle">3</div>
     <h3 class="efeito-circle-2">Realize a contratação</h3>
-    <p class="efeito-circle-2">Entre em contato com os melhores candidatos e faça sua contratação com agilidade.</p>
+    <p class="efeito-circle-2">Entre em contato com as melhores empresas e faça sua contratação com agilidade.</p>
   </div>
 </section>
 

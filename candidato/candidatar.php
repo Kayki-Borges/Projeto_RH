@@ -136,7 +136,7 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <p class="text-center">Nenhum candidato até o momento.</p>
     <?php endif; ?>
 
-    <a href="/projeto_rh/empresa/pagina-empresa.php" class="btn btn-secondary mt-4">Voltar</a>
+    <a href="/projeto_rh/empresa/pagina-empresa log.php" class="btn btn-secondary mt-4">Voltar</a>
 </div>
 </body>
 </html>
