@@ -189,7 +189,7 @@ if (isset($_POST['cancelar_candidatura'])) {
     </nav>
     <div class="resp">
     <ul>
-      <li class="nav-items"><a href="#" class="link">Início</a></li>
+      <li class="nav-items"><a href="/projeto_rh/candidato/pagina-usuario log.php" class="link">Início</a></li>
       <li class="nav-items"><a href="#" class="link">Buscar Vagas</a></li>
       <li class="nav-items"><a href="#" class="link">Sou Empresa</a></li>
     </ul>
