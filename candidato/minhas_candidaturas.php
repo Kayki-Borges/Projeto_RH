@@ -162,8 +162,6 @@ if (isset($_POST['cancelar_candidatura'])) {
     <script src="/projeto_rh/html/revelar.js" defer></script>
     <script src="/projeto_rh/html/toggle.js"></script>
     <script src="/projeto_rh/html/scroll-menu.js"></script>
-    <link rel="stylesheet" href="/projeto_rh/html/Assets/pagina-usuario-body.css">
-    <link rel="stylesheet" href="/projeto_rh/html/Assets/pagina-usuario-main.css">
     <link rel="stylesheet" href="/projeto_rh/css/minhascandidaturas.css">
     <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
     <meta charset="UTF-8">
@@ -173,13 +171,39 @@ if (isset($_POST['cancelar_candidatura'])) {
 <body>
     <!-- Menu e Header -->
     <header>
-
     <nav class="menu">
-
         <!-- Conteúdo do Menu -->
-         
-    </nav>
+         <div class="logo">
+          <img src='/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png' alt='Logo Link Next'></img>
+         </div>
 
+         <div class="items">
+          <ul>
+            <li class="nav-items"><a href="#" class="link">Inicio</a></li>
+            <li class="nav-items"><a href="#" class="link">Curriculo</a></li>          
+          </ul>
+         </div>
+
+         <div class="resp-but">
+          <input type="checkbox" id="checkbox" onclick="mostrar()">
+          <label for="checkbox" class="toggle">
+              <div class="bars" id="bar1"></div>
+              <div class="bars" id="bar2"></div>
+              <div class="bars" id="bar3"></div>
+          </label>
+          </div>
+    </nav>
+    <div class="perf">
+      <img src="/projeto_rh/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil" class="foto" onclick="apar()">
+      <ul class="cont-list">
+        <li><a href="">Editar Perfil</a></li>
+        <li><a href="/projeto_rh/candidato/curriculo.php">Currículo</a></li>
+        <li><a href="#">Candidaturas</a></li>
+        <li><a href="#">Ajuda</a></li>
+        <li><a href="/projeto_rh/cadastro/logout.php">Sair</a></li>
+        <a href="#" class="term">Termos de uso | Link Next</a>
+      </ul>
+    </div>
     </header>
     <section class="hero">
         <h1>Minhas candidaturas</h1>
