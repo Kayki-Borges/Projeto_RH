@@ -177,12 +177,6 @@ if (isset($_POST['cancelar_candidatura'])) {
           <img src='/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png' alt='Logo Link Next'></img>
          </div>
 
-         <div class="items">
-          <ul>
-            <li class="nav-items"><a href="#" class="link">Inicio</a></li>
-            <li class="nav-items"><a href="#" class="link">Curriculo</a></li>          
-          </ul>
-         </div>
 
          <div class="resp-but">
           <input type="checkbox" id="checkbox" onclick="mostrar()">
@@ -193,17 +187,16 @@ if (isset($_POST['cancelar_candidatura'])) {
           </label>
           </div>
     </nav>
+    <div class="resp">
+    <ul>
+      <li class="nav-items"><a href="#" class="link">Início</a></li>
+      <li class="nav-items"><a href="#" class="link">Buscar Vagas</a></li>
+      <li class="nav-items"><a href="#" class="link">Sou Empresa</a></li>
+    </ul>
     <div class="perf">
-      <img src="/projeto_rh/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil" class="foto" onclick="apar()">
-      <ul class="cont-list">
-        <li><a href="">Editar Perfil</a></li>
-        <li><a href="/projeto_rh/candidato/curriculo.php">Currículo</a></li>
-        <li><a href="#">Candidaturas</a></li>
-        <li><a href="#">Ajuda</a></li>
-        <li><a href="/projeto_rh/cadastro/logout.php">Sair</a></li>
-        <a href="#" class="term">Termos de uso | Link Next</a>
-      </ul>
+      <img src="/projeto_rh/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil">
     </div>
+  </div>
     </header>
     <section class="hero">
         <h1>Minhas candidaturas</h1>
@@ -242,7 +235,7 @@ if (isset($_POST['cancelar_candidatura'])) {
             <!-- Botão para se candidatar -->
             <form method="POST" style="margin-top: 10px;">
                 <input type="hidden" name="vaga_id" value="<?= $vaga['id'] ?>">
-                <button type="submit" name="candidatar" style="margin-top: 10px; background-color: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <button type="submit" name="candidatar" id="button-vag" style="margin-top: 10px; background-color: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
                     Candidatar
                 </button>
             </form>
@@ -250,7 +243,7 @@ if (isset($_POST['cancelar_candidatura'])) {
             <!-- Botão para cancelar candidatura -->
             <form method="POST" style="margin-top: 10px;">
                 <input type="hidden" name="vaga_id" value="<?= $vaga['id'] ?>">
-                <button type="submit" name="cancelar_candidatura" style="margin-top: 10px; background-color: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <button type="submit" name="cancelar_candidatura" id="button-vag-canc" style="margin-top: 10px; background-color: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
                     Cancelar Candidatura
                 </button>
             </form>
@@ -317,27 +310,6 @@ if (isset($_POST['cancelar_candidatura'])) {
       color: #333;
     }
 
-    header {
-      background-color: #004aad;
-      color: white;
-      padding: 20px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    header div {
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .hero {
-      padding: 40px 30px 20px;
-      background: linear-gradient(90deg, #004aad 0%, #3e7bfa 100%);
-      color: white;
-    }
-
     .hero h1 {
       margin: 0;
       font-size: 32px;
@@ -365,15 +337,6 @@ if (isset($_POST['cancelar_candidatura'])) {
       flex: 1;
     }
 
-    .search-section button {
-      background-color: #004aad;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
     button[name="cancelar_candidatura"] {
     background-color: #e74c3c; /* Cor de fundo vermelha */
     color: white;
@@ -395,16 +358,6 @@ button[name="cancelar_candidatura"]:hover {
       background-color: #fff;
     }
 
-    .filters select, .filters button {
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #004aad;
-      background: white;
-      color: #004aad;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
     .tabs {
       display: flex;
       justify-content: center;
@@ -418,11 +371,6 @@ button[name="cancelar_candidatura"]:hover {
       cursor: pointer;
       font-weight: 500;
       border-bottom: 3px solid transparent;
-    }
-
-    .tabs .active {
-      border-color: #004aad;
-      color: #004aad;
     }
 
     .empty-state {
