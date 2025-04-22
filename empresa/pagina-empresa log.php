@@ -32,7 +32,7 @@ if (!isset($_SESSION['usuario'])) {
         <div class="items">
           <ul>
           <li class="nav-item"><a href="#banner" class="link">inicio</a></li>
-          <li class="nav-item"><a href="#" class="link">Buscar Candidatos</a></li>
+          <li class="nav-item"><a href="/projeto_rh/candidato/candidatar.php" class="link">Buscar Candidatos</a></li>
           <li class="nav-item"><a href="../login/cadastrar_vaga.php" class="link">Cadastrar Vagas</a></li>
           <li class="nav-item"><a href="#" class="link">Sou Candidato</a></li>
           </ul>
