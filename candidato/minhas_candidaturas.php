@@ -138,12 +138,38 @@ switch ($aba) {
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <script src="/Projeto_RH/html/toggle.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Minhas Candidaturas</title>
   <link rel="stylesheet" href="/projeto_rh/css/minhascandidaturas.css">
 </head>
 <body>
+  <header>
+    <div class="logo">
+    <img src="/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png" alt="">
+    </div>
+
+  <div class="resp-but">
+      <input type="checkbox" id="checkbox" onclick="mostrar()">
+      <label for="checkbox" class="toggle">
+        <div class="bars" id="bar1"></div>
+        <div class="bars" id="bar2"></div>
+        <div class="bars" id="bar3"></div>
+      </label>
+    </div>
+
+    <div class="resp">
+    <ul>
+      <li class="nav-items"><a href="/Projeto_RH/candidato/pagina-usuario log.php" class="link">Início</a></li>
+      <li class="nav-items"><a href="#" class="link">Buscar Vagas</a></li>
+      <li class="nav-items"><a href="/Projeto_RH/html/pagina-empresa.html" class="link">Sou Empresa</a></li>
+    </ul>
+    <div class="perf">
+      <img src="/projeto_rh/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil">
+    </div>
+  </div>
+  </header>
   <!-- cabeçalho/menu omitidos por brevidade -->
   <section class="hero">
     <h1>Minhas Candidaturas</h1>
@@ -201,12 +227,6 @@ switch ($aba) {
 </html>
 
 <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #f2f3f7;
-      color: #333;
-    }
 
     .hero h1 {
       margin: 0;
@@ -242,6 +262,7 @@ switch ($aba) {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: .3s all ease-in-out;
 }
 /* Estilo para o botão “Candidatar-se” */
 button[name="candidatar"] {
@@ -254,12 +275,12 @@ button[name="candidatar"] {
   font-weight: 600;               /* texto levemente mais grosso */
   cursor: pointer;                /* cursor de mãozinha */
   box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* sombra sutil */
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: .3s all ease-in-out;
 }
 
 button[name="candidatar"]:hover {
   background-color: #27ae60;      /* verde escuro ao passar o mouse */
-  transform: translateY(-1px);    /* leve elevação */
+  transform: scale(1.1);    /* leve elevação */
 }
 
 button[name="candidatar"]:active {
@@ -269,6 +290,7 @@ button[name="candidatar"]:active {
 
 button[name="cancelar_candidatura"]:hover {
     background-color: #c0392b; /* Cor de fundo mais escura quando o botão for hover */
+    transform: scale(1.1);    /* leve elevação */
 }
 
     .filters {

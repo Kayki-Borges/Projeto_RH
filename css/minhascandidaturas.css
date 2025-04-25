@@ -20,6 +20,10 @@ header {
   display: flex;
 }
 
+.resp-but{
+  margin-top: 20px;
+}
+
 .menu{
   display: flex;
   align-items: center;
@@ -57,7 +61,7 @@ header {
   padding: 20px;
   border-radius: 20px;
   position: absolute;
-  left: 173vh;
+  left: 177vh;
   top: 80px;
 }
 
