@@ -9,6 +9,8 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 require_once("../conexao.php");// Inclua o arquivo de conexão com o banco
 
+
+
 // Função para decodificar o token do Google
 function decodeGoogleToken($token) {
     $url = "https://oauth2.googleapis.com/tokeninfo?id_token=" . $token;
@@ -46,7 +48,7 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$usuario) {
     // Usuário novo, precisa completar o cadastro
-    echo json_encode(["status" => "success", "redirect" => "/login/escolha_perfil.php"]);
+    echo json_encode(["status" => "success", "redirect" => "/projeto_rh/escolha_perfil.php"]);
     exit;
 }
 
@@ -55,13 +57,13 @@ $_SESSION["usuario"] = $usuario;
 
 // Redireciona para o dashboard do tipo de usuário
 if ($usuario['tipo_usuario'] === 'empresa') {
-    echo json_encode(["status" => "success", "redirect" => "./completar-cadastro.html"]);
+    echo json_encode(["status" => "success", "redirect" => "../escolha_perfil.php"]);
 } else {
     
-    echo json_encode(["status" => "success", "redirect" => "./completar-cadastro.html"]);
+    echo json_encode(["status" => "success", "redirect" => "../escolha_perfil.php"]);
 }
 ob_clean(); // Limpa qualquer saída anterior
-echo json_encode(["status" => "success", "redirect" => "./completar-cadastro.html"]);
+echo json_encode(["status" => "success", "redirect" => "../escolha_perfil.php"]);
 exit;
 
 ?>
