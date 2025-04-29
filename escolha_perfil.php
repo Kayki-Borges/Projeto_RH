@@ -6,15 +6,24 @@
   <title>Finalizar Cadastro</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /*Configurações básicas*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg,rgb(129, 59, 221),rgb(64, 136, 214));
+      background: linear-gradient(135deg,rgb(129, 59, 221),#4088d6);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -50,7 +59,25 @@
       color: #777;
     }
 
-    .choice-button {
+    .choice-button:nth-child(3){
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #4088d6;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .3s all ease-in-out;
+      gap: 10px;
+    }
+
+    .choice-button:nth-child(4){
       display: flex;
       align-items: center;
       justify-content: center;
@@ -64,13 +91,17 @@
       font-size: 18px;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+      transition: .3s all ease-in-out;
       gap: 10px;
     }
 
-    .choice-button:hover {
-      background:rgb(158, 62, 196);
-      transform: scale(1.05);
+  .choice-button:nth-child(3):hover{
+    background: #4088d6;
+    transform: scale(1.1);
+  }
+    .choice-button:nth-child(4):hover {
+      background: #9D61EA;
+      transform: scale(1.1);
     }
 
     .choice-button i {

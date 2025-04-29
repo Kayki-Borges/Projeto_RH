@@ -60,8 +60,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="/Projeto_RH/css/style.css">
     <style>
+        /*Configurações básicas*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
         body {
-            font-family: Arial, sans-serif;
             background: url('/Projeto_RH/images/background.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
