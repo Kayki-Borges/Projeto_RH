@@ -214,9 +214,28 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
                 width: 100%;
             }
         }
+
+        .but-volt{
+            position: absolute;
+            width: 100px;
+            top: 0;
+            left: 10px;
+            background: linear-gradient(to right, #488BE8,#9D61EA);
+            color: white;
+            cursor: pointer;
+            transition:.5s all ease-in-out;
+            border: none;
+        }
+
+        .but-volt a{
+            text-decoration: none;
+            color: #ffff;
+            font-family: Poppins, sans-serif;
+        }
     </style>
 </head>
 <body>
+    <a href="/projeto_rh/html/pagina-usuario.html"><button class="but-volt">Voltar</button></a>
     <div class="container-principal">
 
         <form id="formCadastro" action="/Projeto_RH/cadastro/processa_cadastro.php" method="POST" aria-labelledby="formCadastro">

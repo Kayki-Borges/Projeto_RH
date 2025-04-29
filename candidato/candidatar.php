@@ -119,6 +119,10 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
       transform: scale(1.1);
       background-color: #ff0000;
     }
+
+    .nav-link{
+      color: #9D61EA;
+    }
   </style>
   <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
 </head>

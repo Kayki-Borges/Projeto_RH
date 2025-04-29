@@ -132,9 +132,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             margin-top: 10px;
             background: #007bff;
         }
+
+        .but-volt{
+            position: absolute;
+            width: 100px;
+            top: 0;
+            left: 10px;
+        }
+
+        .but-volt a{
+            text-decoration: none;
+            color: #ffff;
+            font-family: Poppins, sans-serif;
+        }
     </style>
 </head>
 <body>
+    <a href="/projeto_rh/html/pagina-usuario.html"><button class="but-volt">Voltar</button></a>
     <div class="container">
         <h1>Login</h1>
         <div id="login-container">
