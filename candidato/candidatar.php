@@ -68,6 +68,7 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
   <meta charset="UTF-8">
   <title>Candidatos às Vagas</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -87,42 +88,135 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
       font-style: normal;
     }
 
-    /*Corpo do site*/
-    .btn.btn-secondary.mt-4{
-      transition: .3s all ease-in-out;
-      background-color: #9D61EA;
-      border: none;
-    }
-
-    .btn.btn-secondary.mt-4:hover{
-      transform: scale(1.1);
-    }
-
-    .btn.btn-success.btn-sm{
-      transition: .3s all ease-in-out;
-      border: none;
-      background-color: #00a200;
-    }
-
-    .btn.btn-success.btn-sm:hover{
-      transform: scale(1.1);
-      background-color: #00a200;
-    }
-
-    .btn.btn-danger.btn-sm{
-      transition: .3s all ease-in-out;
-      border: none;
-      background-color: #ff0000;
-    }
-
-    .btn.btn-danger.btn-sm:hover{
-      transform: scale(1.1);
-      background-color: #ff0000;
-    }
-
     .nav-link{
       color: #9D61EA;
     }
+
+    /* From Uiverse.io by cssbuttons-io */ 
+.noselect {
+ width: 150px;
+ height: 50px;
+ cursor: pointer;
+ display: flex;
+ align-items: center;
+ background: red;
+ border: none;
+ border-radius: 5px;
+ box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+ background: #e62222;
+}
+
+.noselect, .noselect span {
+ transition: 200ms;
+}
+
+.noselect .text {
+ transform: translateX(35px);
+ color: white;
+ font-weight: bold;
+}
+
+.noselect .icon {
+ position: absolute;
+ border-left: 1px solid #c41b1b;
+ transform: translateX(110px);
+ height: 40px;
+ width: 40px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.noselect svg {
+ width: 15px;
+ fill: #eee;
+}
+
+.noselect:hover {
+ background: #ff3636;
+}
+
+.noselect:hover .text {
+ color: transparent;
+}
+
+.noselect:hover .icon {
+ width: 150px;
+ border-left: none;
+ transform: translateX(0);
+}
+
+.noselect:focus {
+ outline: none;
+}
+
+.noselect:active .icon svg {
+ transform: scale(0.8);
+}
+
+/* From Uiverse.io by Gaurang7717 */ 
+.noselecte {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: Green;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #00a600;
+}
+
+.noselecte,
+.noselecte span {
+  transition: 200ms;
+}
+
+.noselecte .text {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+}
+
+.noselecte .icon {
+  position: absolute;
+  border-left: 1px solid #006e00;
+  transform: translateX(110px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noselecte svg {
+  width: 20px;
+  fill: #eee;
+}
+
+.noselecte:hover {
+  background: ##00a600;
+}
+
+.noselecte:hover .text {
+  color: transparent;
+}
+
+.noselecte:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+.noselecte:focus {
+  outline: none;
+}
+
+.noselecte:active .icon svg {
+  transform: scale(0.8);
+}
+
   </style>
   <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
 </head>
@@ -181,18 +275,22 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   <form method="POST" style="display:inline-block">
                     <input type="hidden" name="candidato_vaga_id"
                            value="<?= $cand['candidato_vaga_id'] ?>">
-                    <button type="submit" name="acao" value="confirmar"
-                            class="btn btn-success btn-sm">
-                      Confirmar
-                    </button>
+<button type="submit" name="acao" value="confirmar" class="noselecte"><span class="text">Confirmar</span><span class="icon"><svg
+      viewBox="0 0 24 24"
+      height="24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"
+      ></path></svg></span>
+</button>
+
                   </form>
                   <form method="POST" style="display:inline-block">
                     <input type="hidden" name="candidato_vaga_id"
                            value="<?= $cand['candidato_vaga_id'] ?>">
-                    <button type="submit" name="acao" value="cancelar"
-                            class="btn btn-danger btn-sm">
-                      Cancelar
-                    </button>
+                    <button type="submit" name="acao" value="cancelar" class="noselect"><span class="text">Cancelar</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
                   </form>
                 <?php else: ?>
                   <span class="text-muted">Ação realizada</span>

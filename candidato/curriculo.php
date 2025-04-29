@@ -32,6 +32,7 @@ try {
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil do Candidato</title>
@@ -41,6 +42,7 @@ try {
     
 </head>
 <body>
+    <a href="/projeto_rh/candidato/pagina-usuario log.php"><button class="but-volt">Voltar</button></a>
     <div class="container">
         <div class="profile">
             <div class="avatar">IL</div>
@@ -90,9 +92,22 @@ try {
 </body>
 </html>
 <style>
+    /*Configurações básicas*/
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .poppins-medium {
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+    }
     /* Estilos globais */
 body {
-    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
@@ -124,7 +139,7 @@ body {
 .avatar {
     width: 60px;
     height: 60px;
-    background-color: #007bff;
+    background-color: #488BE8;
     color: white;
     font-size: 28px;
     font-weight: bold;
@@ -166,19 +181,19 @@ input, select, button {
 
 input:focus, select:focus, button:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: #488BE8;
 }
 
 /* Botão de enviar */
 button {
-    background-color: #007bff;
+    background-color: #488BE8;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #488BE8;
 }
 
 /* Botões para selecionar idiomas */
@@ -199,12 +214,12 @@ button:hover {
 }
 
 .languages button:hover {
-    background-color: #007bff;
+    background-color: #488BE8;
     color: white;
 }
 
 .languages .selected {
-    background-color: #007bff;
+    background-color: #488BE8;
     color: white;
 }
 
@@ -220,6 +235,21 @@ input[type="text"], input[type="email"] {
     font-size: 14px;
     margin-top: 10px;
 }
+.but-volt{
+            position: fixed;
+            width: 100px;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(to right, #488BE8,#9D61EA);
+            color: white;
+            cursor: pointer;
+            transition:.5s all ease-in-out;
+            border: none;
+        }
 
+        .but-volt a{
+            text-decoration: none;
+            color: #ffff;
+            font-family: Poppins, sans-serif;
+        }
 </style>
-

@@ -161,7 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </style>
 </head>
 <body>
-    <a href="/projeto_rh/html/pagina-usuario.html"><button class="but-volt">Voltar</button></a>
+    <a href="/projeto_rh/html/pagina-usuario.html"></a>
     <div class="container">
         <h1>Login</h1>
         <div id="login-container">

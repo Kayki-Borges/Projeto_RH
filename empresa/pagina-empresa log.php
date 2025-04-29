@@ -47,7 +47,8 @@ $id_usuario = $usuario['id'];
           <img src="/Projeto_RH/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil" class="foto" onclick="apar()">
           <ul class="cont-list">
             <li><a href="editar-perfil.php">Editar Perfil</a></li>
-            <li><a href="#">Candidaturas</a></li>
+            <li><a href="/projeto_rh/candidato/candidatar.php">Buscar Candidatos</a></li>
+            <li><a href="../login/cadastrar_vaga.php">Cadastrar Vagas</a></li>
             <li><a href="#">Ajuda</a></li>
             <li><a href="/projeto_rh/cadastro/logout.php">Sair</a></li>
             <a href="#" class="term">Termos de uso | Link Next</a>
@@ -67,7 +68,11 @@ $id_usuario = $usuario['id'];
       <div class="resp">
         <ul>
           <li class="nav-item"><a href="#" class="link">inicio</a></li>
+<<<<<<< Updated upstream
           <li class="nav-item"><a href="#" class="link">Buscar Candidatos</a></li>
+=======
+          <li class="nav-item"><a href="/projeto_rh/candidato/candidatar.php" class="link">Buscar Candidatos</a></li>
+>>>>>>> Stashed changes
           <li class="nav-item"><a href="../login/cadastrar_vaga.php" class="link">Cadastrar Vagas</a></li>
           <li class="nav-item"><a href="" class="link">Sou Candidato</a></li>
         </ul>
@@ -86,7 +91,7 @@ $id_usuario = $usuario['id'];
       <h1>Seja bem vindo(a)!</h1>
       <h2>Aqui você buscará <span>candidatos</span></h2>
       <h2>necessários para sua empresa!</h2>
-      <button><a href="#">Buscar Candidatos</a></button>
+      <button><a href="/projeto_rh/candidato/candidatar.php">Buscar Candidatos</a></button>
       </div>
     </div>
   </section>

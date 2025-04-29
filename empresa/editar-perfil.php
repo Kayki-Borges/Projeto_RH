@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
     <meta charset="UTF-8">
     <title>Editar Perfil</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -53,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #48cae4, #0077b6);
+            background: linear-gradient(135deg, #488BE8, #48cae4);
             margin: 0;
             padding: 0;
             display: flex;
@@ -80,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         h2 {
             text-align: center;
-            color: #023e8a;
+            color: #488BE8;
             margin-bottom: 25px;
         }
 
@@ -94,22 +95,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         form input:focus, form textarea:focus {
-            border-color: #0077b6;
+            border-color: #488BE8;
             box-shadow: 0 0 5px rgba(0, 119, 182, 0.4);
             outline: none;
         }
 
         form input[type="submit"] {
-            background-color: #0096c7;
+            background-color: #488BE8;
             color: white;
             font-weight: bold;
             border: none;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s all ease-in-out;
         }
 
         form input[type="submit"]:hover {
-            background-color: #0077b6;
+            background-color: #488BE8;
+            transform:scale(1.1);
         }
 
         .back-button {
