@@ -138,6 +138,7 @@ switch ($aba) {
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
   <script src="/Projeto_RH/html/toggle.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
