@@ -10,6 +10,7 @@
     <script src="/Projeto_RH/js/senha.js"></script>
 </head>
 <body>
+    <a href="/projeto_rh/html/pagina-empresa.html"><button class="but-volt">Voltar</button></a>
     <div class="container-principal">
     <form id="formCadastroEmpresa" action="/Projeto_RH/cadastro/processa_cadastro_empresa.php" method="POST">
     <h1>Cadastro de Empresa</h1>
@@ -345,4 +346,22 @@
         font-size: 1.5em;
         cursor: pointer;
     }
+
+    .but-volt{
+            position: absolute;
+            width: 100px;
+            top: 0;
+            left: 10px;
+            background: linear-gradient(to right, #488BE8,#9D61EA);
+            color: white;
+            cursor: pointer;
+            transition:.5s all ease-in-out;
+            border: none;
+        }
+
+        .but-volt a{
+            text-decoration: none;
+            color: #ffff;
+            font-family: Poppins, sans-serif;
+        }
 </style>

@@ -38,7 +38,7 @@ $id_usuario = $usuario['id'];
       <ul>
         <li class="nav-item"><a href="#banner" class="link">Início</a></li>
         <li class="nav-item"><a href="../candidato/minhas_candidaturas.php" class="link">Buscar Vagas</a></li>
-        <li class="nav-item"><a href="#" class="link">Sou Empresa</a></li>
+        <li class="nav-item"><a href="/projeto_rh/html/pagina-empresa.html" class="link">Sou Empresa</a></li>
       </ul>
     </div>
 
@@ -47,7 +47,7 @@ $id_usuario = $usuario['id'];
       <ul class="cont-list">
         <li><a href="">Editar Perfil</a></li>
         <li><a href="/projeto_rh/candidato/curriculo.php">Currículo</a></li>
-        <li><a href="#">Candidaturas</a></li>
+        <li><a href="/projeto_rh/candidato/minhas_candidaturas.php">Candidaturas</a></li>
         <li><a href="#">Ajuda</a></li>
         <li><a href="/projeto_rh/cadastro/logout.php">Sair</a></li>
         <a href="#" class="term">Termos de uso | Link Next</a>
@@ -77,7 +77,7 @@ $id_usuario = $usuario['id'];
 </header>
 
 <section>
-  <div class="banner" style="height: 600px;">
+  <div class="banner" id="banner" style="height: 600px;">
     <div class="efeito-text-topo">
       <h1>Impulsionando talentos,</h1>
       <h2>por meio de <span>Oportunidades</span>!</h2>

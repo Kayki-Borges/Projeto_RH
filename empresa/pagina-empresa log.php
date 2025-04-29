@@ -81,7 +81,7 @@ $id_usuario = $usuario['id'];
 
     <section>
 
-    <div class="banner" style="height: 600px;">
+    <div class="banner" id="banner"   style="height: 600px;">
       <div class="efeito-text-topo">
       <h1>Seja bem vindo(a)!</h1>
       <h2>Aqui você buscará <span>candidatos</span></h2>

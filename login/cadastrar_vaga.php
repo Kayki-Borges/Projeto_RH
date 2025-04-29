@@ -50,11 +50,26 @@ $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Vagas</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
+        /*Configurações básicas*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
         body {
             font-family: Arial, sans-serif;
         }
@@ -105,9 +120,35 @@ $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .btn-back {
             text-decoration: none;
             color: white;
-            background-color: #6c757d;
+            background: linear-gradient(to right, #488BE8,#9D61EA);
             padding: 10px 20px;
-            border-radius: 5px;
+            transition: .3s all ease-in-out;
+            border:none;
+        }
+
+        .btn-back:hover{
+            background: linear-gradient(to right, #9D61EA, #488BE8);
+            transform: scale(1.1);
+        }
+
+        .btn-primary{
+            background-color: #9D61EA;
+            border:none;
+            transition: .3s all ease-in-out;
+        }
+
+        .btn-primary:hover{
+            transform: scale(1.1);
+            background-color: #9D61EA;
+        }
+
+        .btn.btn-danger{
+            transition: .3s all ease-in-out;
+        }
+
+        .btn.btn-danger:hover{
+            transform:scale(1.1);
+            background-color: #dc3545;
         }
     </style>
 </head>

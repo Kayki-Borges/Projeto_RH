@@ -71,6 +71,60 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <meta charset="UTF-8">
   <title>Candidatos às Vagas</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /*Configurações básicas*/
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .poppins-medium {
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    /*Corpo do site*/
+    .btn.btn-secondary.mt-4{
+      transition: .3s all ease-in-out;
+      background-color: #9D61EA;
+      border: none;
+    }
+
+    .btn.btn-secondary.mt-4:hover{
+      transform: scale(1.1);
+    }
+
+    .btn.btn-success.btn-sm{
+      transition: .3s all ease-in-out;
+      border: none;
+      background-color: #00a200;
+    }
+
+    .btn.btn-success.btn-sm:hover{
+      transform: scale(1.1);
+      background-color: #00a200;
+    }
+
+    .btn.btn-danger.btn-sm{
+      transition: .3s all ease-in-out;
+      border: none;
+      background-color: #ff0000;
+    }
+
+    .btn.btn-danger.btn-sm:hover{
+      transform: scale(1.1);
+      background-color: #ff0000;
+    }
+
+    .nav-link{
+      color: #9D61EA;
+    }
+  </style>
+  <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
 </head>
 <body>
   <div class="container mt-5">
