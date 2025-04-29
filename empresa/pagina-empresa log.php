@@ -67,9 +67,9 @@ $id_usuario = $usuario['id'];
       <div class="resp">
         <ul>
           <li class="nav-item"><a href="#" class="link">inicio</a></li>
-          <li class="nav-item"><a href="#" class="link">Buscar Vagas</a></li>
+          <li class="nav-item"><a href="#" class="link">Buscar Candidatos</a></li>
           <li class="nav-item"><a href="../login/cadastrar_vaga.php" class="link">Cadastrar Vagas</a></li>
-          <li class="nav-item"><a href="#" class="link">Sou Empresa</a></li>
+          <li class="nav-item"><a href="" class="link">Sou Candidato</a></li>
         </ul>
         <div class="perf">
           <img src="/Projeto_RH/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil" id="perfFoto">

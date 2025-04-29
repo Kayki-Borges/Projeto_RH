@@ -5,29 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Finalizar Cadastro</title>
 
-  <style>
-    /*Configurações básicas*/
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
+  <!-- Fonte Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
 
-.poppins-medium {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-}
+  <!-- Ícones Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
 
     body {
-      font-family: 'Poppins', sans-serif;
-<<<<<<< HEAD
-      background: linear-gradient(135deg, rgb(129, 59, 221), rgb(64, 136, 214));
-=======
-      background: linear-gradient(135deg,rgb(129, 59, 221),#4088d6);
->>>>>>> 85fa376ebcfc9138785d53bcf013acc6919e1562
+      background: linear-gradient(135deg, rgb(129, 59, 221), #4088d6);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -63,7 +56,7 @@
       color: #777;
     }
 
-    .choice-button:nth-child(3){
+    .choice-button {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -72,55 +65,36 @@
       margin-bottom: 20px;
       border: none;
       border-radius: 10px;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s all ease-in-out;
+      gap: 10px;
+    }
+
+    .choice-button.candidato {
       background: #4088d6;
-      color: white;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: .3s all ease-in-out;
-      gap: 10px;
     }
 
-    .choice-button:nth-child(4){
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 20px;
-      border: none;
-      border-radius: 10px;
+    .choice-button.empresa {
       background: #9D61EA;
-      color: white;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: .3s all ease-in-out;
-      gap: 10px;
     }
 
-
-    .choice-button:hover {
-      background: rgb(158, 62, 196);
-      transform: scale(1.05);
-    }
-  .choice-button:nth-child(3):hover{
-    background: #4088d6;
-    transform: scale(1.1);
-  }
-    .choice-button:nth-child(4):hover {
-      background: #9D61EA;
+    .choice-button.candidato:hover {
+      background: #326fb1;
       transform: scale(1.1);
+    }
 
+    .choice-button.empresa:hover {
+      background: #7b45cc;
+      transform: scale(1.1);
     }
 
     .choice-button i {
       font-size: 20px;
     }
   </style>
-
-  <!-- Ícones -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -128,11 +102,11 @@
     <h2>Finalizar Cadastro</h2>
     <p>Escolha seu tipo de conta para completar seu perfil:</p>
 
-    <button onclick="completeRegistration('candidato')" class="choice-button">
+    <button onclick="completeRegistration('candidato')" class="choice-button candidato">
       <i class="fas fa-user"></i> Sou Candidato
     </button>
 
-    <button onclick="completeRegistration('empresa')" class="choice-button">
+    <button onclick="completeRegistration('empresa')" class="choice-button empresa">
       <i class="fas fa-building"></i> Sou Empresa
     </button>
   </div>
@@ -153,7 +127,7 @@
           if (type === 'candidato') {
             window.location.href = "/projeto_rh/editar-perfil-candidato.php";
           } else if (type === 'empresa') {
-            window.location.href = "/projeto_rh/editar-perfil.php";
+            window.location.href = "/projeto_rh/atualizar.php";
           }
         } else {
           alert("Erro ao finalizar cadastro: " + data.message);

@@ -75,13 +75,6 @@ try {
 
     <input type="file" name="foto_candidato" accept="image/*">
 
-    <label>Idioma</label>
-    <div class="languages">
-        <button type="button" class="selected">Português</button>
-        <button type="button">English</button>
-        <button type="button">Español</button>
-    </div>
-
     <button type="submit">Salvar</button>
 </form>
 
