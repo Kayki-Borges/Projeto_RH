@@ -14,7 +14,7 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg,rgb(129, 59, 221),rgb(64, 136, 214));
+      background: linear-gradient(135deg, rgb(129, 59, 221), rgb(64, 136, 214));
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -69,7 +69,7 @@
     }
 
     .choice-button:hover {
-      background:rgb(158, 62, 196);
+      background: rgb(158, 62, 196);
       transform: scale(1.05);
     }
 
@@ -78,9 +78,8 @@
     }
   </style>
 
-  <!-- Adicionando ícones -->
+  <!-- Ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
 <body>
 
@@ -100,34 +99,24 @@
   <script>
     async function completeRegistration(type) {
       try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const userId = urlParams.get("user_id");
-        const token = urlParams.get("token"); // <- pegue o token do Google se estiver vindo pela URL
-
-        if (!userId || !token) {
-          alert("Erro: informações do usuário não encontradas.");
-          return;
-        }
-
-        const response = await fetch('http://localhost/projeto_rh/salvar_tipo_usuario.php', {
+        const response = await fetch('/projeto_rh/salvar_tipo_usuario.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            user_id: userId,
-            tipo: type,
-            token: token
-          })
+          body: JSON.stringify({ tipo: type })
         });
 
         const data = await response.json();
 
         if (data.success) {
           alert("Cadastro finalizado com sucesso!");
-          window.location.href = "/projeto_rh/perfil.php"; // redireciona para o perfil
+          if (type === 'candidato') {
+            window.location.href = "/projeto_rh/editar-perfil-candidato.php";
+          } else if (type === 'empresa') {
+            window.location.href = "/projeto_rh/editar-perfil.php";
+          }
         } else {
           alert("Erro ao finalizar cadastro: " + data.message);
         }
-
       } catch (error) {
         console.error('Erro:', error);
         alert("Erro inesperado ao tentar salvar o cadastro.");

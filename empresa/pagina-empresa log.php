@@ -2,9 +2,14 @@
 session_start();
 
 if (!isset($_SESSION['usuario'])) {
-    echo "Usuário não autenticado!";
-    exit;
+  header('Location:/projeto_rh/login/login.php');
+  exit;
 }
+
+$usuario = $_SESSION['usuario'];
+$tipo_usuario = $usuario['tipo_usuario'];
+$id_usuario = $usuario['id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -41,10 +46,10 @@ if (!isset($_SESSION['usuario'])) {
         <div class="perf">
           <img src="/Projeto_RH/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil" class="foto" onclick="apar()">
           <ul class="cont-list">
-            <li><a href="editar-perfil-empresa.php">Editar Perfil</a></li>
+            <li><a href="editar-perfil.php">Editar Perfil</a></li>
             <li><a href="#">Candidaturas</a></li>
             <li><a href="#">Ajuda</a></li>
-            <li><a href="/projoto_rh/cadastro/logout.php">Sair</a></li>
+            <li><a href="/projeto_rh/cadastro/logout.php">Sair</a></li>
             <a href="#" class="term">Termos de uso | Link Next</a>
           </ul>
         </div>

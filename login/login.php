@@ -159,37 +159,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <button onclick="fecharModal()">Fechar</button>
     </div>
 
-    <script>
-        // Exibe o modal de sucesso após login
-        function exibirModal() {
-            document.getElementById("successModal").style.display = "block";
-        }
+ <script>
+    // Callback para o login do Google
+    function handleCredentialResponse(response) {
+        const token = response.credential;
 
-        function fecharModal() {
-            document.getElementById("successModal").style.display = "none";
-        }
+        fetch('google-callback.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'token=' + encodeURIComponent(token)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Para depuração
+            if (data.status === "success" && data.redirect) {
+                window.location.href = data.redirect; // Redireciona para a URL recebida do backend
+            } else {
+                alert("Erro no login: " + (data.message || "Tente novamente."));
+            }
+        })
+        .catch(error => console.error('Erro:', error));
+    }
+</script>
 
-        // Callback para o login do Google
-        function handleCredentialResponse(response) {
-    const token = response.credential;
-
-    fetch('google-callback.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'token=' + encodeURIComponent(token)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        if (data.status === "success" && data.redirect) {
-            window.location.href = data.redirect;
-        } else {
-            alert("Erro no login: " + (data.message || "Tente novamente."));
-        }
-    })
-    .catch(error => console.error('Erro:', error));
-}
-
-    </script>
 </body>
 </html>

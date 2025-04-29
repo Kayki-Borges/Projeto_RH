@@ -1,128 +1,174 @@
-
 <?php
 session_start();
-require 'conexao.php'; // seu arquivo de conexão PDO
+require '../conexao.php';
 
-// Verificar se o usuário está logado
 if (!isset($_SESSION['usuario'])) {
-    header('Location: login.php'); // Redireciona se não estiver logado
+    header('Location:/projeto_rh/login/login.php');
     exit;
 }
 
-// Detectar se é candidato ou empresa
 $usuario = $_SESSION['usuario'];
-$tipo_usuario = $usuario['tipo_usuario']; // 'candidato' ou 'empresa'
-$id_usuario = $usuario['id']; // id do candidato ou empresa
+$tipo_usuario = $usuario['tipo_usuario'];
+$id_usuario = $usuario['id'];
 
-// Se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     if ($tipo_usuario == 'candidato') {
-        // Dados do formulário do candidato
-        $nome = $_POST['nome_candidato'];
-        $email = $_POST['email_candidato'];
-        $cpf = $_POST['cpf_candidato'];
-        $endereco = $_POST['endereco_candidato'];
-        $telefone = $_POST['telefone_candidato'];
-        $formacao = $_POST['formacao_academica'];
-        $experiencia = $_POST['experiencia_profissional'];
-        $area = $_POST['area_atuacao'];
-
-        // Atualizar no banco de dados
-        $sql = "UPDATE candidatos SET 
-                    nome_candidato = :nome, 
-                    email_candidato = :email, 
-                    cpf_candidato = :cpf,
-                    endereco_candidato = :endereco,
-                    telefone_candidato = :telefone,
-                    formacao_academica = :formacao,
-                    experiencia_profissional = :experiencia,
-                    area_atuacao = :area
-                WHERE id = :id";
-
-        $stmt = $pdo->prepare($sql);
+        $stmt = $pdo->prepare("UPDATE candidatos SET nome_candidato = :nome, email_candidato = :email, cpf_candidato = :cpf, endereco_candidato = :endereco, telefone_candidato = :telefone, formacao_academica = :formacao, experiencia_profissional = :experiencia, area_atuacao = :area WHERE id = :id");
         $stmt->execute([
-            ':nome' => $nome,
-            ':email' => $email,
-            ':cpf' => $cpf,
-            ':endereco' => $endereco,
-            ':telefone' => $telefone,
-            ':formacao' => $formacao,
-            ':experiencia' => $experiencia,
-            ':area' => $area,
+            ':nome' => $_POST['nome_candidato'],
+            ':email' => $_POST['email_candidato'],
+            ':cpf' => $_POST['cpf_candidato'],
+            ':endereco' => $_POST['endereco_candidato'],
+            ':telefone' => $_POST['telefone_candidato'],
+            ':formacao' => $_POST['formacao_academica'],
+            ':experiencia' => $_POST['experiencia_profissional'],
+            ':area' => $_POST['area_atuacao'],
             ':id' => $id_usuario
         ]);
-
-        echo "Perfil de candidato atualizado com sucesso!";
-
     } elseif ($tipo_usuario == 'empresa') {
-        // Dados do formulário da empresa
-        $nome = $_POST['nome_empresa'];
-        $email = $_POST['email_empresa'];
-        $cnpj = $_POST['cnpj_empresa'];
-        $endereco = $_POST['endereco_empresa'];
-        $telefone = $_POST['telefone_empresa'];
-        $area = $_POST['area_atuacao'];
-
-        // Atualizar no banco de dados
-        $sql = "UPDATE empresas SET 
-                    nome_empresa = :nome, 
-                    email_empresa = :email, 
-                    cnpj_empresa = :cnpj,
-                    endereco_empresa = :endereco,
-                    telefone_empresa = :telefone,
-                    area_atuacao = :area
-                WHERE id = :id";
-
-        $stmt = $pdo->prepare($sql);
+        $stmt = $pdo->prepare("UPDATE empresas SET nome_empresa = :nome, email_empresa = :email, cnpj_empresa = :cnpj, endereco_empresa = :endereco, telefone_empresa = :telefone, area_atuacao = :area WHERE id = :id");
         $stmt->execute([
-            ':nome' => $nome,
-            ':email' => $email,
-            ':cnpj' => $cnpj,
-            ':endereco' => $endereco,
-            ':telefone' => $telefone,
-            ':area' => $area,
+            ':nome' => $_POST['nome_empresa'],
+            ':email' => $_POST['email_empresa'],
+            ':cnpj' => $_POST['cnpj_empresa'],
+            ':endereco' => $_POST['endereco_empresa'],
+            ':telefone' => $_POST['telefone_empresa'],
+            ':area' => $_POST['area_atuacao'],
             ':id' => $id_usuario
         ]);
-
-        echo "Perfil de empresa atualizado com sucesso!";
     }
+
+    echo "<script>alert('Perfil atualizado com sucesso!'); window.location.href = 'dashboard.php';</script>";
+    exit;
 }
 ?>
 
-<!-- Formulário de edição -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Editar Perfil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #48cae4, #0077b6);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            animation: fadeBackground 10s infinite alternate;
+        }
+
+        @keyframes fadeBackground {
+            from { background-position: left; }
+            to { background-position: right; }
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeInUp 0.8s ease-in-out;
+        }
+
+        h2 {
+            text-align: center;
+            color: #023e8a;
+            margin-bottom: 25px;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        form input:focus, form textarea:focus {
+            border-color: #0077b6;
+            box-shadow: 0 0 5px rgba(0, 119, 182, 0.4);
+            outline: none;
+        }
+
+        form input[type="submit"] {
+            background-color: #0096c7;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #0077b6;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 10px 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .back-button i {
+            margin-right: 8px;
+        }
+
+        .back-button:hover {
+            background-color: #e0e0e0;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<h2>Editar Perfil</h2>
-
-<form method="POST">
-    <?php if ($tipo_usuario == 'candidato'): ?>
-        Nome: <input type="text" name="nome_candidato" value="<?= htmlspecialchars($usuario['nome_candidato']) ?>"><br>
-        Email: <input type="email" name="email_candidato" value="<?= htmlspecialchars($usuario['email_candidato']) ?>"><br>
-        CPF: <input type="text" name="cpf_candidato" value="<?= htmlspecialchars($usuario['cpf_candidato']) ?>"><br>
-        Endereço: <input type="text" name="endereco_candidato" value="<?= htmlspecialchars($usuario['endereco_candidato']) ?>"><br>
-        Telefone: <input type="text" name="telefone_candidato" value="<?= htmlspecialchars($usuario['telefone_candidato']) ?>"><br>
-        Formação Acadêmica: <input type="text" name="formacao_academica" value="<?= htmlspecialchars($usuario['formacao_academica']) ?>"><br>
-        Experiência Profissional: <textarea name="experiencia_profissional"><?= htmlspecialchars($usuario['experiencia_profissional']) ?></textarea><br>
-        Área de Atuação: <input type="text" name="area_atuacao" value="<?= htmlspecialchars($usuario['area_atuacao']) ?>"><br>
-    <?php elseif ($tipo_usuario == 'empresa'): ?>
-        Nome da Empresa: <input type="text" name="nome_empresa" value="<?= htmlspecialchars($usuario['nome_empresa']) ?>"><br>
-        Email: <input type="email" name="email_empresa" value="<?= htmlspecialchars($usuario['email_empresa']) ?>"><br>
-        CNPJ: <input type="text" name="cnpj_empresa" value="<?= htmlspecialchars($usuario['cnpj_empresa']) ?>"><br>
-        Endereço: <input type="text" name="endereco_empresa" value="<?= htmlspecialchars($usuario['endereco_empresa']) ?>"><br>
-        Telefone: <input type="text" name="telefone_empresa" value="<?= htmlspecialchars($usuario['telefone_empresa']) ?>"><br>
-        Área de Atuação: <input type="text" name="area_atuacao" value="<?= htmlspecialchars($usuario['area_atuacao']) ?>"><br>
-    <?php endif; ?>
-
-    <br>
-    <input type="submit" value="Salvar">
-</form>
-
+    <div class="container">
+        <a class="back-button" href="/projeto_rh/empresa/pagina-empresa log.php"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h2>Editar Perfil</h2>
+        <form method="POST">
+            <?php if ($tipo_usuario == 'candidato'): ?>
+                <input type="text" name="nome_candidato" placeholder="Nome" value="<?= htmlspecialchars($usuario['nome_candidato']) ?>">
+                <input type="email" name="email_candidato" placeholder="Email" value="<?= htmlspecialchars($usuario['email_candidato']) ?>">
+                <input type="text" name="cpf_candidato" placeholder="CPF" value="<?= htmlspecialchars($usuario['cpf_candidato']) ?>">
+                <input type="text" name="endereco_candidato" placeholder="Endereço" value="<?= htmlspecialchars($usuario['endereco_candidato']) ?>">
+                <input type="text" name="telefone_candidato" placeholder="Telefone" value="<?= htmlspecialchars($usuario['telefone_candidato']) ?>">
+                <input type="text" name="formacao_academica" placeholder="Formação Acadêmica" value="<?= htmlspecialchars($usuario['formacao_academica']) ?>">
+                <textarea name="experiencia_profissional" placeholder="Experiência Profissional"><?= htmlspecialchars($usuario['experiencia_profissional']) ?></textarea>
+                <input type="text" name="area_atuacao" placeholder="Área de Atuação" value="<?= htmlspecialchars($usuario['area_atuacao']) ?>">
+            <?php else: ?>
+                <input type="text" name="nome_empresa" placeholder="Nome da Empresa" value="<?= htmlspecialchars($usuario['nome_empresa']) ?>">
+                <input type="email" name="email_empresa" placeholder="Email" value="<?= htmlspecialchars($usuario['email_empresa']) ?>">
+                <input type="text" name="cnpj_empresa" placeholder="CNPJ" value="<?= htmlspecialchars($usuario['cnpj_empresa']) ?>">
+                <input type="text" name="endereco_empresa" placeholder="Endereço" value="<?= htmlspecialchars($usuario['endereco_empresa']) ?>">
+                <input type="text" name="telefone_empresa" placeholder="Telefone" value="<?= htmlspecialchars($usuario['telefone_empresa']) ?>">
+                <input type="text" name="area_atuacao" placeholder="Área de Atuação" value="<?= htmlspecialchars($usuario['area_atuacao']) ?>">
+            <?php endif; ?>
+            <input type="submit" value="Salvar Alterações">
+        </form>
+    </div>
 </body>
 </html>

@@ -1,12 +1,14 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['usuario']['id'])) {
-  echo "Usuário não autenticado!";
+if (!isset($_SESSION['usuario'])) {
+  header('Location:/projeto_rh/login/login.php');
   exit;
 }
 
-$usuarioId = $_SESSION['usuario']['id']; // <-- Adicione isso
+$usuario = $_SESSION['usuario'];
+$tipo_usuario = $usuario['tipo_usuario'];
+$id_usuario = $usuario['id'];
 
 ?>
 <!DOCTYPE html>
