@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -112,31 +114,37 @@
   </div>
 
   <script>
-    async function completeRegistration(type) {
-      try {
-        const response = await fetch('/projeto_rh/salvar_tipo_usuario.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tipo: type })
-        });
+  async function completeRegistration(type) {
+  try {
+    const response = await fetch('/projeto_rh/salvar_tipo_usuario.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tipo: type })
+    });
 
-        const data = await response.json();
+    const data = await response.json();
+    console.log(data); // Para debug
 
-        if (data.success) {
-          alert("Cadastro finalizado com sucesso!");
-          if (type === 'candidato') {
-            window.location.href = "/projeto_rh/editar-perfil-candidato.php";
-          } else if (type === 'empresa') {
-            window.location.href = "/projeto_rh/atualizar.php";
-          }
-        } else {
-          alert("Erro ao finalizar cadastro: " + data.message);
-        }
-      } catch (error) {
-        console.error('Erro:', error);
-        alert("Erro inesperado ao tentar salvar o cadastro.");
+    if (data.success) {
+      alert("Cadastro finalizado com sucesso!");
+      if (type === 'candidato') {
+        window.location.href = "editar-perfil-candidato.php";
+      } else if (type === 'empresa') {
+        window.location.href = "atualizar.php";
+      }
+    } else {
+      // Se sessão expirar ou houver outro erro
+      alert("Erro ao finalizar cadastro: " + data.message);
+      if (data.message.includes('Sessão expirada')) {
+        window.location.href = "login/login.php";
       }
     }
+  } catch (error) {
+    console.error('Erro:', error);
+    alert("Erro inesperado ao tentar salvar o cadastro.");
+  }
+}
+
   </script>
 
 </body>

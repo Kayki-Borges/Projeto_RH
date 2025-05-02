@@ -1,7 +1,16 @@
 <?php
-// Incluindo a conexão com o banco de dados
-include './conexao.php'; // Caminho relativo para a pasta acima
+session_start();
+require '../conexao.php';
 
+if (!isset($_SESSION['usuario'])) {
+    header('Location:/projeto_rh/login/login.php');
+    exit;
+}
+
+$usuario = $_SESSION['usuario'];
+$tipo_usuario = $usuario['tipo_usuario'];
+$id_usuario = $usuario['id'];
+ 
 
 // Capturando os dados do formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
