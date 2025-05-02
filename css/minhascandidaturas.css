@@ -22,6 +22,15 @@ header {
 
 .resp-but{
   margin-top: 20px;
+  margin-left: 1400px;
+}
+
+@media screen and (max-width:768px) {
+  
+  .resp-but {
+    margin-left: 590px;
+  }
+  
 }
 
 .menu{
@@ -42,7 +51,6 @@ header {
   height: 70px;
   width: 100px;
   margin-left: 10px;
-  margin-right: 1400px;
 }
 
 .perf img{
@@ -63,6 +71,14 @@ header {
   position: absolute;
   left: 177vh;
   top: 80px;
+}
+
+@media screen and (max-width:768px) {
+  
+  .resp.abrir {
+    left: 57vh;
+  }
+
 }
 
 .resp.abrir ul{

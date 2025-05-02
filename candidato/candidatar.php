@@ -68,6 +68,7 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <script src="/projeto_rh/html/toggle.js"></script>
   <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
   <meta charset="UTF-8">
   <title>Candidatos às Vagas</title>
@@ -91,8 +92,152 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     .nav-link{
       color: #9D61EA;
     }
+ 
+header {
+  background: linear-gradient(90deg, #488BE8 0%, #3e7bfa 50%, #004aad 100%);
+  width: 100%;
+  height: 80px;
+  display: flex;
+}
 
-    /* From Uiverse.io by cssbuttons-io */ 
+.resp-but{
+  margin-top: 20px;
+  margin-left: 1400px;
+}
+
+@media screen and (max-width:768px) {
+  
+  .resp-but {
+    margin-left: 590px;
+  }
+  
+}
+
+.menu{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu ul{
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin-left: 600px;
+  margin-right: 600px;
+}
+
+.logo img{
+  height: 70px;
+  width: 100px;
+  margin-left: 10px;
+}
+
+.perf img{
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+}
+
+.resp{
+  display: none;
+}
+
+.resp.abrir{
+  display: block;
+  background-color: #488BE8;
+  padding: 20px;
+  border-radius: 20px;
+  position: absolute;
+  left: 175vh;
+  top: 83px;
+}
+
+@media screen and (max-width:768px) {
+  
+  .resp.abrir {
+    left: 57vh;
+  }
+
+}
+
+.resp.abrir ul{
+  list-style: none;
+  margin-right: 20px;
+}
+
+.resp.abrir .nav-items a{
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  color: #e4e4e4;
+  padding: 10px;
+  align-items: center;
+  transition: .2s all ease-in-out;
+}
+
+.resp.abrir .nav-items a:hover{
+  background-color: #004aad;
+  border-radius: 10px;
+  transform: scale(1.1);
+}
+
+.resp.abrir .perf{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/*Botão menu*/
+#checkbox {
+  display: none;
+}
+
+.toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition-duration: .3s;
+}
+
+.bars {
+  width: 100%;
+  height: 4px;
+  background-color: #e4e4e4;
+  border-radius: 5px;
+  transition-duration: .3s;
+}
+
+#checkbox:checked + .toggle .bars {
+  margin-left: 13px;
+}
+
+#checkbox:checked + .toggle #bar2 {
+  transform: rotate(135deg);
+  margin-left: 0;
+  transform-origin: center;
+  transition-duration: .3s;
+}
+
+#checkbox:checked + .toggle #bar1 {
+  transform: rotate(45deg);
+  transition-duration: .3s;
+  transform-origin: left center;
+}
+
+#checkbox:checked + .toggle #bar3 {
+  transform: rotate(-45deg);
+  transition-duration: .3s;
+  transform-origin: left center;
+}
+
 .noselect {
  width: 150px;
  height: 50px;
@@ -217,10 +362,48 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
   transform: scale(0.8);
 }
 
+.btn.btn-secondary.mt-4{
+  background: linear-gradient(to right, #488BE8, #9D61EA);
+  transition: .3s all ease-in-out;
+  border: none;
+}
+
+.btn.btn-secondary.mt-4:hover{
+  background: linear-gradient(to right, #9D61EA, #488BE8);
+  transform: scale(1.1);
+}
+
   </style>
   <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
 </head>
 <body>
+<header>
+    <div class="logo">
+    <img src="/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png" alt="">
+    </div>
+
+  <div class="resp-but">
+      <input type="checkbox" id="checkbox" onclick="mostrar()">
+      <label for="checkbox" class="toggle">
+        <div class="bars" id="bar1"></div>
+        <div class="bars" id="bar2"></div>
+        <div class="bars" id="bar3"></div>
+      </label>
+    </div>
+
+    <div class="resp">
+    <ul>
+      <li class="nav-items"><a href="/Projeto_RH/candidato/pagina-usuario log.php" class="link">Início</a></li>
+      <li class="nav-items" style=" text-align: center;"><a href="#" class="link">Buscar Candidatos</a></li>
+      <li class="nav-items" style=" text-align: center;"><a href="../login/cadastrar_vaga.php" class="link">Cadastrar Vagas</a></li>
+      <li class="nav-items"><a href="/Projeto_RH/html/pagina-empresa.html" class="link">Sou Empresa</a></li>
+      <li class="nav-items"><a href="/projeto_rh/cadastro/logout.php" class="link">Sair</a></li>
+    </ul>
+    <div class="perf">
+      <img src="/projeto_rh/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil">
+    </div>
+  </div>
+  </header>
   <div class="container mt-5">
     <h2 class="mb-4">Candidatos às Suas Vagas</h2>
 
