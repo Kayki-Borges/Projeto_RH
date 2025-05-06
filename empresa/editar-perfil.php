@@ -49,11 +49,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
     <meta charset="UTF-8">
     <title>Editar Perfil</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .poppins-medium {
+            font-family: "Poppins", sans-serif;
+            font-weight: 500;
+            font-style: normal;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #488BE8, #9D61EA);
             margin: 0;
             padding: 0;
@@ -83,6 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             text-align: center;
             color: #9D61EA;
             margin-bottom: 25px;
+            font-size: 30px;
         }
 
         form input, form textarea {
@@ -129,10 +143,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         .back-button i {
             margin-right: 8px;
+            transition: .3s all ease-in-out;
         }
 
         .back-button:hover {
-            background-color: #e0e0e0;
+            transform: scale(1.1);
+            color: white;
+            background: linear-gradient(to right, #488BE8,#9D61EA);
         }
 
         @keyframes fadeInUp {
