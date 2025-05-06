@@ -94,7 +94,7 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
  
 header {
-  background: linear-gradient(90deg, #488BE8 0%, #3e7bfa 50%, #004aad 100%);
+  background: linear-gradient(90deg,rgb(169, 111, 216) 0%,rgb(132, 56, 202) 50%, #004aad 100%);
   width: 100%;
   height: 80px;
   display: flex;
@@ -145,7 +145,7 @@ header {
 
 .resp.abrir{
   display: block;
-  background-color: #488BE8;
+  background-color:rgb(60, 29, 102);
   padding: 20px;
   border-radius: 20px;
   position: absolute;
@@ -177,7 +177,7 @@ header {
 }
 
 .resp.abrir .nav-items a:hover{
-  background-color: #004aad;
+  background-color:rgb(98, 39, 133);
   border-radius: 10px;
   transform: scale(1.1);
 }

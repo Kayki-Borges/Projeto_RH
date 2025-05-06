@@ -181,8 +181,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-size: 25px;
             cursor: pointer;
             color: #488BE8;
-            left: 910px;
-            top: 397px;
+            left: 57%;
+            top: 375px;
         }
     </style>
 </head>
@@ -205,7 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 data-callback="handleCredentialResponse">
             </div>
             <div class="g_id_signin" data-type="standard"></div>
-           <p>Ainda não tem uma conta?<a href="escolher_cadastro.php"> <br> Clique aqui!</a></p>
+           <p>Ainda não tem uma conta?<a href="/projeto_rh/encaminhar_cadastro.php"> <br> Clique aqui!</a></p>
         </div>
     </div>
 
