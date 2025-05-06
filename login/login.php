@@ -53,6 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="/projeto_rh/js/senha.js"></script>
     <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,21 +63,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="/Projeto_RH/css/style.css">
     <style>
         /*Configurações básicas*/
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
 
-.poppins-medium {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-}
+    .poppins-medium {
+         font-family: "Poppins", sans-serif;
+         font-weight: 500;
+         font-style: normal;
+    }
         body {
-            background: url('/Projeto_RH/images/background.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -92,6 +93,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             width: 350px;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
+        }
+
+        @media screen and (max-width:768px) {
+            .container {
+                padding: 40px;
+            }
         }
 
         @keyframes fadeIn {
@@ -116,8 +123,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             background: #f7f7f7;
         }
 
+        input:focus{
+            border: #488BE8 solid 1px;
+        }
+
         button {
-            background: linear-gradient(to right, #488BE8,#9D61EA);
+            background: linear-gradient(to right, #488BE8, #9D61EA);
             color: white;
             cursor: pointer;
             transition:.5s all ease-in-out;
@@ -158,16 +169,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             color: #ffff;
             font-family: Poppins, sans-serif;
         }
+
+        @media screen and (max-width:768px) {
+            .but-volt {
+                left: 20px;
+            }
+        }
+
+        #senhaIcon {
+            position: absolute;
+            font-size: 25px;
+            cursor: pointer;
+            color: #488BE8;
+            left: 910px;
+            top: 397px;
+        }
     </style>
 </head>
 <body>
-    <a href="/projeto_rh/html/pagina-usuario.html"></a>
+    <a href="/projeto_rh/html/pagina-usuario.html"><button class="but-volt">Voltar</button></a>
     <div class="container">
         <h1>Login</h1>
         <div id="login-container">
             <h2>Entre na sua conta</h2>
             <form id="loginForm" method="POST" action="login.php">
                 <input type="email" name="email" id="email" placeholder="Email" required>
+                <i class="bi bi-eye-slash-fill" id="senhaIcon" onclick="mostrarSenha()"></i>
                 <input type="password" name="senha" id="senha" placeholder="Senha" required>
                 <button type="submit">Entrar</button>
             </form>

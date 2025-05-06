@@ -49,6 +49,12 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             flex-wrap: wrap;
         }
 
+        @media screen and (max-width:400px) {
+            .container-principal {
+                margin-top: 80px;
+            }
+        }
+
         .lado-esquerdo {
             flex: 1;
             max-width: 400px;
@@ -64,6 +70,12 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             animation: fadeInImg 1s ease-in-out forwards;
         }
 
+        @media screen and (max-width:400px) {
+
+            .lado-esquerdo img {
+                display: none;
+            }
+        }
         form {
             border: 0.1px solid #2196f3;
             background-color: white;

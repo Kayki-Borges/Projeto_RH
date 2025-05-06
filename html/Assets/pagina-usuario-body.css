@@ -224,7 +224,7 @@ margin: 0 auto;
     flex-direction: column;
     position: absolute;
     top: 160vh;
-    left: 70px;
+    left: 100px;
     gap: 30px;
   }
 }

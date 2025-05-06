@@ -68,17 +68,13 @@ $id_usuario = $usuario['id'];
       <div class="resp">
         <ul>
           <li class="nav-item"><a href="#" class="link">inicio</a></li>
-<<<<<<< Updated upstream
-          <li class="nav-item"><a href="#" class="link">Buscar Candidatos</a></li>
-=======
           <li class="nav-item"><a href="/projeto_rh/candidato/candidatar.php" class="link">Buscar Candidatos</a></li>
->>>>>>> Stashed changes
           <li class="nav-item"><a href="../login/cadastrar_vaga.php" class="link">Cadastrar Vagas</a></li>
-          <li class="nav-item"><a href="" class="link">Sou Candidato</a></li>
+          <li class="nav-item"><a href="../html/pagina-usuario.html" class="link">Sou Candidato</a></li>
+          <li class="nav-item"><a href="/projeto_rh/cadastro/logout.php" class="link">Sair</a></li>
         </ul>
         <div class="perf">
           <img src="/Projeto_RH/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil" id="perfFoto">
-          
         </div>
       </div>
 

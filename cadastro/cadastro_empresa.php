@@ -60,7 +60,7 @@
             <div class="password-container">
                 <label for="confirmar_senha_empresa">Confirmar Senha:</label>
                 <input type="password" name="confirmar_senha_empresa" id="confirmar_senha" required>
-                <i class="bi bi-eye-slash-fill" id="comfirmIcon" onclick="mostrarSenhaDois()"></i>
+                <i class="bi bi-eye-slash-fill" id="comfirmIcon" onclick="mostrarSenhaConfirm()"></i>
             </div>
         </div>
 
@@ -159,6 +159,20 @@
             align-items: center;
             gap: 30px;
             flex-wrap: wrap;
+        }
+
+        @media screen and (max-width:768px) {
+
+            .container-principal {
+                margin-top: 80px;
+            }
+        }
+        @media screen and (max-width:400px) {
+
+            .container-principal {
+                margin-top: 70px;
+            }
+
         }
 
         .lado-esquerdo {

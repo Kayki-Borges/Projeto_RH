@@ -14,9 +14,9 @@ function mostrarSenha(){
 }
 
 //Mostrar senha comfirmar
-function mostrarSenhaDois(){
+function mostrarSenhaConfirm(){
     var inputPassConfirm = document.getElementById('confirmar_senha')
-    var btnSenhaConfirm = document.getElementById('confirmIcon')
+    var btnSenhaConfirm = document.getElementById('comfirmIcon')
 
     if(inputPassConfirm === 'password'){
         inputPassConfirm.setAttribute('type','text')
