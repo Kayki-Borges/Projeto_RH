@@ -128,15 +128,15 @@
     if (data.success) {
       alert("Cadastro finalizado com sucesso!");
       if (type === 'candidato') {
-        window.location.href = "editar-perfil-candidato.php";
+        window.location.href = "/projeto_rh/candidato/pagina-usuario log.php";
       } else if (type === 'empresa') {
-        window.location.href = "atualizar.php";
+        window.location.href = "/projeto_rh/empresa/pagina-empresa log.php";
       }
     } else {
       // Se sessão expirar ou houver outro erro
       alert("Erro ao finalizar cadastro: " + data.message);
       if (data.message.includes('Sessão expirada')) {
-        window.location.href = "login/login.php";
+        window.location.href = "/projeto_rh/login/login.php";
       }
     }
   } catch (error) {

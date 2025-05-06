@@ -53,6 +53,8 @@ if (!$usuario) {
 
 // Se o usuário existe, armazena os dados na sessão
 $_SESSION["usuario"] = $usuario;
+$_SESSION["id_usuario"] = $usuario['id'];  // Salvando o ID do usuário na sessão
+$_SESSION["tipo_usuario"] = $usuario['tipo_usuario'];  // Salvando o tipo de usuário
 
 // Se o perfil não foi escolhido, redireciona para a escolha de perfil
 if ($usuario['tipo_usuario'] == null) {

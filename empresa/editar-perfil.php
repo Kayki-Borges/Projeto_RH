@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ]);
     }
 
-    echo "<script>alert('Perfil atualizado com sucesso!'); window.location.href = 'dashboard.php';</script>";
+    echo "<script>alert('Perfil atualizado com sucesso!'); window.location.href = '/projeto_rh/empresa/pagina-empresa log.php';</script>";
     exit;
 }
 ?>
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #488BE8, #48cae4);
+            background: linear-gradient(135deg, #488BE8, #9D61EA);
             margin: 0;
             padding: 0;
             display: flex;
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         h2 {
             text-align: center;
-            color: #488BE8;
+            color: #9D61EA;
             margin-bottom: 25px;
         }
 
@@ -95,13 +95,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         form input:focus, form textarea:focus {
-            border-color: #488BE8;
+            border-color:#9D61EA;
             box-shadow: 0 0 5px rgba(0, 119, 182, 0.4);
             outline: none;
         }
 
         form input[type="submit"] {
-            background-color: #488BE8;
+            background-color: #9D61EA;
             color: white;
             font-weight: bold;
             border: none;
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         form input[type="submit"]:hover {
-            background-color: #488BE8;
+            background-color: #9D61EA;
             transform:scale(1.1);
         }
 

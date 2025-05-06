@@ -111,30 +111,29 @@
     <div class="container">
         <h1>Atualizar Dados</h1>
         <form action="/projeto_rh/seu_arquivo.php" method="POST">
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" required>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome_empresa" required>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email_empresa" required>
 
-    <label for="cnpj">CNPJ:</label>
-    <input type="text" id="cnpj" name="cnpj" oninput="mascararCNPJ(this)" required>
+            <label for="cnpj">CNPJ:</label>
+            <input type="text" id="cnpj" name="cnpj_empresa" oninput="mascararCNPJ(this)" required>
 
-    <label for="endereco">Endereço:</label>
-    <textarea id="endereco" name="endereco" required></textarea>
+            <label for="endereco">Endereço:</label>
+            <textarea id="endereco" name="endereco_empresa" required></textarea>
 
-    <label for="telefone">Telefone:</label>
-    <input type="text" id="telefone" name="telefone" required>
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone_empresa" oninput="mascararTelefone(this)" required>
 
-    <label for="area_atuacao">Área de Atuação:</label>
-    <input type="text" id="area_atuacao" name="area_atuacao" required>
+            <label for="area_atuacao">Área de Atuação:</label>
+            <input type="text" id="area_atuacao" name="area_atuacao" required>
 
-    <label for="senha">Senha:</label>
-    <input type="password" id="senha" name="senha" required>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha_empresa" required>
 
-    <button type="submit">Atualizar</button>
-</form>
-
+            <button type="submit">Atualizar</button>
+        </form>
     </div>
 </body>
 </html>
