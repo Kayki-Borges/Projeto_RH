@@ -214,7 +214,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 data-callback="handleCredentialResponse">
             </div>
             <div class="g_id_signin" data-type="standard"></div>
-           <p>Ainda não tem uma conta?<a href="escolher_cadastro.php"> <br> Crie uma conta!</a></p>
+           <p>Ainda não tem uma conta?<a href="/projeto_rh/encaminhar_cadastro.php"> <br> Crie uma conta!</a></p>
         </div>
     </div>
 

@@ -350,6 +350,7 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
         window.onload = function () {
             mudarEtapa();
 
+            // Exibe o modal de sucesso se a variável PHP for verdadeira
             <?php if ($cadastro_sucesso): ?>
                 document.getElementById('myModal').style.display = 'flex';
             <?php endif; ?>

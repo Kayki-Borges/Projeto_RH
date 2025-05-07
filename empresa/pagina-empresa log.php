@@ -194,4 +194,6 @@ $id_usuario = $usuario['id'];
   </div>
 </footer>
 </body>
-</html>
+</html><style>
+  
+</style>

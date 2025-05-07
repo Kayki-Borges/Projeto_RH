@@ -1,44 +1,42 @@
+
 <?php
 session_start();
 require_once("../conexao.php");
 
+// Verifica se os dados da empresa existem na sessão
+if (isset($_SESSION['usuario'])) {
+    $empresa_nome = isset($_SESSION['usuario']['nome_empresa']) ? $_SESSION['usuario']['nome_empresa'] : 'Nome não disponível';
+    $empresa_local = isset($_SESSION['usuario']['endereco_empresa']) ? $_SESSION['usuario']['endereco_empresa'] : 'Endereço não disponível';
+    $empresa_id = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : null;
+} else {
+    // Redireciona para a página de login caso a sessão não tenha os dados do usuário
+    header("Location: /projeto_rh/login/login.php");
+    exit;
+}
 
-
-// Dados da empresa logada
-$empresa_nome = $_SESSION['usuario']['nome_empresa'];
-$empresa_local = $_SESSION['usuario']['endereco_empresa'];
-$empresa_id = $_SESSION['usuario']['id'];
-
-// Verifica se o formulário foi enviado e cadastra a vaga
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['descricao'])) {
     $descricao = $_POST['descricao'];
     $requisitos = $_POST['requisitos'];
 
-    // Inserir nova vaga no banco de dados
     $sql = "INSERT INTO vagas (descricao, requisitos, empresa_id) VALUES (?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$descricao, $requisitos, $empresa_id]);
 
-    // Redireciona para a mesma página para evitar reenvio do formulário ao atualizar
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
 
-// Deletar vaga
 if (isset($_GET['delete_id'])) {
     $vaga_id = $_GET['delete_id'];
 
-    // Deletar vaga do banco de dados
     $sql = "DELETE FROM vagas WHERE id = ? AND empresa_id = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$vaga_id, $empresa_id]);
 
-    // Redireciona para a página atual
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
 
-// Buscar todas as vagas cadastradas para a empresa logada
 $sql = "SELECT * FROM vagas WHERE empresa_id = :empresa_id ORDER BY data_postagem DESC";
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':empresa_id', $empresa_id, PDO::PARAM_INT);
@@ -46,6 +44,8 @@ $stmt->execute();
 
 $vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
