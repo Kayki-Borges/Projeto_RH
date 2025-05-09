@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Finalizar Cadastro</title>
-
+  <link rel="icon" href="/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
   <!-- Fonte Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -46,7 +46,7 @@
     /* Lado esquerdo */
     .left {
       flex: 1;
-      background: linear-gradient(to right, #6a11cb, #2575fc);
+      background: linear-gradient(to right, #9D61EA, #488BE8);
       color: white;
       display: flex;
       flex-direction: column;
@@ -122,27 +122,28 @@
       justify-content: center;
       align-items: center;
       gap: 12px;
-      background-color: #A3C6FF; /* Cor suave */
-      color: #333;
+      background-color: #488BE8; /* Cor suave */
+      color: white;
       border: 2px solid transparent;
       transition: all 0.4s ease;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .btn:hover {
-      background-color: #4a90e2;
+      background-color: #488BE8;
       color: white;
       transform: scale(1.05);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      border-color: #4a90e2;
+      border-color: #488BE8;
     }
 
     .btn.empresa {
-      background-color:rgb(168, 114, 226);; /* Cor suave para empresa */
+      background-color: #9D61EA; /* Cor suave para empresa */
     }
 
     .btn.empresa:hover {
-      background-color: #9b4de5;
+      background-color: #9D61EA;
+      border-color: #9D61EA;
     }
 
     .btn i {
