@@ -2,15 +2,9 @@
 session_start();
 require '../conexao.php';
 
-// --- Autenticação ---
-if (!isset($_SESSION['usuario']['id'])) {
-    echo "Usuário não autenticado!";
-    exit;
-}
-
-$usuarioId = $_SESSION['usuario']['id'];
-$aba       = $_GET['aba'] ?? 'banco';  // aba padrão = banco de talentos
-
+if (isset($_SESSION['usuario_id'])) {
+    $usuarioId = $_SESSION['usuario_id'];
+} 
 // --- Tratamento de POST (candidato) ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Candidato se candidata

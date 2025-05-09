@@ -222,7 +222,7 @@
             </div>
         </div>
 
-        <!-- Navegação -->
+    
         <div id="navegacao">
             <button type="button" id="anterior" onclick="mudarEtapa('anterior')" style="display: none;">Anterior</button>
             <button type="button" id="proximo" onclick="mudarEtapa('proximo')">Próximo</button>
@@ -230,18 +230,16 @@
         </div>
     </form>
 
-    <!-- Modal -->
+    
     <div id="meuModal" class="modal">
         <i class="bi bi-check-circle-fill"></i>
         <p class="modal-content">Cadastro realizado com sucesso!</p>
     </div>
 </div>
 
-<!-- Script -->
 <script>
     let etapaAtual = 1;
 
-    // Função para mudar entre etapas do formulário
     function mudarEtapa(acao) {
         const totalEtapas = 3;
         const etapas = document.querySelectorAll(".etapa");
@@ -249,40 +247,32 @@
         const anteriorBtn = document.getElementById("anterior");
         const finalizarBtn = document.getElementById("finalizar");
 
-        // Oculta todas as etapas
         etapas.forEach(etapa => etapa.style.display = "none");
 
-        // Atualiza a etapa atual com base na ação (proximo ou anterior)
         if (acao === "proximo" && etapaAtual < totalEtapas) {
             etapaAtual++;
         } else if (acao === "anterior" && etapaAtual > 1) {
             etapaAtual--;
         }
 
-        // Exibe a etapa atual
         etapas[etapaAtual - 1].style.display = "block";
-
-        // Mostra ou oculta os botões com base na etapa
         anteriorBtn.style.display = etapaAtual === 1 ? "none" : "inline-block";
         proximoBtn.style.display = etapaAtual === totalEtapas ? "none" : "inline-block";
         finalizarBtn.style.display = etapaAtual === totalEtapas ? "inline-block" : "none";
     }
 
-    // Máscara de CNPJ
     document.getElementById('cnpj_empresa').addEventListener('input', function (e) {
         let cnpj = e.target.value.replace(/\D/g, '').slice(0, 14);
         cnpj = cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, '$1.$2.$3/$4-$5');
         e.target.value = cnpj;
     });
 
-    // Máscara de Telefone
     document.getElementById('telefone_empresa').addEventListener('input', function (e) {
         let tel = e.target.value.replace(/\D/g, '').slice(0, 11);
         tel = tel.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
         e.target.value = tel;
     });
 
-    // Alternar visibilidade da senha
     function mostrarSenha() {
         const senha = document.getElementById("senha");
         senha.type = senha.type === "password" ? "text" : "password";
@@ -293,27 +283,46 @@
         senha.type = senha.type === "password" ? "text" : "password";
     }
 
-    // Exibe o modal e redireciona para a página de login após 3 segundos
     function mostrarModalERedirecionar() {
         const modal = document.getElementById("meuModal");
         modal.style.display = "flex";
 
         setTimeout(() => {
             modal.style.display = "none";
-            window.location.href = "/projeto_rh/login/login.php"; // <-- Altere o caminho conforme seu projeto
+            window.location.href = "/projeto_rh/login/login.php";
         }, 3000);
     }
 
-    // Intercepta o envio do formulário para exibir o modal
+    // ✅ Envio com fetch
     document.getElementById("formCadastroEmpresa").addEventListener("submit", function (e) {
-        e.preventDefault(); // Impede envio direto
+        e.preventDefault();
 
-        mostrarModalERedirecionar(); // Remova se usar AJAX acima
+        const form = e.target;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: "POST",
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Erro na resposta do servidor.");
+            }
+            return response.text(); // ou response.json() se PHP retornar JSON
+        })
+        .then(data => {
+            // Sucesso!
+            mostrarModalERedirecionar();
+        })
+        .catch(error => {
+            console.error("Erro ao cadastrar:", error);
+            alert("Ocorreu um erro ao tentar cadastrar. Tente novamente.");
+        });
     });
 
-    // Inicia o formulário na primeira etapa
     mudarEtapa();
 </script>
+
 
 </body>
 </html>
