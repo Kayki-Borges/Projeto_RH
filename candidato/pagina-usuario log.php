@@ -27,7 +27,7 @@ $id_usuario = $usuario['id'];
     <title>Link Next | Conectando Talentos</title>
 </head>
 <body>
-
+<button id="mudarMod" onclick="mudApar()" style="cursor: pointer;">Mudar modo</button>
 <header id="header">
   <nav class="menu">
     <div class="logo">

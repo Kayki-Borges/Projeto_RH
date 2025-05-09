@@ -13,6 +13,23 @@
     font-style: normal;
 }
 
+/* GENERAL */
+#mudarMod{
+  position: fixed;
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(to right, #FF0080, #FF8C00);
+  left: 89%;
+  top: 92%;
+  z-index: 99999999;
+}
+
+#mudarMod:hover{
+  cursor: pointer;
+}
+
 /*Menu principal*/
 header{
   background-color: transparent;

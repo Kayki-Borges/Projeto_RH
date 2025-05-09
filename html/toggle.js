@@ -23,3 +23,5 @@ function apar() {
         but.classList.add('apar')
     }
 }
+
+//Função do Modo escuro

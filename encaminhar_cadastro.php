@@ -4,17 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Escolher Perfil</title>
-
+  <link rel="icon" href="/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
   <!-- Fonte Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    * {
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    *{
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .poppins-medium {
+     font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-style: normal;
     }
 
     body {
@@ -32,7 +38,7 @@
     }
 
     .left {
-      background: linear-gradient(to right, #6a11cb, #2575fc);
+      background: linear-gradient(to right, #9D61EA, #488BE8);
       color: white;
       flex-direction: column;
       padding: 40px;
@@ -71,12 +77,12 @@
       margin-bottom: 30px;
     }
 
-    .btn {
+    .btn.candidato{
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      background-color: #2575fc;
+      background-color: #488BE8;
       color: white;
       padding: 14px 20px;
       border: none;
@@ -85,16 +91,30 @@
       font-weight: 600;
       margin-bottom: 20px;
       cursor: pointer;
-      width: 240px;
+      width: 300px;
       transition: all 0.3s ease;
     }
 
     .btn.empresa {
-      background-color: #6a11cb;
+      background-color: #9D61EA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      cursor: pointer;
+      width: 300px;
+      transition: all 0.3s ease;
     }
 
     .btn:hover {
-      transform: translateY(-3px);
+      transform: scale(1.1);
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
