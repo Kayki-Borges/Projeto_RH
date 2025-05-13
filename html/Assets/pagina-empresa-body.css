@@ -1,7 +1,7 @@
 /*Banner*/
 .banner{
   z-index: 1;
-  background-image: url(IMG/Banner-1.jpg);
+  background-image: url(IMG/Banner-2.jpg);
   background-size: cover;
   display: flex;
   flex-direction: column;
