@@ -2,21 +2,18 @@
 session_start();
 require_once('../conexao.php');
 
-if (!isset( $_SESSION['usuario']['id'])) {
+if (!isset($_SESSION['usuario']['id'])) {
     echo "Usuário não autenticado!";
     exit;
 }
-$candidato_id = $_SESSION['usuario']['id']; // ou ['id_candidato'] se o nome da coluna for assim
 
-
+$candidato_id = $_SESSION['usuario']['id'];
 
 try {
-    // Busca os dados do candidato logado
     $stmt = $pdo->prepare("SELECT * FROM candidatos WHERE id = ?");
     $stmt->execute([$candidato_id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Se não encontrar, mostra mensagem de erro
     if (!$row) {
         echo "Candidato não encontrado no banco de dados.";
         exit();
@@ -26,9 +23,6 @@ try {
     exit();
 }
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -39,58 +33,61 @@ try {
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
-    
 </head>
 <body>
-    <a href="/projeto_rh/candidato/pagina-usuario log.php"><button class="but-volt">Voltar</button></a>
-    <div class="container">
-        <div class="profile">
-            <div class="avatar">IL</div>
-            <p><a href="#">Saiba porque não exibimos a foto de perfil</a></p>
-        </div>
-        <form action="/projeto_rh/candidato/salvar.php" method="POST" enctype="multipart/form-data">
-    <label>Nome *</label>
-    <input type="text" name="nome" value="<?php echo $row['nome_candidato']; ?>" required>
-
-    <label>E-mail *</label>
-    <input type="email" name="email" value="<?php echo $row['email_candidato']; ?>" required>
-
-    <label>Telefone celular *</label>
-    <input type="text" id="telefone" name="telefone" value="<?php echo $row['telefone_candidato']; ?>" required>
-
-    <label>País de origem *</label>
-    <select name="pais">
-        <option selected>Brasil</option>
-    </select>
-
-    <label>CPF *</label>
-    <input type="text" id="cpf" name="cpf" value="<?php echo $row['cpf_candidato']; ?>" required>
-
-    <button type="button">Trocar senha</button>
-
-    <!-- Upload de Foto do Currículo -->
-    <label>Foto do currículo</label>
-
-    <?php if (!empty($row['foto_candidato'])): ?>
-        <img src="uploads/<?php echo $row['foto_candidato']; ?>" alt="Foto do Candidato" style="width: 120px; border-radius: 8px; margin-bottom: 10px;">
-    <?php endif; ?>
-
-    <input type="file" name="foto_candidato" accept="image/*">
-
-    <button type="submit">Salvar</button>
-</form>
-
+<a href="/projeto_rh/candidato/pagina-usuario log.php"><button class="but-volt">Voltar</button></a>
+<div class="container">
+    <div class="profile">
+        <div class="avatar">IL</div>
+        <p><a href="#">Saiba porque não exibimos a foto de perfil</a></p>
     </div>
-    
-    <script>
-        $(document).ready(function(){
-            $('#cpf').inputmask("999.999.999-99");
-            $('#telefone').inputmask("(99) 99999-9999");
-            $('#data_nascimento').inputmask("99/99/9999");
-        });
-    </script>
+    <form action="/projeto_rh/candidato/salvar.php" method="POST" enctype="multipart/form-data">
+        <label>Nome *</label>
+        <input type="text" name="nome" value="<?php echo $row['nome_candidato']; ?>" disabled>
+
+        <label>E-mail *</label>
+        <input type="email" name="email" value="<?php echo $row['email_candidato']; ?>" disabled>
+
+        <label>Telefone celular *</label>
+        <input type="text" id="telefone" name="telefone" value="<?php echo $row['telefone_candidato']; ?>" disabled>
+
+        <label>País de origem *</label>
+        <select name="pais" disabled>
+            <option selected>Brasil</option>
+        </select>
+
+        <label>CPF *</label>
+        <input type="text" id="cpf" name="cpf" value="<?php echo $row['cpf_candidato']; ?>" disabled>
+
+        <button type="button" disabled style="background-color: #ccc; cursor: not-allowed;">Trocar senha</button>
+
+        <label>Foto do currículo</label>
+
+        <?php if (!empty($row['foto_candidato'])): ?>
+            <p>Imagem atual:</p>
+            <a href="uploads/<?php echo htmlspecialchars($row['foto_candidato']); ?>" target="_blank">
+                <img src="uploads/<?php echo htmlspecialchars($row['foto_candidato']); ?>" alt="Foto do Candidato"
+                     style="width: 120px; border-radius: 8px; margin-bottom: 10px;">
+            </a>
+        <?php else: ?>
+            <p style="color: #777;">Nenhuma imagem enviada ainda.</p>
+        <?php endif; ?>
+
+        <input type="file" name="foto_candidato" accept="image/*" required>
+
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#cpf').inputmask("999.999.999-99");
+        $('#telefone').inputmask("(99) 99999-9999");
+    });
+</script>
 </body>
 </html>
+
 <style>
     /*Configurações básicas*/
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
