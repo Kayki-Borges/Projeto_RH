@@ -43,21 +43,21 @@ try {
     </div>
     <form action="/projeto_rh/candidato/salvar.php" method="POST" enctype="multipart/form-data">
         <label>Nome *</label>
-        <input type="text" name="nome" value="<?php echo $row['nome_candidato']; ?>" disabled>
+        <input type="text" name="nome" value="<?php echo $row['nome_candidato']; ?>" readonly>
 
         <label>E-mail *</label>
-        <input type="email" name="email" value="<?php echo $row['email_candidato']; ?>" disabled>
+        <input type="email" name="email" value="<?php echo $row['email_candidato']; ?>" readonly>
 
         <label>Telefone celular *</label>
-        <input type="text" id="telefone" name="telefone" value="<?php echo $row['telefone_candidato']; ?>" disabled>
+        <input type="text" id="telefone" name="telefone" value="<?php echo $row['telefone_candidato']; ?>" readonly>
 
         <label>País de origem *</label>
-        <select name="pais" disabled>
+        <select name="pais" readonly>
             <option selected>Brasil</option>
         </select>
 
         <label>CPF *</label>
-        <input type="text" id="cpf" name="cpf" value="<?php echo $row['cpf_candidato']; ?>" disabled>
+        <input type="text" id="cpf" name="cpf" value="<?php echo $row['cpf_candidato']; ?>" readonly>
 
         <button type="button" disabled style="background-color: #ccc; cursor: not-allowed;">Trocar senha</button>
 
