@@ -14,6 +14,7 @@ $id_usuario = $usuario['id'];
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script src="/projeto_rh/js/dark.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="/projeto_rh/html/revelar.js" defer></script>
@@ -25,8 +26,60 @@ $id_usuario = $usuario['id'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Link Next | Conectando Talentos</title>
+     <style>
+      #MudarMod {
+        background: linear-gradient(to right, #ffbb52, white);
+        position: fixed;
+        z-index: 99999999;
+        cursor: pointer;
+        top: 95vh;
+        left: 188vh;
+        border-radius: 5px;
+        border: none;
+        width: 100px;
+        height: 30px;
+        transition: .3s all ease-in-out;
+      }
+
+      #MudarMod:hover {
+        transform: scale(1.1);
+      }
+
+       body.dark-mode{
+        background-color: #252525;
+      }
+
+      body.dark-mode .box{
+        background-color: #252525;
+      }
+
+      body.dark-mode .box p{
+        color: whitesmoke;
+      }
+
+      body.dark-mode .box h4{
+        color: white;
+      }
+
+      body.dark-mode .step h3 {
+        color: white;
+      }
+
+       body.dark-mode .step p {
+        color: whitesmoke;
+      }
+
+      body.dark-mode .inf h1{
+        color: white;
+      }
+
+      body.dark-mode .infor p{
+        color: white;
+      }
+    </style>
 </head>
 <body>
+  <button class="mud" id="MudarMod" onclick="mod()">Mudar modo!</button>
 
 <header id="header">
   <nav class="menu">

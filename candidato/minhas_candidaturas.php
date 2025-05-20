@@ -138,14 +138,69 @@ switch ($aba) {
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <script src="/projeto_rh/js/dark.js"></script>
   <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
   <script src="/Projeto_RH/html/toggle.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Minhas Candidaturas</title>
   <link rel="stylesheet" href="/projeto_rh/css/minhascandidaturas.css">
+  <style>
+      #MudarMod {
+        background: linear-gradient(to right, #ffbb52, white);
+        position: fixed;
+        z-index: 99999999;
+        cursor: pointer;
+        top: 95vh;
+        left: 188vh;
+        border-radius: 5px;
+        border: none;
+        width: 100px;
+        height: 30px;
+        transition: .3s all ease-in-out;
+      }
+
+      #MudarMod:hover {
+        transform: scale(1.1);
+      }
+
+       body.dark-mode{
+        background-color: #252525;
+      }
+
+      body.dark-mode .tabs{
+        background-color: #252525;
+        color: white;
+      }
+
+      body.dark-mode .search-section {
+         background-color: #252525;
+      }
+
+      body.dark-mode .vaga {
+         background-color: #252525;
+         border: 1px solid white;
+      }
+
+      body.dark-mode .vaga h2{
+         color: white;
+      }
+
+      body.dark-mode .vaga p{
+         color: whitesmoke;
+      }
+
+      body.dark-mode .vaga small{
+         color: whitesmoke;
+      }
+
+      body.dark-mode .vaga .empty-state p{
+         color: whitesmoke;
+      }
+    </style>
 </head>
 <body>
+  <button class="mud" id="MudarMod" onclick="mod()">Mudar modo!</button>
   <header>
     <div class="logo">
     <img src="/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png" alt="">
