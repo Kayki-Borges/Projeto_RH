@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script src="/projeto_rh/js/dark.js"></script>
 <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
     <meta charset="UTF-8">
     <title>Editar Perfil</title>
@@ -162,9 +163,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 padding: 20px;
             }
         }
+
+        #MudarMod {
+        background: linear-gradient(to right, #ffbb52, white);
+        position: fixed;
+        z-index: 99999999;
+        cursor: pointer;
+        top: 95vh;
+        left: 188vh;
+        border-radius: 5px;
+        border: none;
+        width: 100px;
+        height: 30px;
+        transition: .3s all ease-in-out;
+      }
+
+      #MudarMod:hover {
+        transform: scale(1.1);
+      }
+
+       body.dark-mode{
+        background-color: #252525;
+      }
+
+      body.dark-mode .container{
+        background-color: #252525;
+      }
+
+      body.dark-mode .back-button {
+        background-color:rgb(90, 90, 90);
+        color: white;
+      }
     </style>
 </head>
 <body>
+    <button class="mud" id="MudarMod" onclick="mod()">Mudar modo!</button>
     <div class="container">
         <a class="back-button" href="/projeto_rh/empresa/pagina-empresa log.php"><i class="fas fa-arrow-left"></i> Voltar</a>
         <h2>Editar Perfil</h2>

@@ -68,6 +68,7 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <script src="/projeto_rh/js/dark.js"></script>
   <script src="/projeto_rh/html/toggle.js"></script>
   <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
   <meta charset="UTF-8">
@@ -93,6 +94,36 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
       color: #9D61EA;
     }
  
+    #MudarMod {
+        background: linear-gradient(to right, #ffbb52, white);
+        position: fixed;
+        z-index: 99999999;
+        cursor: pointer;
+        top: 95vh;
+        left: 188vh;
+        border-radius: 5px;
+        border: none;
+        width: 100px;
+        height: 30px;
+        transition: .3s all ease-in-out;
+      }
+
+      #MudarMod:hover {
+        transform: scale(1.1);
+      }
+
+       body.dark-mode{
+        background-color: #252525;
+      }
+
+      body.dark-mode .mt-4 {
+        color: white;
+      }
+
+      body.dark-mode .nav-tabs{
+         background-color: #252525;
+      }
+
 header {
   background: linear-gradient(90deg, #9D61EA 0%,#653e97 50%,#52337a 100%);
   width: 100%;
@@ -374,6 +405,7 @@ header {
   <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
 </head>
 <body>
+  <button class="mud" id="MudarMod" onclick="mod()">Mudar modo!</button>
 <header>
     <div class="logo">
     <img src="/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png" alt="">
