@@ -211,7 +211,7 @@
             <h2>Etapa 3: Senha e Confirmação</h2>
             <div class="password-container">
                 <label for="senha_empresa">Senha:</label>
-                <input type="password" name="senha_empresa" id="senha" onclick="mostrarSenha()" required>
+                <input type="password" name="senha_empresa" id="senha" required>
                 <i class="bi bi-eye-slash-fill" id="senhaIcon" onclick="mostrarSenha()"></i>
             </div>
 

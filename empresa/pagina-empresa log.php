@@ -39,10 +39,14 @@ $id_usuario = $usuario['id'];
   --size-of-icon: 1.4em;
   /* it is like a inline-padding of switch */
   --slider-offset: 0.3em;
-  position: relative;
+  position: fixed;
+  top: 93vh;
+  left: 190vh;
+  z-index: 9999999;
   width: var(--width-of-switch);
   height: var(--height-of-switch);
 }
+
 
 /* Hide default HTML checkbox */
 .switch input {
