@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             background: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 10px 5px  rgba(0, 0, 0, 0.28);
             width: 350px;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
@@ -215,6 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
             <div class="g_id_signin" data-type="standard"></div>
            <p>Ainda não tem uma conta?<a href="/projeto_rh/encaminhar_cadastro.php"> <br> Crie uma conta!</a></p>
+           <p><a href="/projeto_rh/candidato/esqueceu_senha.php"><p>Recuperar senha</p></a></p>
         </div>
     </div>
 

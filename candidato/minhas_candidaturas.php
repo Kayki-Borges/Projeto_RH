@@ -86,6 +86,8 @@ $sqlC = "
       v.requisitos,
       v.data_postagem,
       e.nome_empresa,
+      e.email_empresa,
+      e.telefone_empresa,
       cv.status
     FROM vagas v
     JOIN empresas e       ON v.empresa_id      = e.id
@@ -94,6 +96,7 @@ $sqlC = "
      $clause
 ORDER BY v.data_postagem DESC
 ";
+
 $stmtC = $pdo->prepare($sqlC);
 $stmtC->execute(array_merge(['usuario_id' => $usuarioId], $params));
 $vagasC = $stmtC->fetchAll(PDO::FETCH_ASSOC);
@@ -301,16 +304,29 @@ input:checked + .slider:before {
         <small>Postada em <?=date('d/m/Y H:i',strtotime($vaga['data_postagem']))?></small>
 
         <?php if($aba==='banco'): ?>
-          <form method="POST">
-            <input type="hidden" name="vaga_id" value="<?=$vaga['id']?>">
-            <button name="candidatar">Candidatar-se</button>
-          </form>
-        <?php elseif($aba==='andamento'): ?>
-          <form method="POST">
-            <input type="hidden" name="vaga_id" value="<?=$vaga['id']?>">
-            <button name="cancelar_candidatura">Cancelar Candidatura</button>
-          </form>
-        <?php endif; ?>
+  <form method="POST">
+    <input type="hidden" name="vaga_id" value="<?=$vaga['id']?>">
+    <button name="candidatar">Candidatar-se</button>
+  </form>
+
+<?php elseif($aba==='andamento'): ?>
+  <form method="POST">
+    <input type="hidden" name="vaga_id" value="<?=$vaga['id']?>">
+    <button name="cancelar_candidatura">Cancelar Candidatura</button>
+  </form>
+
+<?php elseif($aba==='finalizadas'): ?>
+  <div style="margin-top: 10px;">
+    <strong>Contate a Empresa:</strong><br>
+    <?php if (!empty($vaga['email_empresa'])): ?>
+      📧 <a href="mailto:<?=htmlspecialchars($vaga['email_empresa'])?>"><?=htmlspecialchars($vaga['email_empresa'])?></a><br>
+    <?php endif; ?>
+    <?php if (!empty($vaga['telefone_empresa'])): ?>
+      📞 <?=htmlspecialchars($vaga['telefone_empresa'])?>
+    <?php endif; ?>
+  </div>
+<?php endif; ?>
+
       </div>
     <?php endforeach; ?>
   <?php else: ?>

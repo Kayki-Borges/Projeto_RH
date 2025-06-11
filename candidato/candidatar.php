@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 require_once("../conexao.php");
@@ -68,7 +69,6 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <script src="/projeto_rh/js/dark.js"></script>
   <script src="/projeto_rh/html/toggle.js"></script>
   <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
   <meta charset="UTF-8">
@@ -94,36 +94,6 @@ $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
       color: #9D61EA;
     }
  
-    #MudarMod {
-        background: linear-gradient(to right, #ffbb52, white);
-        position: fixed;
-        z-index: 99999999;
-        cursor: pointer;
-        top: 95vh;
-        left: 188vh;
-        border-radius: 5px;
-        border: none;
-        width: 100px;
-        height: 30px;
-        transition: .3s all ease-in-out;
-      }
-
-      #MudarMod:hover {
-        transform: scale(1.1);
-      }
-
-       body.dark-mode{
-        background-color: #252525;
-      }
-
-      body.dark-mode .mt-4 {
-        color: white;
-      }
-
-      body.dark-mode .nav-tabs{
-         background-color: #252525;
-      }
-
 header {
   background: linear-gradient(90deg, #9D61EA 0%,#653e97 50%,#52337a 100%);
   width: 100%;
@@ -405,7 +375,6 @@ header {
   <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
 </head>
 <body>
-  <button class="mud" id="MudarMod" onclick="mod()">Mudar modo!</button>
 <header>
     <div class="logo">
     <img src="/Projeto_RH/html/Assets/IMG/Link_Next_Logo_sem_fundo.png" alt="">
@@ -454,15 +423,11 @@ header {
         <thead>
           <tr>
             <th>Foto</th>
+            <th>Foto do curriculo</th>
             <th>Nome</th>
             <th>Email</th>
             <th>Telefone</th>
-            <th>Vaga</th>
-            <th>Status</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
+
           <?php foreach ($candidatos as $cand): ?>
             <tr>
               <td>
@@ -474,6 +439,36 @@ header {
                        width="50" height="50" class="rounded-circle">
                 <?php endif; ?>
               </td>
+             
+  <?php if ($cand['foto_candidato']): ?>
+    <!-- Imagem clicável -->  
+     <td>
+    <img src="/projeto_rh/candidato/uploads/<?= htmlspecialchars($cand['foto_candidato']) ?>"
+         width="50" height="50" class="rounded-circle"
+         data-bs-toggle="modal"
+         data-bs-target="#modalFoto<?= $cand['candidato_vaga_id'] ?>"
+         style="cursor:pointer;" alt="Foto do Candidato">
+</td>
+    <!-- Modal -->
+    <div class="modal fade" id="modalFoto<?= $cand['candidato_vaga_id'] ?>" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Foto do Currículo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img src="/projeto_rh/candidato/uploads/<?= htmlspecialchars($cand['foto_candidato']) ?>" class="img-fluid" alt="Foto Ampliada">
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php else: ?>
+    <img src="/projeto_rh/html/Assets/IMG/default-avatar.png"
+         width="50" height="50" class="rounded-circle" alt="Foto padrão">
+  <?php endif; ?>
+</td>
+
               <td><?= htmlspecialchars($cand['nome_candidato']) ?></td>
               <td><?= htmlspecialchars($cand['email_candidato']) ?></td>
               <td><?= htmlspecialchars($cand['telefone_candidato']) ?></td>
@@ -521,3 +516,4 @@ header {
   </div>
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
