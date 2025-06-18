@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12/06/2025 às 17:27
+-- Tempo de geração: 18/06/2025 às 18:58
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -101,7 +101,7 @@ INSERT INTO `empresas` (`id`, `nome_empresa`, `email_empresa`, `cnpj_empresa`, `
 (1, 'empresa2', 'empresa2@gmail.com', '123123', 'nada', '1223123', 'nenhuma', '$2y$10$66tJE.1KZ3sUxjp92w4qJ.VQjGZKLE8soGsHQrQpSaUuqMl4yxaCm', '2025-03-26 15:44:05', 'empresa', NULL),
 (4, 'empresa1', 'empresa1@gmail.com', '123123578', 'nada', '(12) 23123-1245', '', '$2y$10$6nFr41WIF7PR8fYQBLrK7OKYXvjk5uDQmAC/2wv4nZFS6n14lUKgG', '2025-03-26 15:46:19', 'empresa', NULL),
 (8, 'empresa3', 'empresa3@gmail.com', '12.312.414/1241-23', 'nenhum', '(46) 16846-4186', '', '$2y$10$NvhKTu9o4PQuIpOZPTYHluV3595aLtlLZSPmIjfDcuvMtM3Uaa0hq', '2025-05-13 17:14:48', 'empresa', NULL),
-(9, 'CMD', 'wwwisaque18@gmail.com', '54.861.351/8486-31', 'Rua santo expedido', '(86) 46486-4684', '', '$2y$10$SBSxqLBUSOBcweLYsL3oeeHduW1FoSjjqdOJFCf3R4ZFJ4abkV0sy', '2025-06-11 16:34:39', 'empresa', NULL);
+(9, 'CMD', 'wwwisaque18@gmail.com', '12.312.414.1241-23', 'construto', '(12) 23123-1245', 'Tecnologia', '$2y$10$XgDA4z.FdquKyXiZMqxQGu4QxYmdnhwaI9JNYOvjV3.idSZfOI5cu', '2025-06-11 16:34:39', 'empresa', NULL);
 
 -- --------------------------------------------------------
 
@@ -153,7 +153,21 @@ INSERT INTO `reset_senha_tokens` (`id`, `email`, `token`, `expiracao`, `usado`) 
 (15, 'wwwisaque18@gmail.com', '960092b822dca72b16d3299927634e80', '2025-06-11 19:52:55', 0),
 (16, 'wwwisaque18@gmail.com', '876420058560f35f2be19cd5f3f662ae', '2025-06-11 19:57:35', 0),
 (17, 'wwwisaque18@gmail.com', 'd41456205416712d5b32ca455cc26012', '2025-06-11 20:01:06', 0),
-(18, 'wwwisaque18@gmail.com', '7b647126000d0603bbfacd47cb7669ee', '2025-06-11 20:04:25', 0);
+(18, 'wwwisaque18@gmail.com', '7b647126000d0603bbfacd47cb7669ee', '2025-06-11 20:04:25', 0),
+(19, 'wwwisaque18@gmail.com', 'ea2b0b32b4caeac0a490503be20056f0', '2025-06-12 18:47:14', 0),
+(20, 'wwwisaque18@gmail.com', 'e0ef37b497b0c010afd63e81c6a9c5e6', '2025-06-12 18:53:13', 0),
+(21, 'wwwisaque18@gmail.com', '3f2a85c7c4558e052ec60d80b5581f0e', '2025-06-12 18:54:19', 0),
+(22, 'wwwisaque18@gmail.com', '41cace079ed626b6765e12a5b792f441', '2025-06-12 18:56:03', 0),
+(23, 'wwwisaque18@gmail.com', 'd26b9d8ab48b32c57cfde88c55015c60', '2025-06-12 18:56:18', 0),
+(24, 'wwwisaque18@gmail.com', '8228366a91ffcef1410b043a3726c863', '2025-06-12 12:58:12', 0),
+(25, 'wwwisaque18@gmail.com', '37418d7f70e17981befe583838e20318', '2025-06-12 12:59:59', 0),
+(26, 'wwwisaque18@gmail.com', 'd9fe6be04ea27d963f0eccc9f0e30059', '2025-06-12 13:02:02', 0),
+(27, 'wwwisaque18@gmail.com', 'c3c3402e7a0f88abe9bdb75dcdd9f3e6', '2025-06-12 13:06:00', 0),
+(28, 'wwwisaque18@gmail.com', 'ebd71b80da0301f6e7bef19834fdcfcb', '2025-06-12 19:08:57', 0),
+(29, 'wwwisaque18@gmail.com', '738cc04205d659af81877546f89017c6', '2025-06-12 19:11:41', 0),
+(30, 'wwwisaque18@gmail.com', 'a36f2f1602216b55e7e431fb8a6349c7', '2025-06-13 14:02:36', 0),
+(31, 'wwwisaque18@gmail.com', '7bba01d98e78d784d675daa224828c97', '2025-06-13 14:02:36', 0),
+(32, 'wwwisaque18@gmail.com', '76f6b80554364980569fdbc526ce4ba2', '2025-06-13 14:20:50', 0);
 
 -- --------------------------------------------------------
 
@@ -175,7 +189,8 @@ CREATE TABLE `vagas` (
 
 INSERT INTO `vagas` (`id`, `empresa_id`, `descricao`, `requisitos`, `data_postagem`) VALUES
 (22, 4, 'Recepcionista', 'teste1', '2025-05-13 16:35:46'),
-(23, 4, 'Desenvolvedor', 'teste2', '2025-05-13 16:35:51');
+(23, 4, 'Desenvolvedor', 'teste2', '2025-05-13 16:35:51'),
+(24, 9, 'Gerente de Projetos', 'nenhum', '2025-06-18 16:08:41');
 
 --
 -- Índices para tabelas despejadas
@@ -255,13 +270,13 @@ ALTER TABLE `recuperacao_senha`
 -- AUTO_INCREMENT de tabela `reset_senha_tokens`
 --
 ALTER TABLE `reset_senha_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de tabela `vagas`
 --
 ALTER TABLE `vagas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Restrições para tabelas despejadas
