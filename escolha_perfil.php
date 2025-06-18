@@ -212,10 +212,12 @@
     async function completeRegistration(type) {
       try {
         const response = await fetch('/projeto_rh/salvar_tipo_usuario.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tipo: type })
-        });
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ tipo: type }),
+  credentials: 'include' // <- Adicionado aqui!
+});
+
 
         const data = await response.json();
         console.log(data); // Para debug

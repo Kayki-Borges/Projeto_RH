@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    // Primeiro, tenta encontrar o usuário como empresa
+    // Tenta encontrar usuário empresa
     $sql_empresa = "SELECT * FROM empresas WHERE email_empresa = ?";
     $stmt_empresa = $pdo->prepare($sql_empresa);
     $stmt_empresa->execute([$email]);
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // Se não for empresa, tenta como candidato
+    // Tenta encontrar usuário candidato
     $sql_candidato = "SELECT * FROM candidatos WHERE email_candidato = ?";
     $stmt_candidato = $pdo->prepare($sql_candidato);
     $stmt_candidato->execute([$email]);
@@ -34,8 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (password_verify($senha, $candidato['senha_candidato'])) {
             $_SESSION['usuario'] = $candidato;
             $_SESSION['tipo'] = 'candidato';
-            
-            header("Location:  /projeto_rh/candidato/pagina-usuario log.php");
+            header("Location: /projeto_rh/candidato/pagina_usuario log.php");
             exit;
         } else {
             echo "Senha incorreta para candidato!";
@@ -43,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // Se não encontrar em nenhuma das tabelas
+    // Nenhum usuário encontrado
     echo "Usuário não encontrado!";
 }
 ?>
@@ -201,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h1>Login</h1>
         <div id="login-container">
             <h2>Entre na sua conta</h2>
-            <form id="loginForm" method="POST" action="login.php">
+            <form id="loginForm" method="POST" action="/projeto_rh/login/login.php">
                 <input type="email" name="email" id="email" placeholder="Email" required>
                 <i class="bi bi-eye-slash-fill" id="senhaIcon" onclick="mostrarSenha()"></i>
                 <input type="password" name="senha" id="senha" placeholder="Senha" required>

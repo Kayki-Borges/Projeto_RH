@@ -1,15 +1,12 @@
 <?php
 session_start();
 header('Content-Type: application/json; charset=UTF-8');
-
-// Adicionando cabeçalhos CORS
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
-require_once("../conexao.php"); // Inclua o arquivo de conexão com o banco
+require_once("../conexao.php");
 
-// Função para decodificar o token do Google
 function decodeGoogleToken($token) {
     $url = "https://oauth2.googleapis.com/tokeninfo?id_token=" . $token;
     $ch = curl_init();
@@ -20,7 +17,6 @@ function decodeGoogleToken($token) {
     return json_decode($response, true);
 }
 
-// Verifica se o token foi recebido
 if (!isset($_POST['token'])) {
     echo json_encode(["status" => "error", "message" => "Token não recebido"]);
     exit;
@@ -37,36 +33,51 @@ if (!$dados || !isset($dados["email"])) {
 $email = $dados["email"];
 $nome = $dados["name"];
 
-// Verifica se o usuário já existe no banco de dados
-$sql = "SELECT id, tipo_usuario FROM candidatos WHERE email_candidato = :email";
-$stmt = $pdo->prepare($sql);
+// Verifica se é candidato
+$sql_candidato = "SELECT id, tipo_usuario FROM candidatos WHERE email_candidato = :email";
+$stmt = $pdo->prepare($sql_candidato);
 $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 $stmt->execute();
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// Se não é candidato, verifica se é empresa
 if (!$usuario) {
-    // Usuário novo, precisa completar o cadastro
-    // Redireciona para a página de escolha de perfil
+    $sql_empresa = "SELECT id, tipo_usuario FROM empresas WHERE email_empresa = :email";
+    $stmt = $pdo->prepare($sql_empresa);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+if (!$usuario) {
+    // Usuário novo, precisa completar cadastro
+    // Você pode guardar nome/email temporariamente na sessão ou banco para pré-cadastro
+    $_SESSION['usuario_google'] = [
+        'nome' => $nome,
+        'email' => $email,
+        'id_google' => $dados['sub']
+    ];
+
     echo json_encode(["status" => "success", "redirect" => "/projeto_rh/escolha_perfil.php"]);
     exit;
 }
 
-// Se o usuário existe, armazena os dados na sessão
-$_SESSION["usuario"] = $usuario;
-$_SESSION["id_usuario"] = $usuario['id'];  // Salvando o ID do usuário na sessão
-$_SESSION["tipo_usuario"] = $usuario['tipo_usuario'];  // Salvando o tipo de usuário
+// Usuário existe, salva na sessão (padronizando nomes)
+$_SESSION['usuario'] = $usuario;
+$_SESSION['tipo'] = $usuario['tipo_usuario'];
 
-// Se o perfil não foi escolhido, redireciona para a escolha de perfil
+// Se o perfil não foi escolhido
 if ($usuario['tipo_usuario'] == null) {
     echo json_encode(["status" => "success", "redirect" => "/projeto_rh/escolha_perfil.php"]);
     exit;
 }
 
-// Redireciona para o dashboard do tipo de usuário
+// Redireciona conforme tipo
 if ($usuario['tipo_usuario'] === 'empresa') {
-    echo json_encode(["status" => "success", "redirect" => "../empresa/dashboard.php"]);
+    echo json_encode(["status" => "success", "redirect" => "/projeto_rh/empresa/pagina-empresa log.php"]);
 } else {
-    echo json_encode(["status" => "success", "redirect" => "../candidato/dashboard.php"]);
+    echo json_encode(["status" => "success", "redirect" => "/projeto_rh/candidato/pagina-usuario log.php"]);
 }
+
 exit;
 ?>

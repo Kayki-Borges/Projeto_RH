@@ -2,55 +2,162 @@
 session_start();
 require '../conexao.php';
 
-if (!isset($_SESSION['usuario'])) {
-    header('Location:/projeto_rh/login/login.php');
+// Usar email fixo conforme solicitado:
+$email_usuario = "wwwisaque18@gmail.com";
+
+// Busca o tipo do usuário pelo email no banco (tentei inferir, pois a sessão não está sendo usada)
+$tipo_usuario = null;
+
+// Tenta encontrar o usuário na tabela candidatos
+$stmt = $pdo->prepare("SELECT * FROM candidatos WHERE email_candidato = :email");
+$stmt->bindParam(':email', $email_usuario);
+$stmt->execute();
+$dados = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($dados) {
+    $tipo_usuario = 'candidato';
+} else {
+    // Se não encontrou em candidatos, tenta em empresas
+    $stmt = $pdo->prepare("SELECT * FROM empresas WHERE email_empresa = :email");
+    $stmt->bindParam(':email', $email_usuario);
+    $stmt->execute();
+    $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($dados) {
+        $tipo_usuario = 'empresa';
+    }
+}
+
+if (!$tipo_usuario) {
+    echo "Usuário não encontrado com o email: $email_usuario";
     exit;
 }
 
-$usuario = $_SESSION['usuario'];
-$tipo_usuario = $usuario['tipo_usuario'];
-$id_usuario = $usuario['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Dados do formulário
+    $nome = $_POST['nome'] ?? '';
+    $cpf = $_POST['cpf'] ?? '';
+    $cnpj = $_POST['cnpj'] ?? '';
+    $telefone = $_POST['telefone'] ?? '';
+    $endereco = $_POST['endereco'] ?? '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($tipo_usuario == 'candidato') {
-        $stmt = $pdo->prepare("UPDATE candidatos SET nome_candidato = :nome, email_candidato = :email, cpf_candidato = :cpf, endereco_candidato = :endereco, telefone_candidato = :telefone, formacao_academica = :formacao, experiencia_profissional = :experiencia, area_atuacao = :area WHERE id = :id");
-        $stmt->execute([
-            ':nome' => $_POST['nome_candidato'],
-            ':email' => $_POST['email_candidato'],
-            ':cpf' => $_POST['cpf_candidato'],
-            ':endereco' => $_POST['endereco_candidato'],
-            ':telefone' => $_POST['telefone_candidato'],
-            ':formacao' => $_POST['formacao_academica'],
-            ':experiencia' => $_POST['experiencia_profissional'],
-            ':area' => $_POST['area_atuacao'],
-            ':id' => $id_usuario
-        ]);
-    } elseif ($tipo_usuario == 'empresa') {
-        $stmt = $pdo->prepare("UPDATE empresas SET nome_empresa = :nome, email_empresa = :email, cnpj_empresa = :cnpj, endereco_empresa = :endereco, telefone_empresa = :telefone, area_atuacao = :area WHERE id = :id");
-        $stmt->execute([
-            ':nome' => $_POST['nome_empresa'],
-            ':email' => $_POST['email_empresa'],
-            ':cnpj' => $_POST['cnpj_empresa'],
-            ':endereco' => $_POST['endereco_empresa'],
-            ':telefone' => $_POST['telefone_empresa'],
-            ':area' => $_POST['area_atuacao'],
-            ':id' => $id_usuario
-        ]);
+    if ($tipo_usuario === 'candidato') {
+        $query = "UPDATE candidatos SET nome_candidato = :nome, cpf_candidato = :cpf, telefone_candidato = :telefone, endereco_candidato = :endereco WHERE email_candidato = :email";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':cpf', $cpf);
+    } else { // empresa
+        $query = "UPDATE empresas SET nome_empresa = :nome, cnpj_empresa = :cnpj, telefone_empresa = :telefone, endereco_empresa = :endereco WHERE email_empresa = :email";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':cnpj', $cnpj);
     }
 
-    echo "<script>alert('Perfil atualizado com sucesso!'); window.location.href = '/projeto_rh/empresa/pagina-empresa log.php';</script>";
-    exit;
+    $stmt->bindParam(':nome', $nome);
+    $stmt->bindParam(':telefone', $telefone);
+    $stmt->bindParam(':endereco', $endereco);
+    $stmt->bindParam(':email', $email_usuario);
+
+    if ($stmt->execute()) {
+        if ($tipo_usuario === 'candidato') {
+            $redirect = '/projeto_rh/candidato/pagina-candidato.php';
+        } else {
+            $redirect = '/projeto_rh/empresa/pagina-empresa log.php';
+        }
+        echo "<script>alert('Perfil atualizado com sucesso!'); window.location.href = '$redirect';</script>";
+        exit;
+    } else {
+        echo "Erro ao atualizar perfil.";
+        exit;
+    }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <script src="/projeto_rh/js/dark.js"></script>
-<link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Editar Perfil</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/projeto_rh/css/style.css" />
+    <script src="/projeto_rh/js/dark.js"></script>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1>Editar Perfil</h1>
+
+            <form method="POST" action="">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required
+                    value="<?= htmlspecialchars($dados[$tipo_usuario === 'candidato' ? 'nome_candidato' : 'nome_empresa'] ?? '') ?>" />
+
+                <?php if ($tipo_usuario === 'candidato'): ?>
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" value="<?= htmlspecialchars($dados['cpf_candidato'] ?? '') ?>" />
+                <?php else: ?>
+                    <label for="cnpj">CNPJ:</label>
+                    <input type="text" id="cnpj" name="cnpj" value="<?= htmlspecialchars($dados['cnpj_empresa'] ?? '') ?>" />
+                <?php endif; ?>
+
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone"
+                    value="<?= htmlspecialchars($dados[$tipo_usuario === 'candidato' ? 'telefone_candidato' : 'telefone_empresa'] ?? '') ?>" />
+
+                <label for="endereco">Endereço:</label>
+                <textarea id="endereco" name="endereco"><?= htmlspecialchars($dados[$tipo_usuario === 'candidato' ? 'endereco_candidato' : 'endereco_empresa'] ?? '') ?></textarea>
+
+                <button type="submit">Atualizar Perfil</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
+
+<style>
+/* Seu CSS (copiado do código que enviou) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+/* ... resto do CSS ... */
+body {
+    background: linear-gradient(135deg, #488BE8, #9D61EA);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    animation: fadeBackground 10s infinite alternate;
+}
+button[type="submit"] {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 12px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(101, 52, 255, 0.5);
+    transition: all 0.3s ease;
+    letter-spacing: 0.05em;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    box-shadow: 0 8px 20px rgba(101, 52, 255, 0.8);
+    transform: translateY(-3px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(101, 52, 255, 0.4);
+}
+
+</style>
+
     <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
@@ -257,35 +364,4 @@ input:checked + .slider:before {
         color: white;
       }
     </style>
-</head>
-<body>
-    <label class="switch">
-    <input type="checkbox" onclick="mod()">
-    <span class="slider"></span>
-</label>
-    <div class="container">
-        <a class="back-button" href="/projeto_rh/empresa/pagina-empresa log.php"><i class="fas fa-arrow-left"></i> Voltar</a>
-        <h2>Editar Perfil</h2>
-        <form method="POST">
-            <?php if ($tipo_usuario == 'candidato'): ?>
-                <input type="text" name="nome_candidato" placeholder="Nome" value="<?= htmlspecialchars($usuario['nome_candidato']) ?>">
-                <input type="email" name="email_candidato" placeholder="Email" value="<?= htmlspecialchars($usuario['email_candidato']) ?>">
-                <input type="text" name="cpf_candidato" placeholder="CPF" value="<?= htmlspecialchars($usuario['cpf_candidato']) ?>">
-                <input type="text" name="endereco_candidato" placeholder="Endereço" value="<?= htmlspecialchars($usuario['endereco_candidato']) ?>">
-                <input type="text" name="telefone_candidato" placeholder="Telefone" value="<?= htmlspecialchars($usuario['telefone_candidato']) ?>">
-                <input type="text" name="formacao_academica" placeholder="Formação Acadêmica" value="<?= htmlspecialchars($usuario['formacao_academica']) ?>">
-                <textarea name="experiencia_profissional" placeholder="Experiência Profissional"><?= htmlspecialchars($usuario['experiencia_profissional']) ?></textarea>
-                <input type="text" name="area_atuacao" placeholder="Área de Atuação" value="<?= htmlspecialchars($usuario['area_atuacao']) ?>">
-            <?php else: ?>
-                <input type="text" name="nome_empresa" placeholder="Nome da Empresa" value="<?= htmlspecialchars($usuario['nome_empresa']) ?>">
-                <input type="email" name="email_empresa" placeholder="Email" value="<?= htmlspecialchars($usuario['email_empresa']) ?>">
-                <input type="text" name="cnpj_empresa" placeholder="CNPJ" value="<?= htmlspecialchars($usuario['cnpj_empresa']) ?>">
-                <input type="text" name="endereco_empresa" placeholder="Endereço" value="<?= htmlspecialchars($usuario['endereco_empresa']) ?>">
-                <input type="text" name="telefone_empresa" placeholder="Telefone" value="<?= htmlspecialchars($usuario['telefone_empresa']) ?>">
-                <input type="text" name="area_atuacao" placeholder="Área de Atuação" value="<?= htmlspecialchars($usuario['area_atuacao']) ?>">
-            <?php endif; ?>
-            <input type="submit" value="Salvar Alterações">
-        </form>
-    </div>
-</body>
-</html>
+
