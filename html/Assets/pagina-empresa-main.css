@@ -124,7 +124,7 @@ header.roll a{
 
 }
 
-.perf img{
+.perf .foto{
   height: 80px;
   width: 80px;
   border-radius: 100%;
@@ -132,12 +132,25 @@ header.roll a{
   transition: 0.3s all ease-in-out;
 }
 
-.perf img:hover{
+.perf .foto:hover{
   transform: scale(1.1);
 }
 
 .perf .cont-list{
   display: none;
+}
+
+.perf .foto-2{
+  display: none;
+  height: 80px;
+  width: 80px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.perf .foto-2:hover{
+  transform: scale(1.1);
 }
 
 .perf .cont-list.most{

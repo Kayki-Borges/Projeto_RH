@@ -68,6 +68,7 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             border-radius: 10px;
             margin-left: 80px;
             animation: fadeInImg 1s ease-in-out forwards;
+            z-index: 99999;
         }
 
         @media screen and (max-width:400px) {
@@ -144,6 +145,7 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             top: 30.5vh;
             left: 44vh;
             cursor: pointer;
+            z-index: 9999999;
         }
 
         button {
@@ -204,7 +206,7 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
-            z-index: 1000;
+            z-index: 999999999;
         }
 
         .modal-content {
@@ -230,7 +232,7 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
         .but-volt{
             position: absolute;
             width: 100px;
-            top: 0;
+            top: -15px;
             left: 10px;
             background: linear-gradient(to right, #488BE8,#9D61EA);
             color: white;
@@ -290,11 +292,11 @@ unset($_SESSION['cadastro_sucesso']); // Limpar a variável após exibição
             <div id="etapa3" class="etapa" style="display: none;">
                 <h2>Etapa 3: Senha e Área</h2>
                 <label for="senha">Senha:</label>
-                <i class="bi bi-eye-slash-fill" id="senhaIcon" onclick="mostrarSenha()"></i>
+                <i class="bi bi-eye-fill" id="senhaIcon" onclick="mostrarSenha()"></i>
                 <input type="password" name="senha" id="senha" required>
 
                 <label for="confirmar_senha">Confirmar Senha:</label>
-                <i class="bi bi-eye-slash-fill" id="confirmIcon" onclick="mostrarSenhaDois()"></i>
+                <i class="bi bi-eye-fill" id="confirmIcon" onclick="mostrarSenhaConfirm()"></i>
                 <input type="password" name="confirmar_senha" id="confirmar_senha" required>
 
                 <label for="area_interesse">Área de Interesse:</label>
