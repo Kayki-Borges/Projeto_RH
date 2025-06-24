@@ -504,7 +504,7 @@ input:checked + .slider:before {
       <table class="table table-bordered mt-3">
         <thead>
           <tr>
-            <th>Foto</th>
+            
             <th>curriculo</th>
             <th>Nome</th>
             <th>Email</th>
@@ -512,18 +512,17 @@ input:checked + .slider:before {
 
           <?php foreach ($candidatos as $cand): ?>
             <tr>
-              <td>
+            
                 <?php if ($cand['foto_candidato']): ?>
-                  <img src="<?= htmlspecialchars($cand['foto_candidato']) ?>"
-                       width="50" height="50" class="rounded-circle">
+                  
                 <?php else: ?>
                   <img src="/projeto_rh/html/Assets/IMG/default-avatar.png"
                        width="50" height="50" class="rounded-circle">
                 <?php endif; ?>
-              </td>
+           
              
   <?php if ($cand['foto_candidato']): ?>
-    <!-- Imagem clicável -->  
+     
      <td>
     <img src="/projeto_rh/candidato/uploads/<?= htmlspecialchars($cand['foto_candidato']) ?>"
          width="50" height="50" class="rounded-circle"
@@ -539,9 +538,14 @@ input:checked + .slider:before {
             <h5 class="modal-title">Foto do Currículo</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
           </div>
-          <div class="modal-body text-center">
-            <img src="/projeto_rh/candidato/uploads/<?= htmlspecialchars($cand['foto_candidato']) ?>" class="img-fluid" alt="Foto Ampliada">
-          </div>
+         <div class="modal-body text-center">
+  <img src="/projeto_rh/candidato/uploads/<?= htmlspecialchars($cand['foto_candidato']) ?>" class="img-fluid" alt="Foto Ampliada">
+  <br><br>
+  <a class="btn btn-primary" href="/projeto_rh/candidato/uploads/<?= htmlspecialchars($cand['foto_candidato']) ?>" download>
+    Baixar Currículo
+  </a>
+</div>
+
         </div>
       </div>
     </div>
