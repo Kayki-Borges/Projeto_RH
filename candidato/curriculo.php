@@ -66,7 +66,7 @@ try {
         <?php if (!empty($row['foto_candidato'])): ?>
             <p>Imagem atual:</p>
             <a href="uploads/<?php echo htmlspecialchars($row['foto_candidato']); ?>" target="_blank">
-                <img src="uploads/<?php echo htmlspecialchars($row['foto_candidato']); ?>" alt="Foto do Candidato"
+                <img src="uploads/<?php echo htmlspecialchars($row['foto_candidato']); ?>" alt="Curriculo"
                      style="width: 120px; border-radius: 8px; margin-bottom: 10px;">
             </a>
         <?php else: ?>

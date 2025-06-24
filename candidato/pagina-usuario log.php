@@ -172,10 +172,9 @@ input:checked + .slider:before {
         <img src="/Projeto_RH/html/Assets/IMG/Foto model - light.png" class="foto" onclick="apar()">
           <img src="/Projeto_RH/html/Assets/IMG/Foto model - dark.jpg" class="foto-2" onclick="apar()">
       <ul class="cont-list">
-        <li><a href="">Editar Perfil</a></li>
+
         <li><a href="/projeto_rh/candidato/curriculo.php">Currículo</a></li>
         <li><a href="/projeto_rh/candidato/minhas_candidaturas.php">Candidaturas</a></li>
-        <li><a href="#">Ajuda</a></li>
         <li><a href="/projeto_rh/cadastro/logout.php">Sair</a></li>
         <a href="#" class="term">Termos de uso | Link Next</a>
       </ul>

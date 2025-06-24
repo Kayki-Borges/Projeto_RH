@@ -473,10 +473,10 @@ input:checked + .slider:before {
 
     <div class="resp">
     <ul>
-      <li class="nav-items"><a href="/Projeto_RH/candidato/pagina-usuario log.php" class="link">Início</a></li>
+      
       <li class="nav-items" style=" text-align: center;"><a href="#" class="link">Buscar Candidatos</a></li>
       <li class="nav-items" style=" text-align: center;"><a href="../login/cadastrar_vaga.php" class="link">Cadastrar Vagas</a></li>
-      <li class="nav-items"><a href="/Projeto_RH/html/pagina-empresa.html" class="link">Sou Empresa</a></li>
+    
       <li class="nav-items"><a href="/projeto_rh/cadastro/logout.php" class="link">Sair</a></li>
     </ul>
     <div class="perf">
@@ -505,7 +505,7 @@ input:checked + .slider:before {
         <thead>
           <tr>
             <th>Foto</th>
-            <th>Foto do curriculo</th>
+            <th>curriculo</th>
             <th>Nome</th>
             <th>Email</th>
             <th>Telefone</th>

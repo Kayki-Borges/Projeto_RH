@@ -155,7 +155,7 @@ input:checked + .slider:before {
           <li class="nav-item"><a href="#banner" class="link">inicio</a></li>
           <li class="nav-item"><a href="/projeto_rh/candidato/candidatar.php" class="link">Buscar Candidatos</a></li>
           <li class="nav-item"><a href="../login/cadastrar_vaga.php" class="link">Cadastrar Vagas</a></li>
-          <li class="nav-item"><a href="/Projeto_RH/html/pagina-usuario.html" class="link">Sou Candidato</a></li>
+          
           </ul>
         </div>
 
