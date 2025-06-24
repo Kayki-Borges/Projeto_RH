@@ -103,7 +103,7 @@
             color: #9D61EA;
             font-size: 25px;
             position: absolute;
-            top: 50%;
+            top: 63%;
             right: 10px;
             transform: translateY(-50%);
             cursor: pointer;
@@ -141,7 +141,7 @@
         .but-volt {
             position: absolute;
             width: 100px;
-            top: 10px;
+            top: -15px;
             left: 10px;
             background: linear-gradient(to right, #488BE8, #9D61EA);
             color: white;
@@ -212,13 +212,13 @@
             <div class="password-container">
                 <label for="senha_empresa">Senha:</label>
                 <input type="password" name="senha_empresa" id="senha" required>
-                <i class="bi bi-eye-slash-fill" id="senhaIcon" onclick="mostrarSenha()"></i>
+                <i class="bi bi-eye-fill" id="senhaIcon" onclick="mostrarSenha()"></i>
             </div>
 
             <div class="password-container">
                 <label for="confirmar_senha_empresa">Confirmar Senha:</label>
                 <input type="password" name="confirmar_senha_empresa" id="confirmar_senha" required>
-                <i class="bi bi-eye-slash-fill" id="comfirmIcon" onclick="mostrarSenhaConfirm()"></i>
+                <i class="bi bi-eye-fill" id="comfirmIcon" onclick="mostrarSenhaConfirm()"></i>
             </div>
         </div>
 

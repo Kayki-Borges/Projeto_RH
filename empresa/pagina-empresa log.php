@@ -124,6 +124,10 @@ input:checked + .slider:before {
       body.dark-mode .infor p{
         color: white;
       }
+
+      .perf img{
+        border: 2px solid black;
+      }
     </style>
 <body>
   <label class="switch">

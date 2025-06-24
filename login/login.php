@@ -181,9 +181,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             cursor: pointer;
             color: #488BE8;
             left: 57%;
-            top: 375px;
+            top: 360px;
         }
 
+        @media screen and (max-width:768px) {
+            #senhaIcon {
+            position: absolute;
+            font-size: 25px;
+            cursor: pointer;
+            color: #488BE8;
+            left: 57%;
+            top: 360px;
+        }
+        }
         p a{
             color: #488BE8;
             text-decoration: none;
@@ -202,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h2>Entre na sua conta</h2>
             <form id="loginForm" method="POST" action="/projeto_rh/login/login.php">
                 <input type="email" name="email" id="email" placeholder="Email" required>
-                <i class="bi bi-eye-slash-fill" id="senhaIcon" onclick="mostrarSenha()"></i>
+                <i class="bi bi-eye-fill" id="senhaIcon" onclick="mostrarSenha()"></i>
                 <input type="password" name="senha" id="senha" placeholder="Senha" required>
                 <button type="submit">Entrar</button>
             </form>
