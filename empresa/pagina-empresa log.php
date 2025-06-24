@@ -137,6 +137,19 @@ input:checked + .slider:before {
       body.dark-mode .perf .foto{
         display:none;
       }
+
+      .perf .foto-2{
+  display: none;
+  height: 80px;
+  width: 80px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.perf .foto-2:hover{
+  transform: scale(1.1);
+}
     </style>
 <body>
   <label class="switch">
