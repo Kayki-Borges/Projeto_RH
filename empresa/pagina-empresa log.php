@@ -128,6 +128,15 @@ input:checked + .slider:before {
       .perf img{
         border: 2px solid black;
       }
+
+      body.dark-mode .perf .foto-2{
+        display:flex;
+        border: 2px solid white;
+      }
+
+      body.dark-mode .perf .foto{
+        display:none;
+      }
     </style>
 <body>
   <label class="switch">
@@ -152,7 +161,7 @@ input:checked + .slider:before {
 
         <div class="perf">
           <img src="/Projeto_RH/html/Assets/IMG/Foto model - light.png" class="foto" onclick="apar()">
-          <img src="/Projeto_RH/html/Assets/IMG/Foto model - dark.png" class="foto-2" onclick="apar()">
+          <img src="/Projeto_RH/html/Assets/IMG/Foto model - dark.jpg" class="foto-2" onclick="apar()">
           <ul class="cont-list">
             <li><a href="editar-perfil.php">Editar Perfil</a></li>
             <li><a href="/projeto_rh/candidato/candidatar.php">Buscar Candidatos</a></li>

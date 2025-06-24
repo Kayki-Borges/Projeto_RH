@@ -122,13 +122,14 @@ header.roll a{
 
 }
 
-.perf img{
+.perf .foto{
   height: 80px;
   width: 80px;
   border-radius: 100%;
   cursor: pointer;
   transition: 0.3s all ease-in-out;
 }
+
 
 .perf ul{
   list-style: none;

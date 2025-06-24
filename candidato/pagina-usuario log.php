@@ -120,6 +120,33 @@ input:checked + .slider:before {
       body.dark-mode .infor p{
         color: white;
       }
+
+      .perf img{
+        border: 2px solid black;
+      }
+
+      body.dark-mode .perf .foto-2{
+        display:flex;
+        border: 2px solid white;
+      }
+
+      body.dark-mode .perf .foto{
+        display:none;
+      }
+
+      
+.perf .foto-2{
+  display: none;
+  height: 80px;
+  width: 80px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.perf .foto-2:hover{
+  transform: scale(1.1);
+}
     </style>
 </head>
 <body>
@@ -142,7 +169,8 @@ input:checked + .slider:before {
     </div>
 
     <div class="perf">
-      <img src="/projeto_rh/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil" class="foto" onclick="apar()">
+        <img src="/Projeto_RH/html/Assets/IMG/Foto model - light.png" class="foto" onclick="apar()">
+          <img src="/Projeto_RH/html/Assets/IMG/Foto model - dark.jpg" class="foto-2" onclick="apar()">
       <ul class="cont-list">
         <li><a href="">Editar Perfil</a></li>
         <li><a href="/projeto_rh/candidato/curriculo.php">Currículo</a></li>
