@@ -272,7 +272,7 @@ input:checked + .slider:before {
       <li class="nav-items"><a href="/Projeto_RH/html/pagina-empresa.html" class="link">Sou Empresa</a></li>
     </ul>
     <div class="perf">
-      <img src="/projeto_rh/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil">
+      <img src="/projeto_rh/html/Assets/IMG/Foto model - light.png" alt="Foto de perfil">
     </div>
   </div>
   </header>

@@ -448,6 +448,7 @@ input:checked + .slider:before {
       body.dark-mode .active{
         background-color: #252525;
       }
+      
 </style>
 <script src="/projeto_rh/js/dark.js"></script>
 <link rel="icon" href="/projeto_rh/html/Assets/IMG/Link_Next_Logo_sem_fundo.png">
@@ -480,7 +481,7 @@ input:checked + .slider:before {
       <li class="nav-items"><a href="/projeto_rh/cadastro/logout.php" class="link">Sair</a></li>
     </ul>
     <div class="perf">
-      <img src="/projeto_rh/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil">
+      <img src="/Projeto_RH/html/Assets/IMG/Foto model - light.png" class="foto">
     </div>
   </div>
   </header>
