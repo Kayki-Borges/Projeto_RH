@@ -151,7 +151,8 @@ input:checked + .slider:before {
         </div>
 
         <div class="perf">
-          <img src="/Projeto_RH/html/Assets/IMG/Foto model.jpg" alt="Foto de perfil" class="foto" onclick="apar()">
+          <img src="/Projeto_RH/html/Assets/IMG/Foto model - light.png" class="foto" onclick="apar()">
+          <img src="/Projeto_RH/html/Assets/IMG/Foto model - dark.png" class="foto-2" onclick="apar()">
           <ul class="cont-list">
             <li><a href="editar-perfil.php">Editar Perfil</a></li>
             <li><a href="/projeto_rh/candidato/candidatar.php">Buscar Candidatos</a></li>
